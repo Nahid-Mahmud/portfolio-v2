@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="text-xl font-bold text-slate-900 dark:text-white">
-            John<span className="text-emerald-600">Doe</span>
+            Md. Nahid <span className="text-emerald-600">Mahmud</span>
           </Link>
 
           {/* Desktop Navigation */}
