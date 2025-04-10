@@ -53,7 +53,7 @@ export default function Navbar() {
         scrolled ? "bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-sm" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4">
+      <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="text-xl font-bold text-slate-900 dark:text-white" ref={logoRef}>

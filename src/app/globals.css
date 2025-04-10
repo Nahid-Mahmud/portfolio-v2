@@ -79,6 +79,7 @@
 }
 
 .dark {
+  /* give a leniar background of 010313 */
   --background: #010313;
   --foreground: #e0e0e0; /* Light gray for contrast */
   --card: #121212; /* Slightly lighter than background */
@@ -110,6 +111,14 @@
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #2c2c2c;
   --sidebar-ring: #3a3a3a;
+}
+
+@utility container {
+  @apply mx-auto px-4 sm:px-6 lg:px-5;
+
+  @media (width>= 1440px) {
+    max-width: 1440px;
+  }
 }
 
 @layer base {
