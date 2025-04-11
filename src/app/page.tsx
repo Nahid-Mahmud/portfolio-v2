@@ -39,7 +39,7 @@ export default function Home() {
         </p>
         <div className="flex gap-4 pt-4">
           <Button className="text-md bg-emerald-600 h-10 w-fit hover:bg-emerald-700 flex items-center group cursor-pointer">
-            <Download className="transition-transform duration-300 group-hover:scale-110" />
+            <Download className="transition-transform duration-300 group-hover:scale-125" />
             Resume
           </Button>
           <Button
