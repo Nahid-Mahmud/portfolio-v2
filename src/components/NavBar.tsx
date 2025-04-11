@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -51,9 +51,9 @@ export default function Navbar() {
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold text-slate-900 dark:text-white">
+          {/* <Link href="/" className="text-xl font-bold text-slate-900 dark:text-white">
             Nahid<span className="text-emerald-600">Mahmud</span>
-          </Link>
+          </Link> */}
 
           {/* Desktop Navigation */}
           {!isMobile && (
@@ -62,7 +62,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`transition-colors ${
+                  className={`transition-colors text-lg font-semibold ${
                     pathname === link.href
                       ? "text-emerald-600 dark:text-emerald-400"
                       : "text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400"
@@ -76,14 +76,18 @@ export default function Navbar() {
 
           {/* Theme Toggle and Mobile Menu Button */}
           <div className="flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="rounded-full"
-            >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="sr-only peer"
+                value=""
+                type="checkbox"
+              />
+              <div
+                className="w-24 h-10 rounded-full ring-0 peer duration-500 outline-none bg-gray-200 overflow-hidden before:flex before:items-center before:justify-center after:flex after:items-center after:justify-center before:content-['☀️'] before:absolute before:h-8 before:w-8 before:top-1/2 before:bg-white before:rounded-full before:left-1 before:-translate-y-1/2 before:transition-all before:duration-700 peer-checked:before:opacity-0 peer-checked:before:rotate-90 peer-checked:before:-translate-y-full shadow-lg shadow-gray-400 peer-checked:shadow-lg peer-checked:shadow-gray-700 peer-checked:bg-[#010313]
+               after:content-['🌕'] after:absolute after:bg-[#1d1d1d] after:rounded-full after:top-[4px] after:right-1 after:translate-y-full after:w-8 after:h-8 after:opacity-0 after:transition-all after:duration-700 peer-checked:after:opacity-100 peer-checked:after:rotate-180 peer-checked:after:translate-y-0"
+              ></div>
+            </label>
 
             {isMobile && (
               <Button variant="ghost" size="icon" onClick={toggleMenu} className="md:hidden rounded-full">

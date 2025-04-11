@@ -45,7 +45,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  /* --background: oklch(1 0 0); */
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -80,7 +80,7 @@
 
 .dark {
   /* give a leniar background of 010313 */
-  --background: #010313;
+  /* --background: #010313; */
   --foreground: #e0e0e0; /* Light gray for contrast */
   --card: #121212; /* Slightly lighter than background */
   --card-foreground: #e0e0e0;

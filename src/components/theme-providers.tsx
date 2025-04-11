@@ -5,7 +5,7 @@ import { ThemeProvider as NextThemesProvider, type ThemeProviderProps } from "ne
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="dark">
+    <NextThemesProvider attribute="class" defaultTheme="light">
       {children}
     </NextThemesProvider>
   );
