@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
           <Navbar />
-          <div className="bg-white dark:bg-[#010313] transition-colors duration-500">{children}</div>
+          <div className="bg-white dark:text-white dark:bg-[#010313] transition-colors duration-500">{children}</div>
         </ThemeProvider>
       </body>
     </html>
