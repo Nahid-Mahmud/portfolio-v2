@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { useMobile } from "@/hooks/useMobile";
 import Link from "next/link";
@@ -15,10 +15,6 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const navbarRef = useRef<HTMLElement>(null);
-  const logoRef = useRef<HTMLAnchorElement>(null);
-  const navItemsRef = useRef<HTMLDivElement>(null);
-  const actionsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,21 +44,20 @@ export default function Navbar() {
 
   return (
     <header
-      ref={navbarRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-sm" : "bg-transparent"
+        scrolled ? "bg-white/90  backdrop-blur-sm shadow-sm" : "bg-transparent"
       }`}
     >
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold text-slate-900 dark:text-white" ref={logoRef}>
-            John<span className="text-emerald-600">Doe</span>
+          <Link href="/" className="text-xl font-bold text-slate-900 dark:text-white">
+            Nahid<span className="text-emerald-600">Mahmud</span>
           </Link>
 
           {/* Desktop Navigation */}
           {!isMobile && (
-            <nav ref={navItemsRef} className="hidden md:flex items-center space-x-6">
+            <nav className="hidden md:flex items-center space-x-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -80,7 +75,7 @@ export default function Navbar() {
           )}
 
           {/* Theme Toggle and Mobile Menu Button */}
-          <div ref={actionsRef} className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2">
             <Button
               variant="ghost"
               size="icon"
