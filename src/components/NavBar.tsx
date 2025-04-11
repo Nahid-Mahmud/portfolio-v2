@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
@@ -13,21 +12,11 @@ export default function Navbar() {
   const { resolvedTheme, setTheme } = useTheme(); // Use resolvedTheme for accurate theme state
   const isMobile = useMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false); // Add mounted state
 
   useEffect(() => {
     setMounted(true); // Set mounted to true after the component mounts
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMenu = () => {
@@ -49,9 +38,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90  backdrop-blur-sm shadow-sm" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 
+       ${isMenuOpen ? "bg-slate-900" : ""}
+        `}
     >
       <div className="container">
         <div className="flex items-center justify-between h-16">
@@ -107,19 +96,14 @@ export default function Navbar() {
                 </div>
               </label>
             )}
-            {isMobile && (
+            {isMobile && mounted && (
               <div className="flex items-center justify-between w-full">
-                <Button variant="ghost" size="icon" onClick={toggleMenu} className="md:hidden rounded-full">
-                  {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-                  className="rounded-full"
-                >
-                  {resolvedTheme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                </Button>
+                <div onClick={toggleMenu} className="md:hidden rounded-full">
+                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </div>
+                <div onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="rounded-full">
+                  {resolvedTheme === "dark" ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
+                </div>
               </div>
             )}
           </div>
@@ -127,8 +111,12 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      {isMobile && isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-900 shadow-lg">
+      {isMobile && (
+        <div
+          className={`md:hidden absolute w-full bg-white dark:bg-slate-900 shadow-lg ${
+            isMenuOpen ? "top-10" : "-top-96"
+          } transition-all duration-300`}
+        >
           <nav className="flex flex-col py-4">
             {navLinks.map((link) => (
               <Link
