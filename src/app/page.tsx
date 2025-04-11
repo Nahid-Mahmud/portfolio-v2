@@ -54,7 +54,7 @@ export default function Home() {
         </div>
         <div className="flex gap-4 pt-4">
           <Link
-            className="h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 dark:bg-[#1d1f2f] dark:text-white"
+            className="text-md group h-12 w-12 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -62,7 +62,7 @@ export default function Home() {
             <Github className="h-7 w-7 " />
           </Link>
           <Link
-            className="h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 dark:bg-[#1d1f2f] dark:text-white"
+            className="text-md group h-12 w-12 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -70,7 +70,7 @@ export default function Home() {
             <Linkedin className="h-7 w-7 " />
           </Link>
           <Link
-            className="h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 dark:bg-[#1d1f2f] dark:text-white"
+            className="text-md group h-12 w-12 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
             href="mailto:contact@example.com"
           >
             <Mail className="h-7 w-7" />
