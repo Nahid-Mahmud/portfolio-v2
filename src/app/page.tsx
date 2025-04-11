@@ -38,34 +38,42 @@ export default function Home() {
           design.
         </p>
         <div className="flex gap-4 pt-4">
-          <Button className="bg-emerald-600 hover:bg-emerald-700">
-            <Download className="mr-2 h-4 w-4" /> Download CV
+          <Button className="text-md bg-emerald-600 h-10 w-fit hover:bg-emerald-700 flex items-center group cursor-pointer">
+            <Download className="transition-transform duration-300 group-hover:scale-110" />
+            Resume
           </Button>
           <Button
             variant="outline"
-            className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+            className="text-md group h-10 border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
             asChild
           >
             <Link href="/contact" className="flex items-center">
-              Contact Me <ArrowRight className="ml-2 h-4 w-4" />
+              Contact Me <ArrowRight className="group-hover:ml-2 transition-all duration-300 h-4 w-4" />
             </Link>
           </Button>
         </div>
         <div className="flex gap-4 pt-4">
-          <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Github className="h-5 w-5" />
-            </Button>
+          <Link
+            className="h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 dark:bg-[#1d1f2f] dark:text-white"
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Github className="h-7 w-7 " />
           </Link>
-          <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Linkedin className="h-5 w-5" />
-            </Button>
+          <Link
+            className="h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 dark:bg-[#1d1f2f] dark:text-white"
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Linkedin className="h-7 w-7 " />
           </Link>
-          <Link href="mailto:contact@example.com">
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Mail className="h-5 w-5" />
-            </Button>
+          <Link
+            className="h-12 w-12 rounded-full flex items-center justify-center bg-gray-100 dark:bg-[#1d1f2f] dark:text-white"
+            href="mailto:contact@example.com"
+          >
+            <Mail className="h-7 w-7" />
           </Link>
         </div>
       </div>
