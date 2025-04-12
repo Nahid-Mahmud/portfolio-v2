@@ -8,25 +8,7 @@ export default function Home() {
   return (
     <div className="container gap-5 pt-20 flex flex-col-reverse md:flex-row h-screen items-center justify-between">
       {/* grid background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20 ">
-        <div className="absolute inset-0 ">
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" className="absolute inset-0">
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <rect
-                width="40"
-                height="40"
-                fill="none"
-                stroke="white"
-                strokeWidth="0.6"
-                className="opacity-60 dark:opacity-20
-              rotate-12 dark:-rotate-12 transition-all duration-500
-              dark:stroke-white stroke-green-900"
-              />
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
-      </div>
+
       <div className="md:w-1/2 flex flex-col lg:gap-7 gap-4 md:gap-5">
         <h2 className="lg:text-5xl text-xl font-medium text-slate-600 dark:text-slate-400">Hi, I am</h2>
         <h1 className="text-4xl md:text-6xl lg:text-7xl  font-bold text-slate-900 dark:text-white">Md. Nahid Mahmud</h1>

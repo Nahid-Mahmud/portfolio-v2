@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Background from "@/components/Background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,10 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
           <Navbar />
-          <div className="bg-white dark:text-white dark:bg-[#010313] transition-colors duration-500">{children}</div>
+          <div className="bg-white dark:text-white min-h-screen dark:bg-[#010313] transition-colors duration-500">
+            {children}
+            <Background />
+          </div>
           <FloatingChat />
         </ThemeProvider>
       </body>
