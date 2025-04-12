@@ -6,6 +6,8 @@ import { X, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 // Define the structure for a single message in the chat
 interface Message {
@@ -121,10 +123,30 @@ export default function FloatingChat() {
       >
         {/* Chat Header */}
         <div className="p-4 border-b dark:border-gray-700 flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Ask me anything!</h2>
-          <Button variant="ghost" size="icon" onClick={toggleChat} aria-label="Close chat">
-            <X className="h-5 w-5" />
-          </Button>
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-semibold">Ask me anything!</h2>
+            <Button variant="ghost" size="icon" onClick={toggleChat} aria-label="Close chat">
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
+          <div>
+            {/* clear button to clear the chat and start form scratch */}
+            <Button
+              variant="link"
+              size="icon"
+              onClick={() => {
+                setHistory([
+                  { role: "model", text: "Hello! Ask me anything about this portfolio or the person behind it." },
+                ]);
+                setPrompt("");
+                setError(null);
+              }}
+              aria-label="Clear chat"
+              className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 w-fit"
+            >
+              Restart
+            </Button>
+          </div>
         </div>
 
         {/* Messages Container */}
@@ -133,13 +155,16 @@ export default function FloatingChat() {
             <div key={index} className={cn("flex", msg.role === "user" ? "justify-end" : "justify-start")}>
               <div
                 className={cn(
-                  "max-w-[80%] p-3 rounded-lg",
+                  "max-w-[80%] p-3 rounded-lg w-full",
                   msg.role === "user"
                     ? "bg-blue-500 text-white"
                     : "bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200"
                 )}
               >
-                <p className="text-sm sm:text-base whitespace-pre-wrap">{msg.text}</p>
+                {" "}
+                <p className="text-sm sm:text-base whitespace-pre-wrap overflow-hidden overflow-x-auto break-words overflow-wrap-anywhere">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.text}</ReactMarkdown>
+                </p>
               </div>
             </div>
           ))}
