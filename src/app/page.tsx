@@ -55,23 +55,25 @@ export default function Home() {
         <div className="flex gap-4 pt-4">
           <Link
             className="text-md group h-12 w-12 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-            href="https://github.com"
+            href="https://github.com/Nahid-Mahmud"
             target="_blank"
-            rel="noopener noreferrer"
+            // rel="noopener noreferrer"
           >
             <Github className="h-7 w-7 " />
           </Link>
           <Link
             className="text-md group h-12 w-12 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/md-nahid-mahmud/"
             target="_blank"
-            rel="noopener noreferrer"
+            // rel="noopener noreferrer"
           >
             <Linkedin className="h-7 w-7 " />
           </Link>
           <Link
             className="text-md group h-12 w-12 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-            href="mailto:contact@example.com"
+            href="mailto:nahidmahmudn2@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Mail className="h-7 w-7" />
           </Link>

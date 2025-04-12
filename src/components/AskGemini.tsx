@@ -1,11 +1,11 @@
 "use client";
 
-import type React from "react";
-import { useState, useRef, useEffect, type FormEvent } from "react";
-import { X, MessageCircle, Send, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { MessageCircle, RotateCw, Send, X } from "lucide-react";
+import type React from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -52,6 +52,22 @@ export default function FloatingChat() {
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const handleScrollLock = () => {
+      if (isOpen && window.matchMedia("(max-width: 768px)").matches) {
+        document.body.style.overflow = "hidden"; // Disable scrolling
+      } else {
+        document.body.style.overflow = ""; // Enable scrolling
+      }
+    };
+
+    handleScrollLock(); // Apply on mount or when `isOpen` changes
+
+    return () => {
+      document.body.style.overflow = ""; // Cleanup on unmount
+    };
+  }, [isOpen]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -141,7 +157,7 @@ export default function FloatingChat() {
                 className={cn(
                   "max-w-[80%] p-3 rounded-lg w-full",
                   msg.role === "user"
-                    ? "bg-blue-500 text-white"
+                    ? "dark:bg-white dark:text-black bg-[#010313] text-white"
                     : "bg-gray-200 dark:bg-[#010313] text-gray-800 dark:text-gray-200"
                 )}
               >
