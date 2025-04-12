@@ -29,6 +29,7 @@ export default function FloatingChat() {
   const [history, setHistory] = useState<Message[]>([
     { role: "model", text: "Hello! Ask me anything about this portfolio or the person behind it." },
   ]);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
