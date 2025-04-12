@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useState, useRef, useEffect, type FormEvent } from "react";
-import { X, MessageCircle, Send } from "lucide-react";
+import { X, MessageCircle, Send, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
@@ -117,36 +117,19 @@ export default function FloatingChat() {
       {/* Chat Window */}
       <div
         className={cn(
-          "bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-[380px] mb-2 flex flex-col transition-all duration-300 ease-in-out",
+          "bg-white dark:bg-blue-950 rounded-lg shadow-lg w-full max-w-[380px] mb-2 flex flex-col transition-all duration-300 ease-in-out",
           isOpen ? "opacity-100 scale-100 h-[500px] max-h-[80vh]" : "opacity-0 scale-95 h-0 pointer-events-none"
         )}
       >
         {/* Chat Header */}
         <div className="p-4 border-b dark:border-gray-700 flex justify-between items-center">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center gap-2 w-full">
             <h2 className="text-xl font-semibold">Ask me anything!</h2>
-            <Button variant="ghost" size="icon" onClick={toggleChat} aria-label="Close chat">
+            <Button variant="destructive" size="icon" onClick={toggleChat} aria-label="Close chat">
               <X className="h-5 w-5" />
             </Button>
           </div>
-          <div>
-            {/* clear button to clear the chat and start form scratch */}
-            <Button
-              variant="link"
-              size="icon"
-              onClick={() => {
-                setHistory([
-                  { role: "model", text: "Hello! Ask me anything about this portfolio or the person behind it." },
-                ]);
-                setPrompt("");
-                setError(null);
-              }}
-              aria-label="Clear chat"
-              className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 w-fit"
-            >
-              Restart
-            </Button>
-          </div>
+          <div>{/* clear button to clear the chat and start form scratch */}</div>
         </div>
 
         {/* Messages Container */}
@@ -158,7 +141,7 @@ export default function FloatingChat() {
                   "max-w-[80%] p-3 rounded-lg w-full",
                   msg.role === "user"
                     ? "bg-blue-500 text-white"
-                    : "bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200"
+                    : "bg-gray-200 dark:bg-[#010313] text-gray-800 dark:text-gray-200"
                 )}
               >
                 {" "}
@@ -191,7 +174,24 @@ export default function FloatingChat() {
         </div>
 
         {/* Input Form */}
-        <form onSubmit={handleSubmit} className="p-4 border-t dark:border-gray-700 flex gap-2">
+        <form onSubmit={handleSubmit} className="p-4 border-t items-center dark:border-gray-700 flex gap-2">
+          <div
+            //   show tooltip on hover
+            title="Clear chat"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setHistory([
+                { role: "model", text: "Hello! Ask me anything about this portfolio or the person behind it." },
+              ]);
+              setPrompt("");
+              setError(null);
+            }}
+            aria-label="Clear chat"
+            className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 w-fit"
+          >
+            <RotateCw />
+          </div>
           <Textarea
             ref={textareaRef}
             value={prompt}
@@ -201,6 +201,7 @@ export default function FloatingChat() {
             className="resize-none min-h-[40px] max-h-[120px]"
             disabled={isLoading}
           />
+
           <Button
             type="submit"
             size="icon"
@@ -218,17 +219,17 @@ export default function FloatingChat() {
       </div>
 
       {/* Chat Button */}
-      <Button
+      <div
         onClick={toggleChat}
         className={cn(
-          "rounded-full h-14 w-14 shadow-lg transition-all duration-300 bg-blue-600 hover:bg-blue-700",
-          isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
+          "rounded-full h-14 flex items-center justify-center w-14 shadow-lg transition-all duration-300 bg-[#010313] text-white dark:bg-white dark:text-[#010313] dark:hover:bg-slate-200 hover:shadow-xl cursor-pointer drop-shadow-2xl",
+          isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100",
+          !isOpen && " animate-bounce"
         )}
-        size="icon"
         aria-label="Open chat"
       >
         <MessageCircle className="h-6 w-6" />
-      </Button>
+      </div>
     </div>
   );
 }

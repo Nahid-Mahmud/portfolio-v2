@@ -44,6 +44,7 @@
 }
 
 :root {
+  --primary: #010313;
   --radius: 0.625rem;
   /* --background: oklch(1 0 0); */
   --foreground: oklch(0.145 0 0);
@@ -129,3 +130,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* declare a css variable called primary */
+
+
