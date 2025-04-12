@@ -4,7 +4,7 @@
 const yourName = "Md. Nahid Mahmud"; // Replace with your name
 const yourRole = "Full-Stack Developer"; // Replace with your role/title
 const keySkills = ["Next.js", "TypeScript", "React", "Node.js", "Tailwind CSS", "MongoDB", "API Integration"]; // List your key skills
-const experienceSummary = `I am a passionate ${yourRole} with X years of experience specializing in building modern, responsive web applications using technologies like React, Next.js, and Node.js. I enjoy creating efficient and user-friendly solutions.`; // Write a brief summary (2-3 sentences)
+const experienceSummary = `I am a passionate ${yourRole} with 4 years of experience specializing in building modern, responsive web applications using technologies like React, Next.js, and Node.js. I enjoy creating efficient and user-friendly solutions.`; // Write a brief summary (2-3 sentences)
 const project1Name = "Project Alpha";
 const project1Desc = "A web application for task management built with Next.js, Prisma, and PostgreSQL.";
 const project2Name = "Portfolio Website (This one!)";
