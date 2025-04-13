@@ -162,9 +162,9 @@ export default function FloatingChat() {
                 )}
               >
                 {" "}
-                <p className="text-sm sm:text-base whitespace-pre-wrap overflow-hidden overflow-x-auto break-words overflow-wrap-anywhere">
+                <div className="text-sm sm:text-base whitespace-pre-wrap overflow-hidden overflow-x-auto break-words overflow-wrap-anywhere">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.text}</ReactMarkdown>
-                </p>
+                </div>
               </div>
             </div>
           ))}
