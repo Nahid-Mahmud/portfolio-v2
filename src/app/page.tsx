@@ -3,6 +3,7 @@ import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import profileImage from "@/assets/profile.png";
+import TextAnimate from "@/components/TextAnimate";
 
 export default function Home() {
   return (
@@ -13,7 +14,9 @@ export default function Home() {
         <h2 className="lg:text-5xl text-xl font-medium text-slate-600 dark:text-slate-400">Hi, I am</h2>
         <h1 className="text-4xl md:text-6xl lg:text-7xl  font-bold text-slate-900 dark:text-white">Md. Nahid Mahmud</h1>
         <div className="">
-          <p className="text-2xl font-medium text-emerald-600 dark:text-emerald-400">Web Developer</p>
+          <div className="text-2xl font-medium text-emerald-600 dark:text-emerald-400">
+            <TextAnimate />
+          </div>
         </div>
         {/* <p className="text-lg text-slate-700 dark:text-slate-300 max-w-md">
           I build exceptional digital experiences with modern technologies, focusing on clean code and user-centered
