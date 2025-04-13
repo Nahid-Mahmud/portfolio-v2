@@ -5,14 +5,13 @@ import { cn } from "@/lib/utils";
 
 const wordsToAnimate = [
   "Frontend Developer ",
+  "Next.js Developer",
   "Backend Developer",
   "Full Stack Developer",
   "Web Developer",
   "JavaScript Developer",
-  "HTML/CSS Developer",
   "React.js Developer",
   "Web Application Developer",
-  "WordPress Web Developer ",
 ];
 
 const TextAnimate = () => {
@@ -51,7 +50,7 @@ const TextAnimate = () => {
           animate="visible"
           exit="hidden"
           variants={containerVariants}
-          className={cn("z-10 inline-block relative text-left text-green-600 dark:text-green-100 px-2")}
+          className={cn("z-10 inline-block relative text-left text-green-600 dark:text-green-500 px-2")}
         >
           {wordsToAnimate[currentWordIndex].split("").map((letter, index) => (
             <motion.span key={index} variants={letterVariants} className={cn("inline-block")}>
