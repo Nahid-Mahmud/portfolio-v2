@@ -15,24 +15,24 @@ export default function Home() {
         <div className="">
           <p className="text-2xl font-medium text-emerald-600 dark:text-emerald-400">Web Developer</p>
         </div>
-        <p className="text-lg text-slate-700 dark:text-slate-300 max-w-md">
+        {/* <p className="text-lg text-slate-700 dark:text-slate-300 max-w-md">
           I build exceptional digital experiences with modern technologies, focusing on clean code and user-centered
           design.
-        </p>
+        </p> */}
         <div className="flex gap-4 pt-4">
-          <Button className="text-md bg-emerald-600 h-10 w-fit hover:bg-emerald-700 flex items-center group cursor-pointer">
+          <Button className="text-md bg-emerald-600 h-12 text-xl w-fit hover:bg-emerald-700 flex items-center group cursor-pointer">
             <Download className="transition-transform duration-300 group-hover:scale-125" />
             Resume
           </Button>
-          <Button
-            variant="outline"
-            className="text-md group h-10 border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-            asChild
+          <div
+            // variant="outline"
+            className="text-md group h-12 text-xl border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 border flex items-center justify-center rounded-md cursor-pointer px-3"
+            // asChild
           >
-            <Link href="/contact" className="flex items-center">
-              Contact Me <ArrowRight className="group-hover:ml-2 transition-all duration-300 h-4 w-4" />
+            <Link href="/contact" className="flex gap-1 items-center">
+              Contact Me <ArrowRight className="group-hover:ml-2 transition-all duration-300 h-6 w-6 text-xl" />
             </Link>
-          </Button>
+          </div>
         </div>
         <div className="flex gap-4 pt-4">
           <Link
