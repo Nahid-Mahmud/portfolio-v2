@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 
-       ${isMenuOpen ? "bg-slate-900" : ""}
+       ${isMenuOpen ? "dark:bg-slate-900" : ""}
         `}
     >
       <div className="container">
@@ -114,7 +114,7 @@ export default function Navbar() {
       {isMobile && (
         <div
           className={`md:hidden absolute w-full bg-white dark:bg-slate-900 shadow-lg ${
-            isMenuOpen ? "top-10" : "-top-96"
+            isMenuOpen ? "top-12" : "-top-96"
           } transition-all duration-300`}
         >
           <nav className="flex flex-col py-4">
