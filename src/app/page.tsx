@@ -50,9 +50,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="container gap-5 pt-20 flex flex-col-reverse md:flex-row h-screen items-center justify-between">
-      {/* grid background */}
-
+    <div className="container gap-5 pt-20 flex flex-col-reverse md:flex-row md:h-screen pb-5 m items-center md:justify-between">
       <div className="md:w-1/2 flex flex-col lg:gap-7 gap-4 md:gap-5">
         <h2 className="lg:text-5xl text-xl font-medium text-slate-600 dark:text-slate-400">Hi, I am</h2>
         <h1 className="text-4xl md:text-6xl lg:text-7xl  font-bold text-slate-900 dark:text-white">Md. Nahid Mahmud</h1>
@@ -99,7 +97,13 @@ export default function Home() {
       </div>
       <div className="mt-10 md:mt-0 md:w-1/2 flex justify-center">
         <div className="relative w-64 h-64 transition-colors duration-500 bg-green-50 dark:bg-blue-100 md:w-80 md:h-80 lg:h-96 lg:w-96 xl:h-[500px] xl:w-[500px] rounded-full overflow-hidden border-4 border-emerald-600 dark:border-emerald-500">
-          <Image src={profileImage} alt="Md. Nahid Mahmud - Profile Picture" fill className="object-cover" priority />
+          <Image
+            src={profileImage}
+            alt="Md. Nahid Mahmud - Profile Picture"
+            fill
+            className="object-cover"
+            priority={true}
+          />
         </div>
       </div>
     </div>
