@@ -4,7 +4,7 @@ import MouseFollower from "@/components/MouseFollower";
 import Navbar from "@/components/NavBar";
 import { ThemeProvider } from "@/components/theme-providers";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Titillium_Web } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,6 +15,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const titillium = Titillium_Web({
+  variable: "--font-titillium",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["200", "300", "400", "600", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +37,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable}
+      ${titillium.variable}
+      antialiased`}
+      >
         <ThemeProvider>
           <Navbar />
           <div className="bg-white dark:text-white min-h-screen dark:bg-[#010313] transition-colors duration-500">

@@ -131,6 +131,6 @@
   }
 }
 
-/* declare a css variable called primary */
-
-
+body {
+  font-family: var(--font-titillium), sans-serif;
+}
