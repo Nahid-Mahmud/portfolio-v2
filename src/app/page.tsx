@@ -8,6 +8,7 @@ import TextAnimate from "@/components/TextAnimate";
 
 // Define metadata for the Home page
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nahid-mahmud.xyz"),
   title: "Md. Nahid Mahmud - Fullstack Developer",
   description:
     "Welcome to the portfolio of Md. Nahid Mahmud, a Fullstack Developer specializing in crafting exceptional digital experiences with modern technologies.",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     title: "Md. Nahid Mahmud - Fullstack Developer",
     description:
       "Explore the portfolio of Md. Nahid Mahmud, a Fullstack Developer passionate about clean code and user-centered design.",
-    // url: "https://your-portfolio-url.com",
+    url: "https://nahid-mahmud.xyz",
     siteName: "Md. Nahid Mahmud Portfolio",
     images: [
       {
