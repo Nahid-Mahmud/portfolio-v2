@@ -8,7 +8,26 @@ import TextAnimate from "@/components/TextAnimate";
 
 // Define metadata for the Home page
 export const metadata: Metadata = {
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      notranslate: false,
+      noarchive: false,
+      nosnippet: false,
+    },
+  },
   metadataBase: new URL("https://nahid-mahmud.xyz"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/",
+    },
+  },
   title: "Md. Nahid Mahmud - Fullstack Developer",
   description:
     "Welcome to the portfolio of Md. Nahid Mahmud, a Fullstack Developer specializing in crafting exceptional digital experiences with modern technologies.",

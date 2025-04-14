@@ -6,6 +6,10 @@ import profilePic from "@/assets/profile.png";
 
 // Define metadata for the About page
 export const metadata: Metadata = {
+  robots: {
+    index: true,
+    follow: true,
+  },
   metadataBase: new URL("https://nahid-mahmud.xyz"),
   title: "About Me - Md. Nahid Mahmud",
   description:
