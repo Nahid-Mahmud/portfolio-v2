@@ -36,7 +36,7 @@ const skills: Skill[] = [
   { name: "Next.js", category: "frontend", icon: nextJsImage.src },
   { name: "Node.js", category: "backend", icon: nodeJsImage.src },
   { name: "MongoDB", category: "backend", icon: mongoDBImage.src },
-  { name: "API Integration", category: "backend", icon: apiImage.src },
+  { name: "API Integration", category: "frontend", icon: apiImage.src },
   { name: "Postman", category: "tools", icon: postmanImage.src },
   { name: "GitHub", category: "tools", icon: githubImage.src },
   { name: "GitHub Actions", category: "tools", icon: GithubActionImage.src },
@@ -79,7 +79,7 @@ export default function SkillsSection() {
           {filteredSkills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              className="flex flex-col items-center z-10 justify-center p-6 border border-gray-200 rounded-md bg-white hover:shadow-md transition-shadow duration-300 dark:bg-gray-300  dark:border-gray-700 dark:hover:shadow-lg"
+              className="flex flex-col items-center z-10 justify-center p-6 border border-gray-200 rounded-md bg-white hover:shadow-md  dark:hover:shadow-md hover:scale-105 transition-all dark:hover:shadow-slate-400 duration-300 dark:bg-gray-300  dark:border-gray-700 "
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -100 }}

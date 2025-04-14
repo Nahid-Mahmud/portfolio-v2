@@ -53,8 +53,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}
-      ${titillium.variable}
+        className={`${geistSans.variable} ${geistMono.variable} ${titillium.variable}
       antialiased`}
       >
         <ThemeProvider>
