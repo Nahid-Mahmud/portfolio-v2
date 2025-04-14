@@ -41,7 +41,6 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/skills", label: "Skills" },
     { href: "/projects", label: "Projects" },
     { href: "/experience", label: "Experience" },
     { href: "/contact", label: "Contact" },
@@ -69,7 +68,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`transition-colors text-2xl font-semibold ${
+                  className={`transition-colors text-xl font-semibold ${
                     pathname === link.href
                       ? "text-emerald-600 dark:text-emerald-400"
                       : "text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400"

@@ -59,7 +59,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <Navbar />
-          <div className="bg-white dark:text-white min-h-screen dark:bg-[#010313] transition-colors duration-500">
+          <div className="bg-white relative dark:text-white min-h-screen h-full w-full dark:bg-[#010313] transition-colors duration-500">
             {children}
             <Background />
             <MouseFollower />
