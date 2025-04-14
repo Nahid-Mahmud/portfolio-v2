@@ -15,6 +15,17 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false); // Add mounted state
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   useEffect(() => {
     setMounted(true); // Set mounted to true after the component mounts
   }, []);
@@ -38,7 +49,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 
+      className={`fixed top-0 left-0 right-0 z-50
+        ${scrolled ? "bg-white dark:bg-slate-900 shadow-lg" : "bg-transparent"}
+        transition-all duration-300 
        ${isMenuOpen ? "dark:bg-slate-900" : ""}
         `}
     >
