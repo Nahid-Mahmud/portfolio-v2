@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Titillium_Web } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script defer={true} async src="https://www.googletagmanager.com/gtag/js?id=G-WVGG88MLB0"></Script>
+        <Script defer={true} id="google-analytics">
+          {`
+          
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'G-WVGG88MLB0');
+            
+            `}
+        </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable}
       ${titillium.variable}
