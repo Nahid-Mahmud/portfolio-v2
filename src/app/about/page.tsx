@@ -1,11 +1,48 @@
-// components/AboutSectionInspired.tsx
+import Image from "next/image";
+import { Metadata } from "next";
 import React from "react";
-import Image from "next/image"; // Import next/image
 
-import profilePic from "@/assets/profile.png"; // Import your profile picture
+import profilePic from "@/assets/profile.png";
 
-// Replace with the actual path to your profile picture
-// Create a placeholder image or use your actual photo
+// Define metadata for the About page
+export const metadata: Metadata = {
+  title: "About Me - Md. Nahid Mahmud",
+  description:
+    "Learn more about Md. Nahid Mahmud, a passionate Fullstack Developer specializing in crafting beautiful and performant Frontend experiences.",
+  keywords: [
+    "Md. Nahid Mahmud",
+    "About Me",
+    "Fullstack Developer",
+    "Frontend Developer",
+    "MERN Stack",
+    "Web Development",
+    "Clean Code",
+  ],
+  openGraph: {
+    title: "About Me - Md. Nahid Mahmud",
+    description:
+      "Discover the journey and expertise of Md. Nahid Mahmud, a Fullstack Developer with a focus on elegant and user-friendly web solutions.",
+    siteName: "Md. Nahid Mahmud Portfolio",
+    // images: [
+    //   {
+    //     url: "./profile.png",
+    //     width: 1200,
+    //     height: 630,
+    //     alt: "Md. Nahid Mahmud - Profile Picture",
+    //   },
+    // ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Me - Md. Nahid Mahmud",
+    description:
+      "Explore the journey of Md. Nahid Mahmud, a Fullstack Developer passionate about clean code and user-centered design.",
+    images: ["/profile.png"],
+    creator: "@nm_nahid01",
+  },
+};
 
 const AboutSectionInspired: React.FC = () => {
   return (
@@ -14,17 +51,15 @@ const AboutSectionInspired: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
           {/* Image Column */}
           <div className="relative order-fist lg:order-first w-full max-w-sm mx-auto lg:max-w-none lg:mx-0">
-            {/* Simple frame/shadow effect */}
             <div className="relative aspect-square bg-green-50 z-10 rounded-lg shadow-xl overflow-hidden group">
               <Image
-                src={profilePic} // Use the imported image variable
+                src={profilePic}
                 alt="Md. Nahid Mahmud - Profile Picture"
-                layout="fill" // Makes the image fill the container
-                objectFit="cover" // Adjust as needed ('contain', 'cover', etc.)
-                placeholder="blur" // Optional: adds a blur effect while loading
-                className="transition-transform duration-500 ease-in-out group-hover:scale-105" // Subtle zoom on hover
+                layout="fill"
+                objectFit="cover"
+                placeholder="blur"
+                className="transition-transform duration-500 ease-in-out group-hover:scale-105"
               />
-              {/* Optional: Add a subtle overlay or border effect */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent dark:from-black/30"></div>
             </div>
           </div>
