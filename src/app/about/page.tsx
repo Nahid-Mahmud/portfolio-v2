@@ -55,6 +55,7 @@ const AboutSectionInspired: React.FC = () => {
               <Image
                 src={profilePic}
                 alt="Md. Nahid Mahmud - Profile Picture"
+                priority={true}
                 layout="fill"
                 objectFit="cover"
                 placeholder="blur"
