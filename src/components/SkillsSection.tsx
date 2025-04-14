@@ -1,52 +1,47 @@
 "use client";
 
-import type React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import apiImage from "@/assets/skills/api.png";
+import ciCdImage from "@/assets/skills/ci-cd.png";
+import cssImage from "@/assets/skills/css-3.png";
+import GithubActionImage from "@/assets/skills/GitHub Actions.png";
+import githubImage from "@/assets/skills/GitHub.png";
+import htmlImage from "@/assets/skills/html-5.png";
+import javascriptImage from "@/assets/skills/js.png";
+import mongoDBImage from "@/assets/skills/MongoDB.png";
+import nextJsImage from "@/assets/skills/Next.js.png";
+import nodeJsImage from "@/assets/skills/node-js.png";
+import postmanImage from "@/assets/skills/Postman.png";
+import reactJsImage from "@/assets/skills/React.png";
+import tailwindCssImage from "@/assets/skills/tailwindcss.png";
+import typescriptImage from "@/assets/skills/typescript.png";
+import vps from "@/assets/skills/vps.png";
 import { cn } from "@/lib/utils";
-import {
-  Braces,
-  Code,
-  Cpu,
-  Database,
-  FileType,
-  Github,
-  Globe,
-  Layers,
-  LayoutGrid,
-  Rocket,
-  Send,
-  Server,
-  Wind,
-  Workflow,
-} from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useState } from "react";
 
 type Skill = {
   name: string;
-  icon: React.ReactNode;
+  icon: string;
   category: "frontend" | "backend" | "tools";
 };
 
 const skills: Skill[] = [
-  { name: "HTML", icon: <Code className="h-10 w-10 text-gray-700" />, category: "frontend" },
-  { name: "CSS", icon: <LayoutGrid className="h-10 w-10 text-gray-700" />, category: "frontend" },
-  { name: "JavaScript", icon: <Braces className="h-10 w-10 text-gray-700" />, category: "frontend" },
-  { name: "TypeScript", icon: <FileType className="h-10 w-10 text-gray-700" />, category: "frontend" },
-  { name: "Tailwind CSS", icon: <Wind className="h-10 w-10 text-gray-700" />, category: "frontend" },
-  { name: "ReactJS", icon: <Workflow className="h-10 w-10 text-gray-700" />, category: "frontend" },
-  { name: "Next.js", icon: <Layers className="h-10 w-10 text-gray-700" />, category: "frontend" },
-  { name: "Node.js", icon: <Server className="h-10 w-10 text-gray-700" />, category: "backend" },
-  { name: "MongoDB", icon: <Database className="h-10 w-10 text-gray-700" />, category: "backend" },
-  { name: "API Integration", icon: <Send className="h-10 w-10 text-gray-700" />, category: "backend" },
-  { name: "Postman", icon: <Globe className="h-10 w-10 text-gray-700" />, category: "tools" },
-  { name: "GitHub", icon: <Github className="h-10 w-10 text-gray-700" />, category: "tools" },
-  { name: "GitHub Actions", icon: <Rocket className="h-10 w-10 text-gray-700" />, category: "tools" },
-  { name: "CI/CD", icon: <Cpu className="h-10 w-10 text-gray-700" />, category: "tools" },
-  {
-    name: "VPS Hosting (Ubuntu)",
-    icon: <Server className="h-10 w-10 text-gray-700" strokeWidth={1} />,
-    category: "tools",
-  },
+  { name: "HTML", icon: htmlImage.src, category: "frontend" },
+  { name: "CSS", category: "frontend", icon: cssImage.src },
+  { name: "JavaScript", category: "frontend", icon: javascriptImage.src },
+  { name: "TypeScript", category: "frontend", icon: typescriptImage.src },
+  { name: "Tailwind CSS", category: "frontend", icon: tailwindCssImage.src },
+  { name: "ReactJS", category: "frontend", icon: reactJsImage.src },
+  { name: "Next.js", category: "frontend", icon: nextJsImage.src },
+  { name: "Node.js", category: "backend", icon: nodeJsImage.src },
+  { name: "MongoDB", category: "backend", icon: mongoDBImage.src },
+  { name: "API Integration", category: "backend", icon: apiImage.src },
+  { name: "Postman", category: "tools", icon: postmanImage.src },
+  { name: "GitHub", category: "tools", icon: githubImage.src },
+  { name: "GitHub Actions", category: "tools", icon: GithubActionImage.src },
+  { name: "CI/CD", category: "tools", icon: ciCdImage.src },
+  { name: "VPS Hosting (Ubuntu)", category: "tools", icon: vps.src },
 ];
 
 export default function SkillsSection() {
@@ -84,14 +79,14 @@ export default function SkillsSection() {
           {filteredSkills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              className="flex flex-col items-center z-10 justify-center p-6 border border-gray-200 rounded-md bg-white hover:shadow-md transition-shadow duration-300 dark:bg-gray-900  dark:border-gray-700 dark:hover:shadow-lg"
+              className="flex flex-col items-center z-10 justify-center p-6 border border-gray-200 rounded-md bg-white hover:shadow-md transition-shadow duration-300 dark:bg-gray-300  dark:border-gray-700 dark:hover:shadow-lg"
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -100 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              {skill.icon}
-              <span className="mt-3 text-center text-gray-700 dark:text-slate-300">{skill.name}</span>
+              <Image src={skill.icon} alt={skill.name} height={60} width={60} />
+              <span className="mt-3 text-center text-gray-700 dark:text-black">{skill.name}</span>
             </motion.div>
           ))}
         </AnimatePresence>

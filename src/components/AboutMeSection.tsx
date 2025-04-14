@@ -24,7 +24,7 @@ function AboutMeSection() {
           </div>
 
           {/* Text Content Column */}
-          <div className="text-justify flex flex-col gap-6 lg:gap-6">
+          <div className="flex flex-col gap-6 lg:gap-6">
             <h2
               className="font-semibold uppercase tracking-wider mb-3 
         text-emerald-600 dark:text-emerald-400 text-2xl "
@@ -36,7 +36,7 @@ function AboutMeSection() {
               I&apos;m <span className="text-emerald-600 dark:text-emerald-400">Md. Nahid Mahmud</span>
             </h1>
 
-            <div className="space-y-5 text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+            <div className="space-y-5 text-justify text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
               <p>
                 A passionate{" "}
                 <span className="font-medium text-emerald-600 dark:text-emerald-400">Fullstack Developer</span> with a
