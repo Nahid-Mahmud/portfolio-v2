@@ -6,6 +6,7 @@ import profilePic from "@/assets/profile.png";
 
 // Define metadata for the About page
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nahid-mahmud.xyz"),
   title: "About Me - Md. Nahid Mahmud",
   description:
     "Learn more about Md. Nahid Mahmud, a passionate Fullstack Developer specializing in crafting beautiful and performant Frontend experiences.",
