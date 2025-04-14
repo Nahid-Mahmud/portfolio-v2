@@ -53,7 +53,11 @@ const TextAnimate = () => {
           className={cn("z-10 inline-block relative text-left text-green-600 dark:text-green-500 px-2")}
         >
           {wordsToAnimate[currentWordIndex].split("").map((letter, index) => (
-            <motion.span key={index} variants={letterVariants} className={cn("inline-block")}>
+            <motion.span
+              key={index}
+              variants={letterVariants}
+              className={cn("inline-block", "text-2xl md:text-3xl lg:text-4xl")}
+            >
               {letter === " " ? "\u00A0" : letter}
             </motion.span>
           ))}
