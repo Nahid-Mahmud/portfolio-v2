@@ -1,4 +1,6 @@
-export const metadata = {
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Professional Experience - Md. Nahid Mahmud",
   description:
     "Explore my professional journey as a Full Stack Developer, showcasing my skills, achievements, and technologies used.",

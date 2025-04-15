@@ -2,6 +2,34 @@ import ContactForm from "@/components/ContactForm";
 import SocialLink from "@/components/SocialLink";
 
 import { Facebook, Linkedin, Mail, MessageSquare } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact - Md. Nahid Mahmud",
+  description: "Get in touch with the contact form or connect via social media. I'd love to hear from you!",
+  openGraph: {
+    title: "Contact - Md. Nahid Mahmud",
+    description: "Contact me using the contact form or connect with me on social media. I'd love to hear from you!",
+    url: "https://nahid-mahmud.xyz/contact",
+    siteName: "Portfolio",
+    images: [
+      {
+        url: "/open_Graph_photo.png",
+        width: 1200,
+        height: 630,
+        alt: "Contact Us",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us - Md. Nahid Mahmud",
+    description: "Contact me using the contact form or connect with me on social media.",
+    images: ["/open_Graph_photo.png"],
+  },
+};
 
 export default function ContactPage() {
   return (
