@@ -103,7 +103,7 @@ export default function Navbar() {
                     </Link>
                     <Link
                       className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-                      href="mailto:nahidmahmudn2@gmail.com"
+                      href="mailto:nahidmahmudn@gmail.com"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
