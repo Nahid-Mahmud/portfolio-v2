@@ -8,7 +8,7 @@ import { Project } from "@/types/projects";
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="overflow-hidden h-full flex flex-col group border-muted-foreground/20 hover:border-primary/50 transition-colors">
+    <Card className="overflow-hidden h-full flex flex-col group border-muted-foreground/20 transition-colors hover:shadow-lg dark:hover:shadow-white/10 ">
       <div className="relative overflow-hidden h-64">
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
           <div className="flex gap-4">
