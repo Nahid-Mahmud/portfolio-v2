@@ -5,7 +5,7 @@ import profilePic from "@/assets/profile.png";
 function AboutMeSection() {
   return (
     <section id="about" className="">
-      <div className="container mx-auto px-6 lg:px-8">
+      <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
           {/* Image Column */}
           <div className="relative order-fist lg:order-first w-full max-w-sm mx-auto lg:max-w-none lg:mx-0">

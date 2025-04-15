@@ -3,6 +3,8 @@
 import apiImage from "@/assets/skills/api.png";
 import ciCdImage from "@/assets/skills/ci-cd.png";
 import cssImage from "@/assets/skills/css-3.png";
+import expressJsImage from "@/assets/skills/Express.png";
+import firebaseImage from "@/assets/skills/Firebase.png";
 import GithubActionImage from "@/assets/skills/GitHub Actions.png";
 import githubImage from "@/assets/skills/GitHub.png";
 import htmlImage from "@/assets/skills/html-5.png";
@@ -14,7 +16,6 @@ import postmanImage from "@/assets/skills/Postman.png";
 import reactJsImage from "@/assets/skills/React.png";
 import tailwindCssImage from "@/assets/skills/tailwindcss.png";
 import typescriptImage from "@/assets/skills/typescript.png";
-import expressJsImage from "@/assets/skills/Express.png";
 import vps from "@/assets/skills/vps.png";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
@@ -48,6 +49,7 @@ const skills: Skill[] = [
   { name: "GitHub Actions", category: "tools", icon: GithubActionImage.src },
   { name: "CI/CD", category: "tools", icon: ciCdImage.src },
   { name: "VPS Hosting (Ubuntu)", category: "tools", icon: vps.src },
+  { name: "Firebase", category: "tools", icon: firebaseImage.src },
 ];
 
 export default function SkillsSection() {

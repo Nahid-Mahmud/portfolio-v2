@@ -4,23 +4,31 @@
 const yourName = "Md. Nahid Mahmud"; // Replace with your name
 const yourRole = "Full-Stack Developer"; // Replace with your role/title
 const keySkills = [
-  "Next.js",
+  "HTML",
+  "CSS",
+  "JavaScript",
   "TypeScript",
   "React",
+  "Next.js",
   "Node.js",
-  "Tailwind CSS",
+  "Express.js",
   "MongoDB",
-  "API Integration",
+  "Git",
+  "GitHub",
   "Postman",
-  "Github",
+  "VPS Hosting (Ubuntu)",
+  "CI/CD",
+  "API Integration",
+  "Prisma",
 ]; // List your key skills
 const experienceSummary = `I am a passionate ${yourRole} specializing in building modern, responsive web applications using technologies like React, Next.js, and Node.js. I enjoy creating efficient and user-friendly solutions.`; // Write a brief summary (2-3 sentences)
-const project1Name = "Project Alpha";
-const project1Desc = "A web application for task management built with Next.js, Prisma, and PostgreSQL.";
-const project2Name = "Portfolio Website (This one!)";
-const project2Desc =
-  "My personal portfolio showcasing my skills and projects, featuring this interactive AI chat. Built with Next.js and Tailwind CSS.";
-// Add more projects as needed: const project3Name = ...; const project3Desc = ...;
+const project1Name = "ReactHub";
+const project1Desc = `ReactHub is a forum website using the MERN stack. It features responsive design for seamless user experiences on desktops, tablets, and mobiles. Key features include an intuitive navbar, advanced search functionalities, and interactive post displays. Premium features like a Gold badge and increased post limits are managed through a user-centric Dashboard. Admins access a dedicated dashboard for streamlined user management and announcements. Built with Material UI, React Share, React Helmet Async, Firebase authentication, and JWT tokens. Live link (https://react-hub-nahid.surge.sh/)`;
+const project2Name = "ByteCanvas";
+const project2Desc = `ByteCanvas is a cutting-edge technology-themed website offering a streamlined user experience. It features a clean navbar, product management, and a My Cart page. Users can add products, view product details, and manage their cart. The website includes email/password authentication, error handling, and a dark/light theme toggle. Built with React Router, Firebase authentication, MongoDB, and dynamic rendering. Live link (https://bytecanvas.surge.sh/)`;
+const project3Name = "Assignment Buddy";
+const project3Desc = `Assignment Buddy is an online group study platform where users create, manage, and grade assignments collaboratively. Features include secure authentication, assignment creation, submission, marking, and dynamic pages. Built with Firebase authentication, JWT tokens, MongoDB, and Framer Motion for smooth animations. Live link (https://assignment-buddy.surge.sh/)`;
+// Add more projects as needed: const project4Name = ...; const project4Desc = ...;
 const contactInfo = `You can find my contact details on the 'Contact' page or connect with me on LinkedIn (https://www.linkedin.com/in/md-nahid-mahmud/).`; // Guide users on how to contact you
 const availability = "I am currently open to new full-time opportunities and freelance projects."; // e.g., open to opportunities, currently employed, etc.
 // --- END OF EDIT SECTION ---
@@ -57,7 +65,8 @@ Your secondary purpose is to answer general questions related to programming, so
 **Featured Projects:** (Use ONLY this for questions about these projects)
 *   **${project1Name}:** ${project1Desc}
 *   **${project2Name}:** ${project2Desc}
-${/* Add more projects here if you defined them above, e.g.: *   **${project3Name}:** ${project3Desc} */ ""}
+*   **${project3Name}:** ${project3Desc}
+${/* Add more projects here if you defined them above, e.g.: *   **${project4Name}:** ${project4Desc} */ ""}
 
 Now, please answer the user's questions following these instructions and priorities precisely.
 `;
