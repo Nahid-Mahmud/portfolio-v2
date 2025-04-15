@@ -56,7 +56,7 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="name" className="text-sm font-medium text-slate-700 dark:text-slate-200">
             Name
           </Label>
@@ -71,7 +71,7 @@ function ContactForm() {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-200">
             Email
           </Label>
@@ -88,7 +88,7 @@ function ContactForm() {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex flex-col gap-2">
         <Label htmlFor="message" className="text-sm font-medium text-slate-700 dark:text-slate-200">
           Message
         </Label>
@@ -98,13 +98,14 @@ function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           placeholder="How can we help you?"
-          className="min-h-[180px] border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-200 resize-none"
+          className="min-h-[155px] border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-200 resize-none"
           required
         />
       </div>
 
       <Button
         type="submit"
+        disabled={loading}
         className="w-full h-12 bg-[#101828] text-white hover:bg-[#101828] dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600 cursor-pointer transition-all duration-200"
       >
         {loading ? <LoaderCircle className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}

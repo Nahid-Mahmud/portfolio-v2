@@ -5,7 +5,7 @@ import { Facebook, Linkedin, Mail, MessageSquare } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <div className="bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+    <div className="">
       <div className="container mx-auto py-20 px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
@@ -17,37 +17,39 @@ export default function ContactPage() {
           </div>
 
           <div className="grid grid-cols-1 relative z-10 lg:grid-cols-5 gap-10">
-            <div className="lg:col-span-3 bg-white dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden">
+            <div className="lg:col-span-3  bg-white dark:bg-[#162034] rounded-2xl shadow-xl overflow-hidden">
               <div className="p-8 md:p-10">
                 <h2 className="text-2xl font-semibold mb-6 flex items-center text-slate-800 dark:text-slate-100">
                   <MessageSquare className="mr-3 h-6 w-6 text-blue-900 dark:text-white" />
-                  Send us a message
+                  Send a message
                 </h2>
                 <ContactForm />
               </div>
             </div>
 
-            <div className="lg:col-span-2 flex flex-col gap-6">
-              <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 md:p-10">
-                <h2 className="text-2xl font-semibold mb-6 text-slate-800 dark:text-slate-100">Connect With Us</h2>
+            <div className="lg:col-span-2 order-first flex flex-col gap-6">
+              <div className="bg-white dark:bg-[#162034] rounded-2xl shadow-xl p-8 md:p-10">
+                <h2 className="text-2xl capitalize font-semibold mb-6 text-slate-800 dark:text-slate-100">
+                  Connect with Social Media
+                </h2>
 
                 <div className="grid grid-cols-1 gap-4">
                   <SocialLink
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/md-nahid-mahmud/"
                     icon={<Linkedin className="h-5 w-5 text-[#0A66C2]" />}
                     name="LinkedIn"
-                    username="@yourcompany"
+                    username="@md-nahid-mahmud"
                   />
 
                   <SocialLink
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/nahidmahmudd/"
                     icon={<Facebook className="h-5 w-5 text-[#1877F2]" />}
                     name="Facebook"
-                    username="@yourcompany"
+                    username="@nahidmahmudd"
                   />
 
                   <SocialLink
-                    href="https://wa.me/1234567890"
+                    href="https://wa.me/+8801777612585"
                     icon={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -59,14 +61,14 @@ export default function ContactPage() {
                       </svg>
                     }
                     name="WhatsApp"
-                    username="+1 (234) 567-890"
+                    username="+8801777612585"
                   />
 
                   <SocialLink
-                    href="mailto:contact@example.com"
+                    href="mailto:nahidmahmudn@gmail.com"
                     icon={<Mail className="h-5 w-5 text-[#EA4335]" />}
                     name="Email"
-                    username="contact@example.com"
+                    username="nahidmahmudn@gmail.com"
                   />
                 </div>
               </div>

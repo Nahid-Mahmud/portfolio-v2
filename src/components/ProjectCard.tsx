@@ -9,7 +9,7 @@ import Link from "next/link";
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="overflow-hidden h-full flex flex-col group border-muted-foreground/20 transition-colors hover:shadow-lg dark:hover:shadow-white/10 ">
+    <Card className="overflow-hidden dark:bg-[#162034] h-full flex flex-col group border-muted-foreground/20 transition-colors hover:shadow-lg dark:hover:shadow-white/10 ">
       <div className="relative overflow-hidden h-64">
         <div className="absolute hidden inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity md:flex items-center justify-center z-10">
           <div className="flex gap-4">
