@@ -114,7 +114,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <div className="mt-10 md:mt-0 md:w-1/2 flex justify-center">
+      <div className="md:mt-0 md:w-1/2 flex justify-center">
         <div className="relative w-64 h-64 transition-colors duration-500 bg-green-50 dark:bg-blue-100 md:w-80 md:h-80 lg:h-96 lg:w-96 xl:h-[500px] xl:w-[500px] rounded-full overflow-hidden border-4 border-emerald-600 dark:border-emerald-500">
           <Image
             src={profileImage}
