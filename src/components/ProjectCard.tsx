@@ -22,8 +22,9 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
         <div className="h-full w-full overflow-hidden">
           <Image
-            src={project.image || "/placeholder.svg"}
-            fill
+            src={project.image}
+            height={500}
+            width={500}
             alt={project.name}
             className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
           />
