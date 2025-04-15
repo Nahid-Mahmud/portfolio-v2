@@ -143,31 +143,34 @@ export default function Navbar() {
                 <div onClick={toggleMenu} className="md:hidden rounded-full">
                   {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-9 w-9" />}
                 </div>
+
                 <div className="flex items-center gap-4">
-                  <div className="flex gap-4 ">
-                    <Link
-                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-                      href="https://github.com/Nahid-Mahmud"
-                      target="_blank"
-                    >
-                      <Github className="h-6 w-6 " />
-                    </Link>
-                    <Link
-                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-                      href="https://www.linkedin.com/in/md-nahid-mahmud/"
-                      target="_blank"
-                    >
-                      <Linkedin className="h-6 w-6 " />
-                    </Link>
-                    <Link
-                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-                      href="mailto:nahidmahmudn2@gmail.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Mail className="h-6 w-6" />
-                    </Link>
-                  </div>
+                  {pathname !== "/" && (
+                    <div className="flex gap-4 ">
+                      <Link
+                        className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                        href="https://github.com/Nahid-Mahmud"
+                        target="_blank"
+                      >
+                        <Github className="h-6 w-6 " />
+                      </Link>
+                      <Link
+                        className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                        href="https://www.linkedin.com/in/md-nahid-mahmud/"
+                        target="_blank"
+                      >
+                        <Linkedin className="h-6 w-6 " />
+                      </Link>
+                      <Link
+                        className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                        href="mailto:nahidmahmudn2@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Mail className="h-6 w-6" />
+                      </Link>
+                    </div>
+                  )}
                   <div onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="rounded-full">
                     {resolvedTheme === "dark" ? <Sun className="h-9 w-9" /> : <Moon className="h-9 w-9" />}
                   </div>
