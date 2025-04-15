@@ -36,7 +36,9 @@ export default function Projects() {
     <section id="projects" className="py-20 ">
       <div className="container px-4 mx-auto">
         <div className="md:mb-16 mb-5 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">My Projects</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl  mb-4">My Projects</h2>
+          {/* outdated project warning and working on new projects */}
+
           <p className="max-w-2xl mx-auto text-muted-foreground">
             A showcase of my recent work, personal projects, and collaborations.
           </p>
