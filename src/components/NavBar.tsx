@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Github, Linkedin, Mail, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -81,40 +81,96 @@ export default function Navbar() {
           )}
 
           {/* Theme Toggle and Mobile Menu Button */}
-          <div className={`flex items-center gap-2  ${isMobile && "w-full"} `}>
+          <div className={`flex items-center gap-4   ${isMobile && "w-full"} `}>
             {mounted && !isMobile && (
-              <label
-                onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-                className="relative inline-flex items-center cursor-pointer"
-              >
-                <div
-                  className={`w-24 h-10 rounded-full ring-0 peer duration-500 outline-none overflow-hidden shadow-lg shadow-gray-400 
-                  ${resolvedTheme === "dark" ? "bg-[#010313]" : "bg-gray-200"} relative`}
+              <div className="flex items-center gap-5">
+                {" "}
+                {pathname !== "/" && (
+                  <div className="flex gap-4 ">
+                    <Link
+                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                      href="https://github.com/Nahid-Mahmud"
+                      target="_blank"
+                    >
+                      <Github className="h-6 w-6 " />
+                    </Link>
+                    <Link
+                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                      href="https://www.linkedin.com/in/md-nahid-mahmud/"
+                      target="_blank"
+                    >
+                      <Linkedin className="h-6 w-6 " />
+                    </Link>
+                    <Link
+                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                      href="mailto:nahidmahmudn2@gmail.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Mail className="h-6 w-6" />
+                    </Link>
+                  </div>
+                )}
+                {/* Toggle button */}
+                <label
+                  onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                  className="relative inline-flex items-center cursor-pointer"
                 >
-                  <span
-                    className={`absolute top-2 left-2 transition-all duration-500 ${
-                      resolvedTheme === "dark" ? "opacity-0 -translate-y-full" : "opacity-100 translate-y-0"
-                    }`}
+                  <div
+                    className={`w-24 h-10 rounded-full ring-0 peer duration-500 outline-none overflow-hidden shadow-lg shadow-gray-400 
+                  ${resolvedTheme === "dark" ? "bg-[#010313]" : "bg-gray-200"} relative`}
                   >
-                    <Sun className="h-6 w-6 text-slate-900 dark:text-slate-200" />
-                  </span>
-                  <span
-                    className={`absolute top-2 right-2 transition-all duration-500 ${
-                      resolvedTheme === "dark" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full"
-                    }`}
-                  >
-                    <Moon className="h-6 w-6 text-slate-900 dark:text-slate-200" />
-                  </span>
-                </div>
-              </label>
+                    <span
+                      className={`absolute top-2 left-2 transition-all duration-500 ${
+                        resolvedTheme === "dark" ? "opacity-0 -translate-y-full" : "opacity-100 translate-y-0"
+                      }`}
+                    >
+                      <Sun className="h-6 w-6 text-slate-900 dark:text-slate-200" />
+                    </span>
+                    <span
+                      className={`absolute top-2 right-2 transition-all duration-500 ${
+                        resolvedTheme === "dark" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full"
+                      }`}
+                    >
+                      <Moon className="h-6 w-6 text-slate-900 dark:text-slate-200" />
+                    </span>
+                  </div>
+                </label>
+              </div>
             )}
             {isMobile && mounted && (
               <div className="flex items-center justify-between w-full">
                 <div onClick={toggleMenu} className="md:hidden rounded-full">
-                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-9 w-9" />}
                 </div>
-                <div onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="rounded-full">
-                  {resolvedTheme === "dark" ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
+                <div className="flex items-center gap-4">
+                  <div className="flex gap-4 ">
+                    <Link
+                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                      href="https://github.com/Nahid-Mahmud"
+                      target="_blank"
+                    >
+                      <Github className="h-6 w-6 " />
+                    </Link>
+                    <Link
+                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                      href="https://www.linkedin.com/in/md-nahid-mahmud/"
+                      target="_blank"
+                    >
+                      <Linkedin className="h-6 w-6 " />
+                    </Link>
+                    <Link
+                      className="text-md group h-10 w-10 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
+                      href="mailto:nahidmahmudn2@gmail.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Mail className="h-6 w-6" />
+                    </Link>
+                  </div>
+                  <div onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="rounded-full">
+                    {resolvedTheme === "dark" ? <Sun className="h-9 w-9" /> : <Moon className="h-9 w-9" />}
+                  </div>
                 </div>
               </div>
             )}
@@ -126,7 +182,7 @@ export default function Navbar() {
       {isMobile && (
         <div
           className={`md:hidden absolute w-full bg-white dark:bg-slate-900 shadow-lg ${
-            isMenuOpen ? "top-12" : "-top-96"
+            isMenuOpen ? "top-14" : "-top-96"
           } transition-all duration-300`}
         >
           <nav className="flex flex-col py-4">
