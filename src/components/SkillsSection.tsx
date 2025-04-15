@@ -14,6 +14,7 @@ import postmanImage from "@/assets/skills/Postman.png";
 import reactJsImage from "@/assets/skills/React.png";
 import tailwindCssImage from "@/assets/skills/tailwindcss.png";
 import typescriptImage from "@/assets/skills/typescript.png";
+import expressJsImage from "@/assets/skills/Express.png";
 import vps from "@/assets/skills/vps.png";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
@@ -36,6 +37,11 @@ const skills: Skill[] = [
   { name: "Next.js", category: "frontend", icon: nextJsImage.src },
   { name: "Node.js", category: "backend", icon: nodeJsImage.src },
   { name: "MongoDB", category: "backend", icon: mongoDBImage.src },
+  {
+    name: "Express.js",
+    category: "backend",
+    icon: expressJsImage.src,
+  },
   { name: "API Integration", category: "frontend", icon: apiImage.src },
   { name: "Postman", category: "tools", icon: postmanImage.src },
   { name: "GitHub", category: "tools", icon: githubImage.src },
