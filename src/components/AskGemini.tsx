@@ -40,6 +40,11 @@ export default function FloatingChat() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [history]);
 
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, [history]);
   // Focus textarea when chat is opened
   useEffect(() => {
     if (isOpen) {
