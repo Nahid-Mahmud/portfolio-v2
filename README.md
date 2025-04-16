@@ -1,4 +1,4 @@
-```markdown
+
 # Md. Nahid Mahmud - Fullstack Developer Portfolio 🌟
 
 Welcome to the source code of my personal portfolio website! This project showcases my skills, experience, and projects as a **Fullstack Developer**. Explore my journey, tech stack, and featured projects.
@@ -82,4 +82,3 @@ Feel free to reach out if you'd like to collaborate or have any questions!
 This project is licensed under the [MIT License](LICENSE).
 
 Thank you for visiting my portfolio! 😊
-```
