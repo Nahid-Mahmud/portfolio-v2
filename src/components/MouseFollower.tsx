@@ -39,7 +39,7 @@ export default function MouseFollower() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{
           type: "spring",
-          stiffness: 160,
+          stiffness: 30,
           damping: 10,
         }}
       />
