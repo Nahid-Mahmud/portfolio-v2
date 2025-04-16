@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+```markdown
+# Md. Nahid Mahmud - Fullstack Developer Portfolio 🌟
 
-## Getting Started
+Welcome to the source code of my personal portfolio website! This project showcases my skills, experience, and projects as a **Fullstack Developer**. Explore my journey, tech stack, and featured projects.
 
-First, run the development server:
+🌐 **Live Website**: [nahid-mahmud.xyz](https://nahid-mahmud.xyz)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+- **About Me**: Learn about my journey and expertise.
+- **Skills Section**: Explore my tech stack categorized into frontend, backend, and tools.
+- **Projects**: A showcase of my recent work, personal projects, and collaborations.
+- **Professional Experience**: A detailed overview of my career and achievements.
+- **Contact Form**: Get in touch with me directly or connect via social media.
+- **Dark Mode**: A seamless light/dark mode experience.
+
+## 🛠️ Tech Stack
+This portfolio is built with modern web technologies:
+- **Frontend**: React, Next.js, Tailwind CSS, Framer Motion
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Tools**: GitHub Actions, CI/CD, VPS Hosting
+- **Other**: TypeScript, Firebase, Prisma
+
+## 📂 Project Structure
+```plaintext
+.
+├── src/
+│   ├── app/               # Next.js app directory
+│   │   ├── about/         # About page
+│   │   ├── contact/       # Contact page
+│   │   ├── experience/    # Experience page
+│   │   ├── projects/      # Projects page
+│   │   └── page.tsx       # Home page
+│   ├── components/        # Reusable UI components
+│   ├── lib/               # Utility functions and context
+│   ├── types/             # TypeScript types
+│   └── assets/            # Static assets (images, icons, etc.)
+├── public/                # Public assets (robots.txt, images, etc.)
+├── package.json           # Project dependencies and scripts
+└── README.md              # Project documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📚 Environment Variables
+To run this project, you need to set up the following environment variables in a `.env.local` file:
+```plaintext
+GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
+NODEMAILER_PASSWORD=YOUR_GOOGLE_APP_PASSWORD
+NODEMAILER_EMAIL=YOUR_EMAIL_ADDRESS
+SEND_TO_EMAIL=RECIPIENT_EMAIL_ADDRESS
+```
+Replace the placeholders with your actual credentials.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📬 Contact Me
+Feel free to reach out if you'd like to collaborate or have any questions!
+- **Email**: [nahidmahmudn@gmail.com](mailto:nahidmahmudn@gmail.com)
+- **LinkedIn**: [Md. Nahid Mahmud](https://www.linkedin.com/in/md-nahid-mahmud/)
+- **GitHub**: [Nahid-Mahmud](https://github.com/Nahid-Mahmud)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Development
+### Prerequisites
+- Node.js >= 16
+- npm or yarn
 
-## Learn More
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Nahid-Mahmud/portfolio.git
+   cd portfolio
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env.local` file in the root directory and add the required environment variables.
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+5. Open your browser at `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## 📜 License
+This project is licensed under the [MIT License](LICENSE).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Thank you for visiting my portfolio! 😊
+```
