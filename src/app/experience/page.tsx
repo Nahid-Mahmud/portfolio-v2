@@ -181,8 +181,7 @@ export default function ExperiencePage() {
                       <li className="flex items-start">
                         <span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600 mt-2 mr-2 flex-shrink-0"></span>
                         <span>
-                          Provided technical assistance in configuring and hosting email services on a VPS, and helped
-                          deploy and maintain web applications on the VPS, ensuring reliable and secure hosting.
+                        I provided technical assistance in configuring the VPS and assisted in deploying and maintaining web applications on the VPS, ensuring reliable and secure hosting.
                         </span>
                       </li>
                     </ul>
