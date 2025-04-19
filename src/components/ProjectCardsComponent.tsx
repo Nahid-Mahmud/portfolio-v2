@@ -40,6 +40,7 @@ const projects: Project[] = [
     tags: ["React", "MongoDB", "Express", "JWT"],
     category: "fullstack",
   },
+  
 ];
 
 function ProjectCardsComponent() {
