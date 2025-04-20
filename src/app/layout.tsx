@@ -40,8 +40,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <Script defer={true} async src="https://www.googletagmanager.com/gtag/js?id=G-WVGG88MLB0"></Script>
-        <Script defer={true} id="google-analytics">
+        <Script
+          defer={true}
+          strategy="lazyOnload"
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-WVGG88MLB0"
+        ></Script>
+        <Script defer={true} id="google-analytics" strategy="lazyOnload">
           {`
           
           window.dataLayer = window.dataLayer || [];
