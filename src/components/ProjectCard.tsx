@@ -48,25 +48,29 @@ function ProjectCard({ project }: { project: Project }) {
       </CardContent>
 
       <CardFooter className="border-t pt-4 flex justify-between">
-        <Link
-          href={project.clientRepo}
-          className="text-sm font-medium flex items-center hover:text-primary transition-colors"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Github className="mr-1 h-4 w-4" />
-          Client
-        </Link>
+        {project.clientRepo && (
+          <Link
+            href={project.clientRepo}
+            className="text-sm font-medium flex items-center hover:text-primary transition-colors"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Github className="mr-1 h-4 w-4" />
+            Client
+          </Link>
+        )}
 
-        <Link
-          href={project.serverRepo}
-          className="text-sm font-medium flex items-center hover:text-primary transition-colors"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Github className="mr-1 h-4 w-4" />
-          Server
-        </Link>
+        {project.serverRepo && (
+          <Link
+            href={project.serverRepo}
+            className="text-sm font-medium flex items-center hover:text-primary transition-colors"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Github className="mr-1 h-4 w-4" />
+            Server
+          </Link>
+        )}
         <Link
           href={project.liveUrl}
           className="text-sm md:hidden font-medium flex items-center hover:text-primary transition-colors"
