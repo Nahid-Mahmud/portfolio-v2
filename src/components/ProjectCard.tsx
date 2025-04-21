@@ -70,7 +70,11 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
         </CardContent>
 
-        <CardFooter className="border-t pt-4 flex justify-between">
+        <CardFooter
+          className={`border-t pt-4 flex justify-between  
+          ${!project?.clientRepo && !project?.serverRepo ? "md:hidden" : ""}
+          `}
+        >
           {project.clientRepo && (
             <Link
               href={project.clientRepo}
