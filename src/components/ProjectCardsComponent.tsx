@@ -10,6 +10,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const projects: Project[] = [
   {
+    id: "",
+    name: "",
+    description: "",
+    image: ReactHubImage,
+    liveUrl: "",
+    clientRepo: "",
+    serverRepo: "",
+    tags: [],
+    category: "frontend",
+  },
+  {
     id: "reacthub",
     name: "ReactHub",
     description: "A comprehensive platform for React developers to share resources and collaborate on projects.",
@@ -42,17 +53,6 @@ const projects: Project[] = [
     tags: ["React", "MongoDB", "Express", "JWT"],
     category: "fullstack",
   },
-  {
-    id: "",
-    name: "",
-    description: "",
-    image: ReactHubImage,
-    liveUrl: "",
-    clientRepo: "",
-    serverRepo: "",
-    tags: [],
-    category: "frontend",
-  },
 ];
 
 function ProjectCardsComponent() {
@@ -73,7 +73,7 @@ function ProjectCardsComponent() {
   return (
     <div className="space-y-8">
       <Tabs defaultValue="all" onValueChange={setActiveCategory} className="w-full">
-        <TabsList className="w-full max-w-md mx-auto grid grid-cols-3 mb-8">
+        <TabsList className="w-full z-10 max-w-md mx-auto grid grid-cols-3 mb-8">
           {categories.map((category) => (
             <TabsTrigger key={category} value={category} className="capitalize">
               {category}
