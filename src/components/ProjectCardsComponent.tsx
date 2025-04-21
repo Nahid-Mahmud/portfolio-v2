@@ -5,19 +5,21 @@ import ProjectCard from "./ProjectCard";
 import ReactHubImage from "@/assets/react-hub.png";
 import byteCanvasImage from "@/assets/bytecanvas.png";
 import assignmentBuddyImage from "@/assets/assignment-buddy.png";
+import construction_websiteImage from "@/assets/construction_website.png";
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const projects: Project[] = [
   {
-    id: "",
-    name: "",
-    description: "",
-    image: ReactHubImage,
-    liveUrl: "",
+    id: "Civil & Structural Engineering Company Website",
+    name: "Civil & Structural Engineering Company Website",
+    description:
+      "Developed a responsive, professional front-end for an engineering firm offering civil, structural, and specialty services. My goal was to showcase the company’s expertise and streamline the user journey. I implemented a clean layout, service sections, and contact forms, resulting in a polished site that supports lead generation and reflects the firm's innovation and reliability.",
+    image: construction_websiteImage,
+    liveUrl: "https://bernithamedford.vercel.app/",
     clientRepo: "",
     serverRepo: "",
-    tags: [],
+    tags: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Framer Motion"],
     category: "frontend",
   },
   {
@@ -72,8 +74,8 @@ function ProjectCardsComponent() {
 
   return (
     <div className="space-y-8">
-      <Tabs defaultValue="all" onValueChange={setActiveCategory} className="w-full">
-        <TabsList className="w-full z-10 max-w-md mx-auto grid grid-cols-3 mb-8">
+      <Tabs defaultValue="all" onValueChange={setActiveCategory} className="w-full ">
+        <TabsList className="w-full z-10 max-w-md mx-auto grid grid-cols-3 mb-8 dark:bg-[#0A2540]">
           {categories.map((category) => (
             <TabsTrigger key={category} value={category} className="capitalize">
               {category}
