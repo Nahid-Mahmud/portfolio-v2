@@ -6,8 +6,8 @@ export interface Project {
   description: string;
   image: StaticImageData;
   liveUrl: string;
-  clientRepo: string;
-  serverRepo: string;
+  clientRepo?: string;
+  serverRepo?: string;
   tags: string[];
   category: string;
 }
