@@ -21,7 +21,7 @@ const projects: Project[] = [
   {
     id: "bytecanvas",
     name: "ByteCanvas",
-    description: "A digital canvas application that allows users to create and share artwork online.",
+    description: "A digital canvas application that allows users to create and share products online.",
     image: byteCanvasImage,
     liveUrl: "https://bytecanvas.surge.sh/",
     clientRepo: "https://github.com/Nahid-Mahmud/Byte-canvas-client",
