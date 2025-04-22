@@ -1,14 +1,14 @@
 "use client";
+import aquaImage from "@/assets/aqua.png";
+import assignmentBuddyImage from "@/assets/assignment-buddy.png";
+import byteCanvasImage from "@/assets/bytecanvas.png";
+import construction_websiteImage from "@/assets/construction_website.png";
+import ReactHubImage from "@/assets/react-hub.png";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Project } from "@/types/projects";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import ReactHubImage from "@/assets/react-hub.png";
-import byteCanvasImage from "@/assets/bytecanvas.png";
-import assignmentBuddyImage from "@/assets/assignment-buddy.png";
-import construction_websiteImage from "@/assets/construction_website.png";
-import { useState, useEffect } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import aquaImage from "@/assets/aqua.png";
 
 const projects: Project[] = [
   {
