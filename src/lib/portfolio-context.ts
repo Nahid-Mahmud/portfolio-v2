@@ -28,6 +28,16 @@ const project2Name = "ByteCanvas";
 const project2Desc = `ByteCanvas is a cutting-edge technology-themed website offering a streamlined user experience. It features a clean navbar, product management, and a My Cart page. Users can add products, view product details, and manage their cart. The website includes email/password authentication, error handling, and a dark/light theme toggle. Built with React Router, Firebase authentication, MongoDB, and dynamic rendering. Live link (https://bytecanvas.surge.sh/)`;
 const project3Name = "Assignment Buddy";
 const project3Desc = `Assignment Buddy is an online group study platform where users create, manage, and grade assignments collaboratively. Features include secure authentication, assignment creation, submission, marking, and dynamic pages. Built with Firebase authentication, JWT tokens, MongoDB, and Framer Motion for smooth animations. Live link (https://assignment-buddy.surge.sh/)`;
+
+const project4Name = "Frontend Development for Smart Water Leak Detection System";
+const project4Desc = `A"Developed the frontend for Aqua IQ, a smart leak detection system by Pure IC. The goal was to present complex product features in a clear, engaging, and responsive layout. I implemented a clean UI, structured product information, and intuitive navigation, ensuring a smooth user experience across devices. The result was a polished and professional website that supports the product’s innovative positioning in the market.", Live link (https://aqua-frontend-nextjs.vercel.app/)`;
+
+const project5Name = "My Portfolio";
+const project5Desc = `This portfolio website showcases my skills, projects, and experience as a Full-Stack Developer. It features a clean design, responsive layout, and easy navigation. Built with Next.js, Tailwind CSS, and Framer Motion for smooth animations. Live link (https://nahid-mahmud.xyz/)`;
+
+const project6Name = "Civil & Structural Engineering Company Website";
+const project6Desc = `Developed a responsive, professional front-end for an engineering firm offering civil, structural, and specialty services. My goal was to showcase the company’s expertise and streamline the user journey. I implemented a clean layout, service sections, and contact forms, resulting in a polished site that supports lead generation and reflects the firm's innovation and reliability. Live link (https://civil-154sde.vercel.app/)`;
+
 // Add more projects as needed: const project4Name = ...; const project4Desc = ...;
 const contactInfo = `You can find my contact details on the 'Contact' page or connect with me on LinkedIn (https://www.linkedin.com/in/md-nahid-mahmud/).`; // Guide users on how to contact you
 const availability = "I am currently open to new full-time opportunities and freelance projects."; // e.g., open to opportunities, currently employed, etc.
@@ -66,6 +76,9 @@ Your secondary purpose is to answer general questions related to programming, so
 *   **${project1Name}:** ${project1Desc}
 *   **${project2Name}:** ${project2Desc}
 *   **${project3Name}:** ${project3Desc}
+*   **${project4Name}:** ${project4Desc}
+*   **${project5Name}:** ${project5Desc}
+*   **${project6Name}:** ${project6Desc}
 ${/* Add more projects here if you defined them above, e.g.: *   **${project4Name}:** ${project4Desc} */ ""}
 
 Now, please answer the user's questions following these instructions and priorities precisely.
