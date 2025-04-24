@@ -7,8 +7,8 @@ const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.OPENROUTER_API_KEY, // Ensure this environment variable is set
   defaultHeaders: {
-    "HTTP-Referer": process.env.SITE_URL || "", // Optional. Set your site URL
-    "X-Title": process.env.SITE_NAME || "", // Optional. Set your site name
+    "HTTP-Referer": process.env.SITE_URL || "https://nahid-mahmud.xyz", // Optional. Set your site URL
+    "X-Title": process.env.SITE_NAME || "Portfolio - Md. Nahid Mahmud", // Optional. Set your site name
   },
 });
 
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     console.log(`Sending conversation to OpenAI with ${messages.length} messages.`);
 
     const completion = await openai.chat.completions.create({
-      model: "google/learnlm-1.5-pro-experimental:free", // Replace "default-model" with a valid fallback model
+      model: "google/learnlm-1.5-pro-experimental:free",
       messages,
     });
 
