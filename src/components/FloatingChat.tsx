@@ -97,7 +97,7 @@ export default function FloatingChat() {
     };
 
     try {
-      const res = await fetch("/api/ask-gemini", {
+      const res = await fetch("/api/ask-ai", {
         // Call our backend API route
         method: "POST",
         headers: {

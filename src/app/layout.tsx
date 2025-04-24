@@ -1,4 +1,4 @@
-import FloatingChat from "@/components/AskGemini";
+import FloatingChat from "@/components/FloatingChat";
 import Background from "@/components/Background";
 import MouseFollower from "@/components/MouseFollower";
 import Navbar from "@/components/NavBar";
