@@ -43,7 +43,7 @@ This portfolio is built with modern web technologies:
 ## 📚 Environment Variables
 To run this project, you need to set up the following environment variables in a `.env.local` file:
 ```plaintext
-GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
+OPENROUTER_API_KEY=YOUR_OPENROUTER_API_KEY
 NODEMAILER_PASSWORD=YOUR_GOOGLE_APP_PASSWORD
 NODEMAILER_EMAIL=YOUR_EMAIL_ADDRESS
 SEND_TO_EMAIL=RECIPIENT_EMAIL_ADDRESS
