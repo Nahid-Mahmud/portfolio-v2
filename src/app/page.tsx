@@ -120,7 +120,7 @@ export default function Home() {
             src={profileImage}
             alt="Md. Nahid Mahmud - Profile Picture"
             fill
-            className="object-cover"
+            className="object-cover z-10"
             priority={true}
           />
         </div>
