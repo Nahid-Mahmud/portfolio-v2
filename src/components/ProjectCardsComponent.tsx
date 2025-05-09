@@ -9,8 +9,20 @@ import type { Project } from "@/types/projects";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
+import AIOImage from "@/assets/aio.png";
 
 const projects: Project[] = [
+  {
+    id: "AIO Chat",
+    name: "AIO Chat",
+    description:
+      "A full-featured AI chatbot app built with Next.js and React — supporting multiple AI models, context management, and responsive UI.",
+    liveUrl: "http://aio.chat.nahid-mahmud.xyz",
+    clientRepo: "https://github.com/Nahid-Mahmud/personal-ai-chatbot",
+    tags: ["Next.js", "React", "Redux", "Next-Themes", "Tailwind Css"],
+    category: "frontend",
+    image: AIOImage,
+  },
   {
     id: "Civil & Structural Engineering Company Website",
     name: "Civil & Structural Engineering Company Website",
