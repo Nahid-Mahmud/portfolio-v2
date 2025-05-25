@@ -1,7 +1,7 @@
 {
   "cSpell.words": ["assignmentbuddy", "bytecanvas", "deepseek", "learnlm", "mistralai", "reacthub"],
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false,

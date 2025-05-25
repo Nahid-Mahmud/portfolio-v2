@@ -68,6 +68,8 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  //prefetch the page
+                  prefetch={true}
                   className={`transition-colors text-xl font-semibold ${
                     pathname === link.href
                       ? "text-emerald-600 dark:text-emerald-400"
