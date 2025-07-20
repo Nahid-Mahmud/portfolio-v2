@@ -41,12 +41,11 @@ function ContactForm() {
       });
 
       if (response.ok) {
-        toast.success("Message sent successfully!");
         setFormData({ name: "", email: "", message: "" });
         setShowSuccessPopup(true);
       }
     } catch {
-      toast.error("Failed to send message. Please try again later.");
+      toast.error("Failed to send message. Please try again.");
     } finally {
       setLoading(false);
     }
