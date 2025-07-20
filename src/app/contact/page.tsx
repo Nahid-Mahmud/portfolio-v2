@@ -51,6 +51,8 @@ export default function ContactPage() {
                   <MessageSquare className="mr-3 h-6 w-6 text-blue-900 dark:text-white" />
                   Send a message
                 </h2>
+
+                {/* Contact form */}
                 <ContactForm />
               </div>
             </div>
