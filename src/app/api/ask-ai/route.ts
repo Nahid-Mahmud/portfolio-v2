@@ -22,29 +22,28 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const conversationHistory = body.contents || [];
 
-    // Prepare the messages for the OpenAI API
-    const messages = conversationHistory.map((turn: any) => ({
-      role: turn.role,
-      content: turn.parts.map((part: any) => ({
-        type: "text",
-        text: part.text,
-      })),
-    }));
+    // Prepare the messages for the OpenAI API (content as string, not array)
+    const validRoles = ["system", "user", "assistant"];
+    const messages = conversationHistory
+      .map((turn: any) => ({
+        role: turn.role,
+        content: turn.parts.map((part: any) => part.text).join(" "),
+      }))
+      // Filter out invalid roles and empty content
+      .filter((msg: any) => validRoles.includes(msg.role) && msg.content && msg.content.trim().length > 0);
 
-    // Add system instruction as the first message
+    // Add system instruction as the first message (role: 'system')
     messages.unshift({
-      role: "user",
+      role: "system",
       content: portfolioContext,
     });
 
     console.log(`Sending conversation to OpenAI with ${messages.length} messages.`);
-
     const completion = await openai.chat.completions.create({
-      model: "mistralai/mistral-7b-instruct-v0.2",
+      model: "meta-llama/llama-3.3-8b-instruct:free",
       // model: "google/learnlm-1.5-pro-experimental:free",
       messages,
     });
-
     // console.log(completion);
 
     const responseMessage = completion.choices[0]?.message?.content;
