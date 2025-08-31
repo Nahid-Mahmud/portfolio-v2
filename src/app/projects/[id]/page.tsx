@@ -27,7 +27,7 @@ export default async function ProjectPage({ params }: PageProps) {
   const projectDetailsHtml = await readMarkdownFile(project.projectData);
 
   return (
-    <div className="min-h-screen bg-background pt-20">
+    <div className="min-h-screen bg-background pt-20 ">
       <div className="container mx-auto px-4 py-8">
         {/* Back button */}
         <div className="mb-8">
@@ -105,7 +105,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <div className="pt-8">
               <h2 className="text-2xl font-semibold mb-6">Project Details</h2>
               <div
-                className="prose prose-lg max-w-none dark:prose-invert"
+                className="prose prose-sm md:prose-lg max-w-none dark:prose-invert text-wrap break-words"
                 dangerouslySetInnerHTML={{ __html: projectDetailsHtml }}
               />
             </div>
