@@ -1,5 +1,5 @@
 "use client";
-import { projectsData } from "@/app/data/projects";
+import { projectsData } from "@/app/_data/projects";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
