@@ -103,7 +103,7 @@ export default function ExperiencePage() {
                   </svg>
                   <div>
                     <h3 className="font-medium text-slate-900">Duration</h3>
-                    <p className="text-slate-600">August, 2024 - April, 2025</p>
+                    <p className="text-slate-600">August, 2024 - April, 2025 (9 month)</p>
                   </div>
                 </div>
 
@@ -181,7 +181,8 @@ export default function ExperiencePage() {
                       <li className="flex items-start">
                         <span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600 mt-2 mr-2 flex-shrink-0"></span>
                         <span>
-                        I provided technical assistance in configuring the VPS and assisted in deploying and maintaining web applications on the VPS, ensuring reliable and secure hosting.
+                          I provided technical assistance in configuring the VPS and assisted in deploying and
+                          maintaining web applications on the VPS, ensuring reliable and secure hosting.
                         </span>
                       </li>
                     </ul>
