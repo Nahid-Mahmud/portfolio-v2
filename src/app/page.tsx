@@ -1,10 +1,11 @@
 import { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import profileImage from "@/assets/profile.png";
 import TextAnimate from "@/components/TextAnimate";
+import ResumeButtonModal from "@/components/ResumeButtonModal";
+import { Button } from "@/components/ui/button";
 
 // Define metadata for the Home page
 export const metadata: Metadata = {
@@ -79,11 +80,19 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex gap-4 pt-4">
-          <Button className="text-md bg-emerald-600 h-12 text-xl w-fit hover:bg-emerald-700 flex items-center group cursor-pointer">
-            <Download className="transition-transform duration-300 group-hover:scale-125" />
-            Resume
-          </Button>
+        <div className="flex gap-4 pt-4 ">
+          <ResumeButtonModal />
+          <Link
+            href={"https://drive.google.com/file/d/1HmHNR381BTJXhvUJNuVLHdmoxdL9xlol/view?usp=drive_link"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden"
+          >
+            <Button className="text-md bg-emerald-600 h-12 text-xl w-fit hover:bg-emerald-700 flex items-center group cursor-pointer">
+              <Download className="transition-transform duration-300 group-hover:scale-125" />
+              Resume
+            </Button>
+          </Link>
           <div className="text-md group h-12 text-xl border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 border flex items-center justify-center rounded-md cursor-pointer px-3">
             <Link href="/contact" className="flex gap-1 items-center">
               Contact Me <ArrowRight className="group-hover:ml-2 transition-all duration-300 h-6 w-6 text-xl" />
