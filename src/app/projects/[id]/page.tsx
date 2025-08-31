@@ -6,6 +6,7 @@ import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReactPlayer from "react-player";
 
 interface PageProps {
   params: Promise<{
@@ -41,9 +42,40 @@ export default async function ProjectPage({ params }: PageProps) {
 
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Project Image */}
-          <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
-            <Image src={project.image} alt={project.name} fill className="object-cover" priority />
-          </div>
+          {!project?.explanationVideo && (
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg bg-white">
+              <Image
+                src={project.image}
+                alt={project.name}
+                fill
+                className="object-cover bg-white aspect-square z-10"
+                priority
+              />
+            </div>
+          )}
+
+          {/* Explanation Video */}
+          {project.explanationVideo && (
+            <div className="space-y-4">
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg bg-black">
+                <ReactPlayer
+                  src={project.explanationVideo}
+                  width="100%"
+                  height="100%"
+                  controls
+                  style={{ position: "absolute", top: 0, left: 0 }}
+                  config={{
+                    youtube: {
+                      // @ts-expect-error - playerVars type definition issue
+                      playerVars: {
+                        vq: "hd1080",
+                      },
+                    },
+                  }}
+                />
+              </div>
+            </div>
+          )}
 
           {/* Project Header */}
           <div className="space-y-4">

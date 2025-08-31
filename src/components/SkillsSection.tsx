@@ -21,6 +21,8 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
+import mongooseImage from "@/assets/skills/Mongoose.js.png";
+import redisImage from "@/assets/skills/Redis.png";
 
 type Skill = {
   name: string;
@@ -50,6 +52,12 @@ const skills: Skill[] = [
   { name: "CI/CD", category: "tools", icon: ciCdImage.src },
   { name: "VPS Hosting (Ubuntu)", category: "tools", icon: vps.src },
   { name: "Firebase", category: "tools", icon: firebaseImage.src },
+  { name: "Mongoose", category: "backend", icon: mongooseImage.src },
+  {
+    name: "Redis",
+    category: "tools",
+    icon: redisImage.src,
+  },
 ];
 
 export default function SkillsSection() {

@@ -1,5 +1,6 @@
 import AboutMeSection from "@/components/AboutMeSection";
 import SkillsSection from "@/components/SkillsSection";
+import SoftSkills from "@/components/Softskill";
 import { Metadata } from "next";
 import React from "react";
 
@@ -53,6 +54,7 @@ const AboutSectionInspired: React.FC = () => {
     <div className="py-20 md:py-28 ">
       <AboutMeSection />
       <SkillsSection />
+      <SoftSkills />
     </div>
   );
 };

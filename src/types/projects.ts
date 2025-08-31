@@ -11,4 +11,5 @@ export interface Project {
   tags: string[];
   category: string;
   projectData?: string;
+  explanationVideo?: string;
 }
