@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const wordsToAnimate = [
+  "Full Stack Developer",
   "Frontend Developer ",
   "Next.js Developer",
   "Backend Developer",
-  "Full Stack Developer",
   "Web Developer",
   "JavaScript Developer",
   "React.js Developer",

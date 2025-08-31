@@ -78,6 +78,7 @@ export default function Home() {
             <TextAnimate />
           </div>
         </div>
+
         <div className="flex gap-4 pt-4">
           <Button className="text-md bg-emerald-600 h-12 text-xl w-fit hover:bg-emerald-700 flex items-center group cursor-pointer">
             <Download className="transition-transform duration-300 group-hover:scale-125" />
