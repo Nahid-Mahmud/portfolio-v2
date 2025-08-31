@@ -37,6 +37,7 @@ export const projectsData: Project[] = [
     category: "fullstack",
     image: OopsipayImage,
     projectData: "oopsiPay.md",
+    explanationVideo: "https://www.youtube.com/watch?v=SOmPx96cNWY",
   },
   {
     id: "AIO-Chat",
@@ -49,6 +50,7 @@ export const projectsData: Project[] = [
     category: "frontend",
     image: AIOImage,
     projectData: "aioChat.md",
+    explanationVideo: "https://www.youtube.com/watch?v=266ybnAr1q4",
   },
 
   {
@@ -61,7 +63,7 @@ export const projectsData: Project[] = [
     serverRepo: "https://github.com/Nahid-Mahmud/react-hub-server",
     tags: ["React", "Node.js", "MongoDB", "Express"],
     category: "fullstack",
-    projectData:"reactHub.md"
+    projectData: "reactHub.md",
   },
   {
     id: "bytecanvas",
@@ -73,6 +75,7 @@ export const projectsData: Project[] = [
     serverRepo: "https://github.com/Nahid-Mahmud/ByteCanvas-server",
     tags: ["React", "Firebase", "Node.js", "Express"],
     category: "fullstack",
+    projectData: "byteCanvas.md",
   },
   {
     id: "assignmentbuddy",
@@ -84,5 +87,6 @@ export const projectsData: Project[] = [
     serverRepo: "https://github.com/Nahid-Mahmud/assignmnet-buddy-server",
     tags: ["React", "MongoDB", "Express", "JWT"],
     category: "fullstack",
+    projectData: "assignmentBuddy.md",
   },
 ];
