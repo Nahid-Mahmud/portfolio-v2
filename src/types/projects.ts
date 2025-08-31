@@ -10,4 +10,5 @@ export interface Project {
   serverRepo?: string;
   tags: string[];
   category: string;
+  projectData?: string;
 }

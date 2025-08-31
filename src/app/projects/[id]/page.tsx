@@ -1,24 +1,30 @@
-import { notFound } from "next/navigation";
+import { projectsData } from "@/app/data/projects";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { readMarkdownFile } from "@/utils/readMarkdownFile";
+import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, Github, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { projectsData } from "@/app/data/projects";
+import { notFound } from "next/navigation";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function ProjectPage({ params }: PageProps) {
-  const projectId = decodeURIComponent(params.id);
+// Function to process Markdown to HTML
+
+export default async function ProjectPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const projectId = decodeURIComponent(resolvedParams.id);
   const project = projectsData.find((p) => p.id === projectId);
 
   if (!project) {
     notFound();
   }
+
+  const projectDetailsHtml = await readMarkdownFile(project.projectData);
 
   return (
     <div className="min-h-screen bg-background pt-20">
@@ -93,6 +99,17 @@ export default function ProjectPage({ params }: PageProps) {
               </Button>
             )}
           </div>
+
+          {/* Project Details from Markdown */}
+          {projectDetailsHtml && (
+            <div className="pt-8">
+              <h2 className="text-2xl font-semibold mb-6">Project Details</h2>
+              <div
+                className="prose prose-lg max-w-none dark:prose-invert"
+                dangerouslySetInnerHTML={{ __html: projectDetailsHtml }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

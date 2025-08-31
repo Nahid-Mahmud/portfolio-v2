@@ -3,9 +3,43 @@ import assignmentBuddyImage from "@/assets/assignment-buddy.png";
 import byteCanvasImage from "@/assets/bytecanvas.png";
 import ReactHubImage from "@/assets/react-hub.png";
 import { Project } from "../../types/projects";
+import OopsipayImage from "@/assets/oopsiPay.png";
 export const projectsData: Project[] = [
   {
-    id: "AIO Chat",
+    id: "OopsiPAY",
+    name: "OopsiPAY",
+    description:
+      "OopsiPAY is a secure digital wallet and payment platform built with React, TypeScript, Node.js, and MongoDB, offering seamless cash-in, cash-out, and money transfer with role-based access and analytics.",
+    liveUrl: "https://oopsipay.nahid-mahmud.xyz",
+    clientRepo: "https://github.com/Nahid-Mahmud/OopsiPay-Frontend",
+    serverRepo: "https://github.com/Nahid-Mahmud/OopsiPay-Backend",
+    tags: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Redis",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "RTK Query",
+      "Zod",
+      "react-hook-form",
+      "lucide-react",
+      "sonner",
+      "Cloudinary",
+      "JWT",
+      "Passport.js",
+      "Mongoose",
+      "SMTP",
+    ],
+    category: "fullstack",
+    image: OopsipayImage,
+    projectData: "oopsiPay.md",
+  },
+  {
+    id: "AIO-Chat",
     name: "AIO Chat",
     description:
       "A full-featured AI chatbot app built with Next.js and React — supporting multiple AI models, context management, and responsive UI.",
@@ -14,6 +48,7 @@ export const projectsData: Project[] = [
     tags: ["Next.js", "React", "Redux", "Next-Themes", "Tailwind Css"],
     category: "frontend",
     image: AIOImage,
+    projectData: "aioChat.md",
   },
 
   {
@@ -26,6 +61,7 @@ export const projectsData: Project[] = [
     serverRepo: "https://github.com/Nahid-Mahmud/react-hub-server",
     tags: ["React", "Node.js", "MongoDB", "Express"],
     category: "fullstack",
+    projectData:"reactHub.md"
   },
   {
     id: "bytecanvas",
