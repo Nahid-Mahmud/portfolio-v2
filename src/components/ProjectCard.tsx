@@ -45,11 +45,17 @@ function ProjectCard({ project }: { project: Project }) {
           {project.description.length > 100 ? `${project.description.slice(0, 100)}...` : project.description}
         </p>
         <div className="flex flex-wrap gap-2 mt-4">
-          {project.tags.map((tag) => (
+          {project.tags.slice(0, 5).map((tag) => (
             <Badge key={tag} variant="secondary" className="font-normal">
               {tag}
             </Badge>
           ))}
+
+          {project.tags.length > 5 ? (
+            <Badge key="more" variant="secondary" className="font-normal">
+              +{project.tags.length - 5} more
+            </Badge>
+          ) : null}
         </div>
       </CardContent>
 
