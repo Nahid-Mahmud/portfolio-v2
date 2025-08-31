@@ -1,10 +1,8 @@
-import { Project } from "../../types/projects";
 import AIOImage from "@/assets/aio.png";
-import aquaImage from "@/assets/aqua.png";
 import assignmentBuddyImage from "@/assets/assignment-buddy.png";
 import byteCanvasImage from "@/assets/bytecanvas.png";
-import construction_websiteImage from "@/assets/construction_website.png";
 import ReactHubImage from "@/assets/react-hub.png";
+import { Project } from "../../types/projects";
 export const projectsData: Project[] = [
   {
     id: "AIO Chat",
@@ -17,30 +15,7 @@ export const projectsData: Project[] = [
     category: "frontend",
     image: AIOImage,
   },
-  {
-    id: "Civil & Structural Engineering Company Website",
-    name: "Civil & Structural Engineering Company Website",
-    description:
-      "Developed a responsive, professional front-end for an engineering firm offering civil, structural, and specialty services. My goal was to showcase the company’s expertise and streamline the user journey. I implemented a clean layout, service sections, and contact forms, resulting in a polished site that supports lead generation and reflects the firm's innovation and reliability.",
-    image: construction_websiteImage,
-    liveUrl: "https://civil-154sde.vercel.app/",
-    clientRepo: "",
-    serverRepo: "",
-    tags: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Framer Motion"],
-    category: "frontend",
-  },
-  {
-    id: "Frontend Development for Smart Water Leak Detection System",
-    name: "Frontend Development for Smart Water Leak Detection System",
-    description:
-      "Developed the frontend for Aqua IQ, a smart leak detection system by Pure IC. The goal was to present complex product features in a clear, engaging, and responsive layout. I implemented a clean UI, structured product information, and intuitive navigation, ensuring a smooth user experience across devices. The result was a polished and professional website that supports the product’s innovative positioning in the market.",
-    image: aquaImage,
-    liveUrl: "https://aqua-frontend-nextjs.vercel.app/",
-    clientRepo: "",
-    serverRepo: "",
-    tags: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Framer Motion"],
-    category: "frontend",
-  },
+
   {
     id: "reacthub",
     name: "ReactHub",
