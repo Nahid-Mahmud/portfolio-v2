@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 // Add import for Card components
 import { Card, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Blogs - Md. Nahid Mahmud",
@@ -45,7 +46,7 @@ export default function Blogs() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {allBlogs.map((blog) => (
-            <Card key={blog.slug} className="z-10 flex flex-col h-full">
+            <Card key={blog.slug} className="z-10 flex flex-col h-full pt-0">
               {blog.image && (
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
                   <Image src={blog.image} alt={blog.title} fill className="object-cover" />
@@ -55,10 +56,12 @@ export default function Blogs() {
                 <CardTitle>{blog.title}</CardTitle>
                 <CardDescription>{blog.description}</CardDescription>
               </CardContent>
-              <CardFooter>
-                <Link href={`/blogs/${blog.slug}`} className="text-primary font-medium">
-                  Read More →
-                </Link>
+              <CardFooter className="items-end flex w-full justify-end">
+                <Button variant={"outline"} asChild>
+                  <Link href={`/blogs/${blog.slug}`} className="text-primary font-medium">
+                    Read Full Blog →
+                  </Link>
+                </Button>
               </CardFooter>
             </Card>
           ))}
