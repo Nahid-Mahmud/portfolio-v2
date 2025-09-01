@@ -10,14 +10,12 @@ import Image from "next/image";
 export const dynamic = "force-static";
 
 export async function generateStaticParams() {
-  return allBlogs.map((blog) => ({ slug: blog.slug }));
+  return await allBlogs.map((blog) => ({ slug: blog.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const blog = allBlogs.find((b) => b.slug === params.slug);
-  if (!blog) {
-    return { title: "Blog Not Found" };
-  }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const blog = allBlogs.find((b) => b.slug === slug);
   if (!blog) {
     return { title: "Blog Not Found" };
   }
@@ -52,11 +50,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function BlogPage({ params }: PageProps) {
-  const blog = allBlogs.find((b) => b.slug === params.slug);
+  const { slug } = await params;
+  const blog = allBlogs.find((b) => b.slug === slug);
   if (!blog) {
     notFound();
   }
