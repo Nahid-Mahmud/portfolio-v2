@@ -43,7 +43,12 @@ export default function FloatingChat() {
   );
 
   useEffect(() => {
-    startTour(chatTourSteps);
+    const hasShownTour = localStorage.getItem("chatTourShown");
+
+    if (!hasShownTour) {
+      startTour(chatTourSteps);
+      localStorage.setItem("chatTourShown", "true");
+    }
 
     return () => {
       destroyTour();
