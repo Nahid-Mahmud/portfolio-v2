@@ -61,7 +61,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       <div className="px-4 pb-4 pt-2 mt-auto space-y-2">
         <div className="flex items-center gap-4 justify-between w-full ">
-          <div className="flex gap-5 ">
+          <div className="flex gap-5 items-center justify-between w-full md:w-fit">
             {project.clientRepo && (
               <Link
                 href={project.clientRepo}
@@ -87,7 +87,7 @@ function ProjectCard({ project }: { project: Project }) {
             )}
           </div>
           <div>
-            <Button size="sm" variant="outline" asChild>
+            <Button size="sm" variant="outline" asChild className="hidden md:inline-flex">
               <Link href={`/projects/${encodeURIComponent(project.id)}`}>View Details</Link>
             </Button>
           </div>
