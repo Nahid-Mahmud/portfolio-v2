@@ -20,23 +20,32 @@ const keySkills = [
   "CI/CD",
   "API Integration",
   "Prisma",
+  "Redux",
+  "Firebase",
+  "JWT",
+  "Stripe",
+  "Cloudinary",
+  "Redis",
+  "Tailwind CSS",
+  "Material UI",
+  "Framer Motion",
 ]; // List your key skills
-const experienceSummary = `I am a passionate ${yourRole} specializing in building modern, responsive web applications using technologies like React, Next.js, and Node.js. I enjoy creating efficient and user-friendly solutions.`; // Write a brief summary (2-3 sentences)
-const project1Name = "ReactHub";
-const project1Desc = `ReactHub is a forum website using the MERN stack. It features responsive design for seamless user experiences on desktops, tablets, and mobiles. Key features include an intuitive navbar, advanced search functionalities, and interactive post displays. Premium features like a Gold badge and increased post limits are managed through a user-centric Dashboard. Admins access a dedicated dashboard for streamlined user management and announcements. Built with Material UI, React Share, React Helmet Async, Firebase authentication, and JWT tokens. Live link (https://react-hub-nahid.surge.sh/)`;
-const project2Name = "ByteCanvas";
-const project2Desc = `ByteCanvas is a cutting-edge technology-themed website offering a streamlined user experience. It features a clean navbar, product management, and a My Cart page. Users can add products, view product details, and manage their cart. The website includes email/password authentication, error handling, and a dark/light theme toggle. Built with React Router, Firebase authentication, MongoDB, and dynamic rendering. Live link (https://bytecanvas.surge.sh/)`;
-const project3Name = "Assignment Buddy";
-const project3Desc = `Assignment Buddy is an online group study platform where users create, manage, and grade assignments collaboratively. Features include secure authentication, assignment creation, submission, marking, and dynamic pages. Built with Firebase authentication, JWT tokens, MongoDB, and Framer Motion for smooth animations. Live link (https://assignment-buddy.surge.sh/)`;
+const experienceSummary = `I am a passionate ${yourRole} specializing in building modern, responsive web applications using technologies like React, Next.js, and Node.js. I enjoy creating efficient and user-friendly solutions with a focus on full-stack development, AI integration, and payment systems.`; // Write a brief summary (2-3 sentences)
 
-const project4Name = "Frontend Development for Smart Water Leak Detection System";
-const project4Desc = `A"Developed the frontend for Aqua IQ, a smart leak detection system by Pure IC. The goal was to present complex product features in a clear, engaging, and responsive layout. I implemented a clean UI, structured product information, and intuitive navigation, ensuring a smooth user experience across devices. The result was a polished and professional website that supports the product’s innovative positioning in the market.", Live link (https://aqua-frontend-nextjs.vercel.app/)`;
+const project1Name = "AIO Chat";
+const project1Desc = `AIO Chat is a powerful Next.js-based AI chatbot application with support for multiple AI models including Meta's Llama 3.2, Google's LearnLM, and Qwen2.5. Features include context management for targeted AI responses, responsive design across all devices, dark/light mode toggle, and rich markdown support with code highlighting. Built with Next.js 15.3, React 19, Redux with Redux Persist, TailwindCSS 4.0, and ShadCn UI components. Integrates with OpenRouter API for AI model access and supports real-time interactive conversations with persistent context. Live Link : https://aio.chat.nahid-mahmud.xyz`;
 
-const project5Name = "My Portfolio";
-const project5Desc = `This portfolio website showcases my skills, projects, and experience as a Full-Stack Developer. It features a clean design, responsive layout, and easy navigation. Built with Next.js, Tailwind CSS, and Framer Motion for smooth animations. Live link (https://nahid-mahmud.xyz/)`;
+const project2Name = "OopsiPAY";
+const project2Desc = `OopsiPAY is a comprehensive digital wallet and payment platform built with React, TypeScript, Node.js, and MongoDB. Features include secure authentication with JWT and bcrypt, role-based access (Users, Agents, Admins, Super Admins), financial transactions (cash-in, cash-out, send money), admin analytics dashboard with server-side pagination, and file upload with Cloudinary integration. The platform supports email OTP verification, Redis caching, and comprehensive transaction management. Built with Redux Toolkit, RTK Query, Tailwind CSS, and Zod validation. Live Link: https://oopsipay.vercel.app`;
 
-const project6Name = "Civil & Structural Engineering Company Website";
-const project6Desc = `Developed a responsive, professional front-end for an engineering firm offering civil, structural, and specialty services. My goal was to showcase the company’s expertise and streamline the user journey. I implemented a clean layout, service sections, and contact forms, resulting in a polished site that supports lead generation and reflects the firm's innovation and reliability. Live link (https://civil-154sde.vercel.app/)`;
+const project3Name = "ReactHub";
+const project3Desc = `ReactHub is a dynamic MERN stack forum website featuring responsive design, advanced server-side search using tags, post sorting by date or popularity, user dashboard with premium membership (Gold badge), and admin dashboard for comprehensive management. Includes Stripe payment integration for premium features, social sharing with React Share, SEO optimization with React Helmet Async, Firebase authentication with JWT tokens, and Material UI components. Supports role-based access with separate admin and private routes. Live link: https://react-hub-nahid.surge.sh/`;
+
+const project4Name = "ByteCanvas";
+const project4Desc = `ByteCanvas is a modern technology-themed e-commerce platform built with the MERN stack, featuring products from Apple, Samsung, Google, Sony, Huawei, and Xiaomi. Includes responsive design, dynamic product management with brand-specific collections, cart functionality, secure Firebase authentication with JWT authorization, theme toggle (dark/light), and comprehensive error handling with custom 404 page. Built with React Router for dynamic navigation and MongoDB collections per brand. Live links: https://bytecanvas.surge.sh/ and https://bytecanvas.netlify.app/`;
+
+const project5Name = "Assignment Buddy";
+const project5Desc = `Assignment Buddy is an interactive MERN stack platform for collaborative group study and assignment management. Features include assignment creation with detailed parameters, secure Firebase authentication with JWT tokens, dynamic routing with private routes, submission and grading system with feedback storage, difficulty-based filtering, and smooth Framer Motion animations. Supports conditional rendering for enhanced UX and responsive design across all devices. Backend deployed on Vercel with MongoDB Atlas. Live link: https://assignment-buddy.surge.sh/`;
 
 // Add more projects as needed: const project4Name = ...; const project4Desc = ...;
 const contactInfo = `You can find my contact details on the 'Contact' page or connect with me on LinkedIn (https://www.linkedin.com/in/md-nahid-mahmud/).`; // Guide users on how to contact you
@@ -78,7 +87,7 @@ Your secondary purpose is to answer general questions related to programming, so
 *   **${project3Name}:** ${project3Desc}
 *   **${project4Name}:** ${project4Desc}
 *   **${project5Name}:** ${project5Desc}
-*   **${project6Name}:** ${project6Desc}
+
 ${/* Add more projects here if you defined them above, e.g.: *   **${project4Name}:** ${project4Desc} */ ""}
 
 Now, please answer the user's questions following these instructions and priorities precisely.
