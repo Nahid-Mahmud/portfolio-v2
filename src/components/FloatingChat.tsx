@@ -2,12 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useDriver } from "@/hooks/useDriver";
 import { cn } from "@/lib/utils";
 import { MessageCircle, RotateCw, Send, X } from "lucide-react";
 import type React from "react";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import "driver.js/dist/driver.css";
 
 // Define the structure for a single message in the chat
 interface Message {
@@ -24,6 +26,30 @@ interface ApiRequestBody {
 }
 
 export default function FloatingChat() {
+  // driver js
+  const { startTour, destroyTour } = useDriver();
+
+  const chatTourSteps = useMemo(
+    () => [
+      {
+        element: "#chat-bubble",
+        popover: {
+          title: "Personalized AI Chat Bot",
+          description: "Ask anything about this portfolio and the man behind it!",
+        },
+      },
+    ],
+    []
+  );
+
+  useEffect(() => {
+    startTour(chatTourSteps);
+
+    return () => {
+      destroyTour();
+    };
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
   const [prompt, setPrompt] = useState<string>("");
   const [history, setHistory] = useState<Message[]>([
@@ -250,7 +276,7 @@ export default function FloatingChat() {
         )}
         aria-label="Open chat"
       >
-        <MessageCircle className="h-6 w-6" />
+        <MessageCircle id="chat-bubble" className="h-6 w-6" />
       </div>
     </div>
   );
