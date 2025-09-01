@@ -1,4 +1,6 @@
 import ioRedisPhoto from "@/assets/blogs/Ioredis.png";
+import bullMqImage from "@/assets/blogs/bullMq.png";
+import mongoDbImage from "@/assets/blogs/mongodb.png";
 
 export const allBlogs = [
   {
@@ -15,7 +17,7 @@ export const allBlogs = [
     title: "A Beginner's Guide to BullMQ",
     description: "Learn the basics of BullMQ, a powerful queue library for Node.js.",
     slug: "a-beginners-guide-to-bullmq",
-    image: "",
+    image: bullMqImage,
     fullBlog: "bullmq.blog.md",
     publishDate: "2025-08-025",
   },
@@ -24,7 +26,7 @@ export const allBlogs = [
     title: "A Beginner's Handbook to MongoDB Aggregation Pipeline",
     description: "Understand the MongoDB aggregation pipeline with this comprehensive guide.",
     slug: "a-beginners-handbook-to-mongodb-aggregation-pipeline",
-    image: "",
+    image: mongoDbImage,
     fullBlog: "mongodbPipeline.blog.md",
     publishDate: "2025-09-01",
   },

@@ -8,6 +8,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactPlayer from "react-player";
 
+// Force static rendering for all project pages
+export const dynamic = "force-static";
+
+// Pre-generate all project id routes at build time
+export async function generateStaticParams() {
+  return projectsData.map((p) => ({
+    id: encodeURIComponent(p.id),
+  }));
+}
+
 interface PageProps {
   params: Promise<{
     id: string;
