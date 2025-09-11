@@ -103,7 +103,7 @@ export default function ExperiencePage() {
                   </svg>
                   <div>
                     <h3 className="font-medium text-slate-900">Duration</h3>
-                    <p className="text-slate-600">August, 2024 - April, 2025 (9 month)</p>
+                    <p className="text-slate-600">August, 2024 - April, 2025 (8 month)</p>
                   </div>
                 </div>
 
