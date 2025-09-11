@@ -47,6 +47,9 @@ const project4Desc = `ByteCanvas is a modern technology-themed e-commerce platfo
 const project5Name = "Assignment Buddy";
 const project5Desc = `Assignment Buddy is an interactive MERN stack platform for collaborative group study and assignment management. Features include assignment creation with detailed parameters, secure Firebase authentication with JWT tokens, dynamic routing with private routes, submission and grading system with feedback storage, difficulty-based filtering, and smooth Framer Motion animations. Supports conditional rendering for enhanced UX and responsive design across all devices. Backend deployed on Vercel with MongoDB Atlas. Live link: https://assignment-buddy.surge.sh/`;
 
+const project6Name = "Zanix LMS";
+const project6Desc = `Zanix LMS is a robust, full-stack Learning Management System (LMS) designed to deliver a seamless online education experience. It supports multiple user roles—students, instructors, administrators, moderators, and super admins—enabling course creation, management, enrollment, and interactive learning. The frontend is built with Next.js, React, and TypeScript, ensuring a responsive and intuitive user interface. The backend, powered by Node.js, Express, TypeScript, and MongoDB, provides secure APIs, data management, and scalable services. Key features include video content integration, mock payment processing, email notifications, and analytics, making it a comprehensive solution for educational platforms.`;
+
 // Add more projects as needed: const project4Name = ...; const project4Desc = ...;
 const contactInfo = `You can find my contact details on the 'Contact' page or connect with me on LinkedIn (https://www.linkedin.com/in/md-nahid-mahmud/).`; // Guide users on how to contact you
 const availability = "I am currently open to new full-time opportunities and freelance projects."; // e.g., open to opportunities, currently employed, etc.
@@ -87,6 +90,7 @@ Your secondary purpose is to answer general questions related to programming, so
 *   **${project3Name}:** ${project3Desc}
 *   **${project4Name}:** ${project4Desc}
 *   **${project5Name}:** ${project5Desc}
+*   **${project6Name}:** ${project6Desc}
 
 ${/* Add more projects here if you defined them above, e.g.: *   **${project4Name}:** ${project4Desc} */ ""}
 

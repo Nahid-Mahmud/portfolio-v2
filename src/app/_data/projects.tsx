@@ -4,6 +4,7 @@ import byteCanvasImage from "@/assets/bytecanvas.png";
 import ReactHubImage from "@/assets/react-hub.png";
 import { Project } from "../../types/projects";
 import OopsipayImage from "@/assets/oopsiPay.png";
+import ZanixImage from "@/assets/zanix.png";
 export const projectsData: Project[] = [
   {
     id: "OopsiPAY",
@@ -38,6 +39,36 @@ export const projectsData: Project[] = [
     image: OopsipayImage,
     projectData: "oopsiPay.md",
     explanationVideo: "https://www.youtube.com/watch?v=SOmPx96cNWY",
+  },
+  {
+    id: "zanix-lms",
+    name: "Zanix LMS",
+    description:
+      "Zanix LMS is a robust, full-stack Learning Management System (LMS) designed to deliver a seamless online education experience with multiple user roles, course management, video content, and analytics.",
+    image: ZanixImage,
+    liveUrl: "",
+    clientRepo: "",
+    serverRepo: "https://github.com/Nahid-Mahmud/Znanix-LMS-Backend.git",
+    tags: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Redis",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "RTK Query",
+      "Zod",
+      "Cloudinary",
+      "JWT",
+      "BullMQ",
+      "PDFKit",
+    ],
+    category: "fullstack",
+    projectData: "zanix-lms-project-details.markdown",
+    explanationVideo: "https://www.youtube.com/watch?v=xCKLvj9XADI",
   },
   {
     id: "AIO-Chat",
