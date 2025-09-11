@@ -60,6 +60,7 @@ export default function ExperiencePage() {
             A detailed overview of my professional journey and expertise
           </p>
         </div>
+        
 
         <div className="overflow-hidden border-none rounded-lg shadow-lg ">
           {/* Card Header */}
