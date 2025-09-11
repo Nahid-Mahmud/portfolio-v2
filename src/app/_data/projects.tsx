@@ -46,9 +46,10 @@ export const projectsData: Project[] = [
     description:
       "Zanix LMS is a robust, full-stack Learning Management System (LMS) designed to deliver a seamless online education experience with multiple user roles, course management, video content, and analytics.",
     image: ZanixImage,
-    liveUrl: "",
-    clientRepo: "",
+    liveUrl: "https://zanix.nahid-mahmud.xyz/",
+    clientRepo: "https://github.com/Nahid-Mahmud/Znanix-LMS-Frontend",
     serverRepo: "https://github.com/Nahid-Mahmud/Znanix-LMS-Backend.git",
+
     tags: [
       "Next.js",
       "React",
