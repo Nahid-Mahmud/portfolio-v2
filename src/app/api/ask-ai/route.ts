@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
 
     console.log(`Sending conversation to OpenAI with ${messages.length} messages.`);
     const completion = await openai.chat.completions.create({
-      model: "meta-llama/llama-3.3-8b-instruct:free",
+      model: "mistralai/devstral-small-2505:free",
       // model: "google/learnlm-1.5-pro-experimental:free",
       messages,
     });
