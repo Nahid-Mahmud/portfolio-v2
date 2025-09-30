@@ -2,11 +2,29 @@
 import { useEffect, useState } from "react";
 import { Mail, Send } from "lucide-react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+const forgotPasswordSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+});
+
+type ForgotPasswordForm = z.infer<typeof forgotPasswordSchema>;
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState("");
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
+
+  const form = useForm<ForgotPasswordForm>({
+    resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
   const heroMessage = "Forgot your password? No worries—let's get you back in.";
 
@@ -24,14 +42,13 @@ export default function ForgotPasswordPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (data: ForgotPasswordForm) => {
     // TODO: trigger forgot-password API
-    console.log("Request password reset for:", { email });
+    console.log("Request password reset for:", data);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4 overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br bg-[#040931]  flex items-center justify-center p-4 overflow-hidden relative">
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-20 h-20 bg-blue-400/20 rounded-full animate-pulse"></div>
         <div className="absolute top-1/3 right-20 w-16 h-16 bg-teal-400/20 rounded-full animate-bounce delay-1000"></div>
@@ -57,29 +74,40 @@ export default function ForgotPasswordPage() {
             <p className="text-blue-200">Enter your email to receive a reset link</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-blue-300 group-focus-within:text-blue-200 transition-colors" />
-              </div>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white/15"
-                placeholder="Your email address"
-                required
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="relative group">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                          <Mail className="h-5 w-5 text-blue-300 group-focus-within:text-blue-200 transition-colors" />
+                        </div>
+                        <Input
+                          {...field}
+                          type="email"
+                          className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white/15"
+                          placeholder="Your email address"
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
 
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center justify-center space-x-2 group"
-            >
-              <Send className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              <span>Send Reset Link</span>
-            </button>
-          </form>
+              <Button
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center justify-center space-x-2 group"
+              >
+                <Send className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                <span>Send Reset Link</span>
+              </Button>
+            </form>
+          </Form>
 
           <div className="text-center mt-8">
             <p className="text-blue-200">
