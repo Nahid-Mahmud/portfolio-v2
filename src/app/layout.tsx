@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Titillium_Web } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import "@mdxeditor/editor/style.css";
+import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
       antialiased`}
       >
         {children}
+        <Toaster richColors={true} position="top-right" expand={true} />
       </body>
     </html>
   );
