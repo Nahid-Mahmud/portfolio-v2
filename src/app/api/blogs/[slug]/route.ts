@@ -3,9 +3,9 @@ import { allBlogs } from "@/app/(commonLayout)/_data/blogs";
 import fs from "fs";
 import path from "path";
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
-    const { slug } = params;
+    const { slug } = await params;
     const blog = allBlogs.find((b) => b.slug === slug);
 
     if (!blog) {

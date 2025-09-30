@@ -19,7 +19,7 @@ interface AddPhotoDialogProps {
   loading: boolean;
   setOpen: (open: boolean) => void;
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function AddPhotoDialog({ onSubmit, loading, setOpen }: AddPhotoDialogProps) {
   const maxSizeMB = 5;
   const maxSize = maxSizeMB * 1024 * 1024; // 5MB default

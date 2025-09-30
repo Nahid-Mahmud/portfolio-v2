@@ -1,5 +1,3 @@
-import { MDXEditor } from "@/components/mdx-editor";
-
 export default function DashboardPage() {
   return (
     <div>
