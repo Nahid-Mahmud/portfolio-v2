@@ -1,4 +1,6 @@
 import PhotoGalleryClient from "@/components/PhotoGalleryClient";
+import fs from "fs";
+import path from "path";
 
 interface Photo {
   url: string;
@@ -7,12 +9,10 @@ interface Photo {
 
 async function fetchPhotos(): Promise<Photo[]> {
   try {
-    const response = await fetch("/api/photos");
-    if (!response.ok) {
-      throw new Error("Failed to fetch photos");
-    }
-    const data = await response.json();
-    return data;
+    const dataFilePath = path.join(process.cwd(), "src", "data", "photos.json");
+    const data = fs.readFileSync(dataFilePath, "utf8");
+    const photos: Photo[] = JSON.parse(data);
+    return photos;
   } catch (error) {
     console.error("Failed to fetch photos:", error);
     return [];
