@@ -2,14 +2,38 @@
 import { useEffect, useState } from "react";
 import { Eye, EyeOff, Lock, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+const resetPasswordSchema = z
+  .object({
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string().min(6, "Password must be at least 6 characters"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
+type ResetPasswordForm = z.infer<typeof resetPasswordSchema>;
 
 export default function ResetPasswordPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
+
+  const form = useForm<ResetPasswordForm>({
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
   const heroMessage = "Set a new password and secure your account.";
 
@@ -27,18 +51,13 @@ export default function ResetPasswordPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
+  const handleSubmit = (data: ResetPasswordForm) => {
     // TODO: trigger reset-password API with token
-    console.log("Reset password:", { password });
+    console.log("Reset password:", data);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4 overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br bg-[#040931]  flex items-center justify-center p-4 overflow-hidden relative">
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-20 h-20 bg-blue-400/20 rounded-full animate-pulse"></div>
         <div className="absolute top-1/3 right-20 w-16 h-16 bg-teal-400/20 rounded-full animate-bounce delay-1000"></div>
@@ -64,64 +83,84 @@ export default function ResetPasswordPage() {
             <p className="text-blue-200">Choose a strong password for your account</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-blue-300 group-focus-within:text-blue-200 transition-colors" />
-              </div>
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-12 pr-12 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white/15"
-                placeholder="New password"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center hover:scale-110 transition-transform"
-              >
-                {showPassword ? (
-                  <EyeOff className="h-5 w-5 text-blue-300 hover:text-blue-200" />
-                ) : (
-                  <Eye className="h-5 w-5 text-blue-300 hover:text-blue-200" />
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="relative group">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                          <Lock className="h-5 w-5 text-blue-300 group-focus-within:text-blue-200 transition-colors" />
+                        </div>
+                        <Input
+                          {...field}
+                          type={showPassword ? "text" : "password"}
+                          className="w-full pl-12 pr-12 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white/15"
+                          placeholder="New password"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute inset-y-0 right-0 pr-4 flex items-center hover:scale-110 transition-transform"
+                        >
+                          {showPassword ? (
+                            <EyeOff className="h-5 w-5 text-blue-300 hover:text-blue-200" />
+                          ) : (
+                            <Eye className="h-5 w-5 text-blue-300 hover:text-blue-200" />
+                          )}
+                        </button>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
                 )}
-              </button>
-            </div>
-
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <ShieldCheck className="h-5 w-5 text-blue-300 group-focus-within:text-blue-200 transition-colors" />
-              </div>
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full pl-12 pr-12 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white/15"
-                placeholder="Confirm new password"
-                required
               />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center hover:scale-110 transition-transform"
-              >
-                {showConfirmPassword ? (
-                  <EyeOff className="h-5 w-5 text-blue-300 hover:text-blue-200" />
-                ) : (
-                  <Eye className="h-5 w-5 text-blue-300 hover:text-blue-200" />
-                )}
-              </button>
-            </div>
 
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              Save New Password
-            </button>
-          </form>
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="relative group">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                          <ShieldCheck className="h-5 w-5 text-blue-300 group-focus-within:text-blue-200 transition-colors" />
+                        </div>
+                        <Input
+                          {...field}
+                          type={showConfirmPassword ? "text" : "password"}
+                          className="w-full pl-12 pr-12 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white/15"
+                          placeholder="Confirm new password"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute inset-y-0 right-0 pr-4 flex items-center hover:scale-110 transition-transform"
+                        >
+                          {showConfirmPassword ? (
+                            <EyeOff className="h-5 w-5 text-blue-300 hover:text-blue-200" />
+                          ) : (
+                            <Eye className="h-5 w-5 text-blue-300 hover:text-blue-200" />
+                          )}
+                        </button>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                Save New Password
+              </Button>
+            </form>
+          </Form>
 
           <div className="text-center mt-8 space-y-2">
             <Link
