@@ -1,7 +1,8 @@
 "use client";
-import { skills } from "@/app/_data/skills";
+
 import React, { useEffect, useRef, useState } from "react";
 import SkillCard from "./SkillCard";
+import { skills } from "@/app/(commonLayout)/_data/skills";
 
 const categories = [
   "All",

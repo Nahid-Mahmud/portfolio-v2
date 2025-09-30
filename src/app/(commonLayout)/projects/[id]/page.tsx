@@ -1,4 +1,3 @@
-import { projectsData } from "@/app/_data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { readMarkdownFile } from "@/utils/readMarkdownFile";
@@ -7,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactPlayer from "react-player";
+import { projectsData } from "../../_data/projects";
 
 // Force static rendering for all project pages
 export const dynamic = "force-static";
@@ -105,7 +105,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <div className="space-y-2">
               <h3 className="text-xl font-semibold">Technologies</h3>
               <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
+                {project.tags.map((tag: string) => (
                   <Badge key={tag} variant="secondary" className="font-normal">
                     {tag}
                   </Badge>

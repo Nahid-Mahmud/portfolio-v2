@@ -1,9 +1,10 @@
 "use client";
-import { projectsData } from "@/app/_data/projects";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
+import { projectsData } from "@/app/(commonLayout)/_data/projects";
 
 function ProjectCardsComponent() {
   // Get unique categories from projects

@@ -1,13 +1,7 @@
-import FloatingChat from "@/components/FloatingChat";
-import Background from "@/components/Background";
-import MouseFollower from "@/components/MouseFollower";
-import Navbar from "@/components/NavBar";
-import { ThemeProvider } from "@/components/theme-providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Titillium_Web } from "next/font/google";
-import "./globals.css";
 import Script from "next/script";
-import { Toaster } from "sonner";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -62,16 +56,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${titillium.variable}
       antialiased`}
       >
-        <ThemeProvider>
-          <Navbar />
-          <div className="bg-white relative dark:text-white min-h-screen h-full w-full dark:bg-[#010313] transition-colors duration-500">
-            {children}
-            <Toaster position="top-right" />
-            <Background />
-            <MouseFollower />
-          </div>
-          <FloatingChat />
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
