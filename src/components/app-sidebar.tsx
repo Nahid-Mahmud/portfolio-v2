@@ -1,12 +1,8 @@
-import * as React from "react"
-import { GalleryVerticalEnd, Minus, Plus } from "lucide-react"
+import * as React from "react";
+import { GalleryVerticalEnd, Minus, Plus } from "lucide-react";
 
-import { SearchForm } from "@/components/search-form"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+import { SearchForm } from "@/components/search-form";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
@@ -19,148 +15,53 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // This is sample data.
 const data = {
   navMain: [
     {
-      title: "Getting Started",
+      title: "Dashboard",
+      url: "/dashboard",
+    },
+    {
+      title: "Blogs",
       url: "#",
       items: [
         {
-          title: "Installation",
-          url: "#",
+          title: "Add Blogs",
+          url: "/dashboard/blogs/add-blogs",
         },
         {
-          title: "Project Structure",
-          url: "#",
+          title: "All Blogs",
+          url: "/dashboard/blogs/all-blogs",
         },
       ],
     },
     {
-      title: "Building Your Application",
-      url: "#",
-      items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
-        {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
+      title: "Photo Gallery",
+      url: "/dashboard/photo-gallery",
     },
     {
-      title: "API Reference",
+      title: "Project",
       url: "#",
       items: [
         {
-          title: "Components",
-          url: "#",
+          title: "Add New",
+          url: "/dashboard/project/add-new",
         },
         {
-          title: "File Conventions",
-          url: "#",
+          title: "All",
+          url: "/dashboard/project/all",
         },
         {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Community",
-      url: "#",
-      items: [
-        {
-          title: "Contribution Guide",
-          url: "#",
+          title: "Edit",
+          url: "/dashboard/project/edit",
         },
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -174,7 +75,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <GalleryVerticalEnd className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Documentation</span>
+                  <span className="font-medium">Portfolio Dashboard</span>
                   <span className="">v1.0.0</span>
                 </div>
               </a>
@@ -186,43 +87,41 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {data.navMain.map((item, index) => (
-              <Collapsible
-                key={item.title}
-                defaultOpen={index === 1}
-                className="group/collapsible"
-              >
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton>
-                      {item.title}{" "}
-                      <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
-                      <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  {item.items?.length ? (
+            {data.navMain.map((item, index) =>
+              item.items?.length ? (
+                <Collapsible key={item.title} defaultOpen={index === 1} className="group/collapsible">
+                  <SidebarMenuItem>
+                    <CollapsibleTrigger asChild>
+                      <SidebarMenuButton>
+                        {item.title} <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
+                        <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
+                      </SidebarMenuButton>
+                    </CollapsibleTrigger>
                     <CollapsibleContent>
                       <SidebarMenuSub>
                         {item.items.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={item.isActive}
-                            >
+                            <SidebarMenuSubButton asChild>
                               <a href={item.url}>{item.title}</a>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}
                       </SidebarMenuSub>
                     </CollapsibleContent>
-                  ) : null}
+                  </SidebarMenuItem>
+                </Collapsible>
+              ) : (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>{item.title}</a>
+                  </SidebarMenuButton>
                 </SidebarMenuItem>
-              </Collapsible>
-            ))}
+              )
+            )}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
