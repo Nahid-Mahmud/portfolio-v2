@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
       messages,
     });
     // console.log(completion);
+    
 
     const responseMessage = completion.choices[0]?.message?.content;
     console.log(responseMessage);
