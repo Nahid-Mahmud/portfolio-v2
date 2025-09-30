@@ -2,9 +2,10 @@ import AIOImage from "@/assets/aio.png";
 import assignmentBuddyImage from "@/assets/assignment-buddy.png";
 import byteCanvasImage from "@/assets/bytecanvas.png";
 import ReactHubImage from "@/assets/react-hub.png";
-import { Project } from "../../types/projects";
+
 import OopsipayImage from "@/assets/oopsiPay.png";
 import ZanixImage from "@/assets/zanix.png";
+import { Project } from "@/types/projects";
 export const projectsData: Project[] = [
   {
     id: "OopsiPAY",

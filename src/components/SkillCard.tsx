@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Skill } from "@/app/_data/skills";
+
 import ProgressRing from "./ProgressRing";
+import { Skill } from "@/app/(commonLayout)/_data/skills";
 
 interface SkillCardProps {
   skill: Skill;
