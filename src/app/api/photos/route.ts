@@ -34,3 +34,23 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Failed to add photo" }, { status: 500 });
   }
 }
+
+export async function PUT(request: NextRequest) {
+  try {
+    const { url, alt }: Photo = await request.json();
+    if (!url || !alt) {
+      return NextResponse.json({ error: "URL and alt are required" }, { status: 400 });
+    }
+    const data = fs.readFileSync(dataFilePath, "utf8");
+    const photos: Photo[] = JSON.parse(data);
+    const index = photos.findIndex((photo) => photo.url === url);
+    if (index === -1) {
+      return NextResponse.json({ error: "Photo not found" }, { status: 404 });
+    }
+    photos[index].alt = alt;
+    fs.writeFileSync(dataFilePath, JSON.stringify(photos, null, 2));
+    return NextResponse.json({ message: "Photo updated successfully" });
+  } catch {
+    return NextResponse.json({ error: "Failed to update photo" }, { status: 500 });
+  }
+}
