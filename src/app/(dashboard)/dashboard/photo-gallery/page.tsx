@@ -1,30 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import AddPhotoDialog from "@/components/AddPhotoDialog";
+import EditAltDialog from "@/components/EditAltDialog";
+import PhotoCard from "@/components/PhotoCard";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-
-const formSchema = z.object({
-  url: z.string().url(),
-  alt: z.string(),
-});
-
-const editFormSchema = z.object({
-  alt: z.string(),
-});
 
 interface Photo {
   url: string;
   alt: string;
 }
+
+type AddPhotoValues = {
+  url: string;
+  alt: string;
+};
+
+type EditAltValues = {
+  alt: string;
+};
 
 export default function PhotoGallery() {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -32,16 +28,6 @@ export default function PhotoGallery() {
   const [open, setOpen] = useState(false);
   const [editingPhoto, setEditingPhoto] = useState<Photo | null>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { url: "", alt: "" },
-  });
-
-  const editForm = useForm<z.infer<typeof editFormSchema>>({
-    resolver: zodResolver(editFormSchema),
-    defaultValues: { alt: "" },
-  });
 
   useEffect(() => {
     fetchPhotos();
@@ -57,7 +43,7 @@ export default function PhotoGallery() {
     }
   };
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: AddPhotoValues) => {
     setLoading(true);
     try {
       const response = await fetch("/api/photos", {
@@ -67,8 +53,6 @@ export default function PhotoGallery() {
       });
       if (response.ok) {
         toast.success("Photo added successfully!");
-        setOpen(false);
-        form.reset();
         fetchPhotos();
       } else {
         toast.error("Failed to add photo");
@@ -88,11 +72,10 @@ export default function PhotoGallery() {
 
   const startEditAlt = (photo: Photo) => {
     setEditingPhoto(photo);
-    editForm.setValue("alt", photo.alt);
     setEditDialogOpen(true);
   };
 
-  const onEditSubmit = async (values: z.infer<typeof editFormSchema>) => {
+  const onEditSubmit = async (values: EditAltValues) => {
     if (!editingPhoto) return;
     setLoading(true);
     try {
@@ -103,8 +86,6 @@ export default function PhotoGallery() {
       });
       if (response.ok) {
         toast.success("Alt text updated successfully!");
-        setEditDialogOpen(false);
-        setEditingPhoto(null);
         fetchPhotos();
       } else {
         toast.error("Failed to update alt text");
@@ -125,97 +106,22 @@ export default function PhotoGallery() {
           <DialogTrigger asChild>
             <Button>Add New Photo</Button>
           </DialogTrigger>
-          <DialogContent className="bg-white">
-            <DialogHeader>
-              <DialogTitle>Add Photo</DialogTitle>
-            </DialogHeader>
-            <Form {...form}>
-              <div className="flex flex-col gap-4">
-                <FormField
-                  control={form.control}
-                  name="url"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder="Image URL" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="alt"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder="Alt text" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Button onClick={form.handleSubmit(onSubmit)} disabled={loading}>
-                  {loading ? "Adding..." : "Add Photo"}
-                </Button>
-              </div>
-            </Form>
-          </DialogContent>
+          <AddPhotoDialog onSubmit={onSubmit} loading={loading} setOpen={setOpen} />
         </Dialog>
       </div>
 
-      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-        <DialogContent className="bg-white">
-          <DialogHeader>
-            <DialogTitle>Edit Alt Text</DialogTitle>
-          </DialogHeader>
-          <Form {...editForm}>
-            <div className="flex flex-col gap-4">
-              <FormField
-                control={editForm.control}
-                name="alt"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input placeholder="Alt text" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex gap-2">
-                <Button onClick={editForm.handleSubmit(onEditSubmit)} disabled={loading}>
-                  {loading ? "Updating..." : "Update"}
-                </Button>
-                <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </Form>
-        </DialogContent>
-      </Dialog>
+      <EditAltDialog
+        editDialogOpen={editDialogOpen}
+        setEditDialogOpen={setEditDialogOpen}
+        editingPhoto={editingPhoto}
+        onEditSubmit={onEditSubmit}
+        loading={loading}
+        setEditingPhoto={setEditingPhoto}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {photos.map((photo, index) => (
-          <Card key={index}>
-            <CardContent className="p-4">
-              <div className="relative w-full h-48 mb-4">
-                <Image src={photo.url} alt={photo.alt} fill className="object-cover rounded" />
-              </div>
-              <p className="text-sm text-gray-600 mb-2">{photo.alt}</p>
-              <div className="flex gap-2">
-                <Button variant="outline" size="sm" onClick={() => copyToClipboard(photo.url)}>
-                  Copy URL
-                </Button>
-                <Button variant="outline" size="sm" onClick={() => startEditAlt(photo)}>
-                  Edit Alt
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <PhotoCard key={index} photo={photo} copyToClipboard={copyToClipboard} startEditAlt={startEditAlt} />
         ))}
       </div>
     </div>
