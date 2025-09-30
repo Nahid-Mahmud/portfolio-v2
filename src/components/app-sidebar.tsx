@@ -1,7 +1,8 @@
+"use client";
+import { Minus, Plus } from "lucide-react";
+import { usePathname } from "next/navigation";
 import * as React from "react";
-import { GalleryVerticalEnd, Minus, Plus } from "lucide-react";
 
-import { SearchForm } from "@/components/search-form";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
@@ -16,6 +17,7 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 // This is sample data.
 const data = {
@@ -54,70 +56,70 @@ const data = {
           title: "All",
           url: "/dashboard/project/all",
         },
-        {
-          title: "Edit",
-          url: "/dashboard/project/edit",
-        },
       ],
     },
   ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <GalleryVerticalEnd className="size-4" />
+              <Link href="/">
+                <div className="flex flex-col  ">
+                  <span className="font-bold text-2xl">Go Home</span>
                 </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Portfolio Dashboard</span>
-                  <span className="">v1.0.0</span>
-                </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-        <SearchForm />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {data.navMain.map((item, index) =>
-              item.items?.length ? (
-                <Collapsible key={item.title} defaultOpen={index === 1} className="group/collapsible">
+            {data.navMain.map((item, index) => {
+              const isActive = item.items?.length
+                ? item.items.some((sub) => pathname === sub.url)
+                : pathname === item.url;
+
+              return item.items?.length ? (
+                <Collapsible key={item.title} defaultOpen={isActive || index === 1} className="group/collapsible">
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
+                      <SidebarMenuButton className={isActive ? "bg-accent" : ""}>
                         {item.title} <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
                         <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
                       <SidebarMenuSub>
-                        {item.items.map((item) => (
-                          <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton asChild>
-                              <a href={item.url}>{item.title}</a>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
+                        {item.items.map((subItem) => {
+                          const isSubActive = pathname === subItem.url;
+                          return (
+                            <SidebarMenuSubItem key={subItem.title}>
+                              <SidebarMenuSubButton asChild className={isSubActive ? "bg-black/10" : ""}>
+                                <Link href={subItem.url}>{subItem.title}</Link>
+                              </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                          );
+                        })}
                       </SidebarMenuSub>
                     </CollapsibleContent>
                   </SidebarMenuItem>
                 </Collapsible>
               ) : (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>{item.title}</a>
+                  <SidebarMenuButton asChild className={isActive ? "bg-accent" : ""}>
+                    <Link href={item.url}>{item.title}</Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              )
-            )}
+              );
+            })}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
