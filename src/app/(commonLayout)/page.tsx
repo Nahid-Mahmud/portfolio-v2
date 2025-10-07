@@ -116,7 +116,7 @@ export default function Home() {
           </Link>
           <Link
             className="text-md group h-12 w-12 rounded-full border flex items-center justify-center border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-            href="mailto:nahidmahmudn2@gmail.com"
+            href="mailto:nahidmahmudn@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
           >
