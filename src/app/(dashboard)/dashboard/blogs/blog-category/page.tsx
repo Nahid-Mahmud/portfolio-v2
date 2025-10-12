@@ -1,9 +1,12 @@
+import { getAllBlogCategories } from "@/actions/blog.category.actions";
 import CategoryList from "@/components/dashboard/blogs/category-list";
 
-export default function BlogCategory() {
+export default async function BlogCategory() {
+  const res = await getAllBlogCategories();
+
   return (
     <div>
-      <CategoryList />
+      <CategoryList categories={res.data} />
     </div>
   );
 }

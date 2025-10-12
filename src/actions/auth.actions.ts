@@ -2,8 +2,6 @@
 
 import envVariables from "@/config/env";
 import setAccessToken from "@/service/SetAccessToken";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export const login = async (data: {
   email: string;
@@ -17,6 +15,7 @@ export const login = async (data: {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include", // This ensures cookies are sent and received
       body: JSON.stringify(data),
     });
 
@@ -31,10 +30,12 @@ export const login = async (data: {
       };
     }
 
-    console.log(responseData.data.accessToken);
-
-    // Set the access token (this will redirect to dashboard)
     await setAccessToken(responseData.data.accessToken, "accessToken");
+
+    // Since we're using httpOnly cookies, we don't need to set them manually
+    // The backend already set the cookies in the response
+    // Just redirect to dashboard
+    // redirect("/dashboard");
 
     // This line will never be reached due to redirect in setAccessToken
   } catch (error) {
