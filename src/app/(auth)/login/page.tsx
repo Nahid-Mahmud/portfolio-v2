@@ -1,13 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Eye, EyeOff, LogIn, User, Lock } from "lucide-react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { login } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff, Lock, LogIn, User } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import * as z from "zod";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -21,6 +23,9 @@ export default function LoginPage() {
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [characterAnimation, setCharacterAnimation] = useState("bounce");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
@@ -29,6 +34,14 @@ export default function LoginPage() {
       password: "",
     },
   });
+
+  // Clear error messages when user starts typing
+  const clearMessages = () => {
+    if (errorMessage || successMessage) {
+      setErrorMessage("");
+      setSuccessMessage("");
+    }
+  };
 
   const welcomeMessage = "Hello Chief. Glad you are here. Let's do something unique today!";
 
@@ -49,10 +62,55 @@ export default function LoginPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = (data: LoginForm) => {
-    setCharacterAnimation("wave");
-    // Handle login logic here
-    console.log("Login attempted with:", data);
+  const onSubmit = async (data: LoginForm) => {
+    setIsLoading(true);
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    try {
+      const result = await login(data);
+
+      // If result is undefined, it means redirect happened on server side
+      if (!result) {
+        // Server-side redirect happened, show success message briefly
+        setSuccessMessage("Login successful! Redirecting...");
+        toast.success("Login successful!");
+        setCharacterAnimation("celebrate");
+        return;
+      }
+
+      if (result?.success) {
+        setSuccessMessage("Login successful!");
+        toast.success("Login successful!");
+        setCharacterAnimation("celebrate");
+      } else {
+        setErrorMessage(result?.error || "Login failed. Please try again.");
+        setCharacterAnimation("wave");
+        toast.error(result?.error || "Login failed. Please try again.");
+      }
+    } catch (error) {
+      // Check if it's a redirect error (which means success)
+      if (
+        error &&
+        typeof error === "object" &&
+        "digest" in error &&
+        typeof error.digest === "string" &&
+        error.digest.includes("NEXT_REDIRECT")
+      ) {
+        // This is actually a successful login with redirect
+        setSuccessMessage("Login successful! Redirecting...");
+        toast.success("Login successful!");
+        setCharacterAnimation("celebrate");
+        return;
+      }
+
+      console.error("Login error:", error);
+      setErrorMessage("An unexpected error occurred. Please try again.");
+      setCharacterAnimation("wave");
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -92,6 +150,22 @@ export default function LoginPage() {
           </div>
         </div>
 
+        {/* Error and Success Messages */}
+        {(errorMessage || successMessage) && (
+          <div className="mb-6">
+            {errorMessage && (
+              <div className="bg-red-500/20 backdrop-blur-sm border border-red-400/30 rounded-2xl p-4 mb-4">
+                <p className="text-red-200 text-center font-medium">{errorMessage}</p>
+              </div>
+            )}
+            {successMessage && (
+              <div className="bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-2xl p-4 mb-4">
+                <p className="text-green-200 text-center font-medium">{successMessage}</p>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Login Form */}
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl">
           <div className="text-center mb-8">
@@ -100,7 +174,7 @@ export default function LoginPage() {
           </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {/* Email Input */}
               <FormField
                 control={form.control}
@@ -117,10 +191,14 @@ export default function LoginPage() {
                           type="email"
                           className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white/15"
                           placeholder="Your email address"
+                          onChange={(e) => {
+                            field.onChange(e);
+                            clearMessages();
+                          }}
                         />
                       </div>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-yellow-500" />
                   </FormItem>
                 )}
               />
@@ -141,6 +219,10 @@ export default function LoginPage() {
                           type={showPassword ? "text" : "password"}
                           className="w-full pl-12 pr-12 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white/15"
                           placeholder="Your password"
+                          onChange={(e) => {
+                            field.onChange(e);
+                            clearMessages();
+                          }}
                         />
                         <button
                           type="button"
@@ -155,7 +237,7 @@ export default function LoginPage() {
                         </button>
                       </div>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-yellow-500" />
                   </FormItem>
                 )}
               />
@@ -163,10 +245,20 @@ export default function LoginPage() {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center justify-center space-x-2 group"
+                disabled={isLoading}
+                className="w-full cursor-pointer bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center justify-center space-x-2 group"
               >
-                <LogIn className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                <span>Sign In</span>
+                {isLoading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <span>Signing In...</span>
+                  </>
+                ) : (
+                  <>
+                    <LogIn className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                    <span>Sign In</span>
+                  </>
+                )}
               </Button>
             </form>
           </Form>
