@@ -16,8 +16,12 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { logoutUser } from "@/service/logoutUser";
+import { Button } from "./ui/button";
 
 // This is sample data.
 const data = {
@@ -37,6 +41,10 @@ const data = {
         {
           title: "All Blogs",
           url: "/dashboard/blogs/all-blogs",
+        },
+        {
+          title: "Blog Category",
+          url: "/dashboard/blogs/blog-category",
         },
       ],
     },
@@ -63,6 +71,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <Sidebar {...props}>
@@ -71,7 +80,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-                <div className="flex flex-col  ">
+                <div className="flex flex-col ">
                   <span className="font-bold text-2xl">Go Home</span>
                 </div>
               </Link>
@@ -123,6 +132,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <Button
+                variant={"destructive"}
+                onClick={() => logoutUser(router)}
+                className="w-full text-left hover:bg-red-800 cursor-pointer hover:text-white"
+              >
+                Logout
+              </Button>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
