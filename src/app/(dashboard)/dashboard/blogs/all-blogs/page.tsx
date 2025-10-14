@@ -1,10 +1,23 @@
-import { allBlogs } from "@/app/(commonLayout)/_data/blogs";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { getAllBlogs } from "@/actions/blog.actions";
 
-export default function AdminAllBlogs() {
+interface Blog {
+  id: string;
+  title: string;
+  description: string;
+  photo: string;
+  altText: string;
+  slug: string;
+  categoryId: string;
+  createdAt: string;
+}
+
+export default async function AdminAllBlogs() {
+  const { data: blogs } = (await getAllBlogs()) as { data: Blog[] };
+  console.log(blogs);
   return (
     <section className="py-20">
       <div className="container px-4 mx-auto">
@@ -14,21 +27,23 @@ export default function AdminAllBlogs() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allBlogs.map((blog) => (
+          {blogs.map((blog) => (
             <Card key={blog.slug} className="z-10 flex flex-col h-full pt-0">
-              {blog.image && (
+              {blog.photo && (
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
-                  <Image src={blog.image} alt={blog.title} fill className="object-cover" />
+                  <Image src={blog.photo} alt={blog.altText} fill className="object-cover" />
                 </div>
               )}
               <CardContent className="space-y-2 pt-4 flex-1">
                 <CardTitle>{blog.title}</CardTitle>
                 <CardDescription>{blog.description}</CardDescription>
-                <p className="text-sm text-muted-foreground">Published: {blog.publishDate}</p>
+                <p className="text-sm text-muted-foreground">
+                  Created: {new Date(blog.createdAt).toLocaleDateString()}
+                </p>
               </CardContent>
               <CardFooter className="items-end flex w-full justify-end">
                 <Button variant={"outline"} asChild>
-                  <Link href={`/dashboard/blogs/edit/${blog.slug}`} className="text-primary font-medium">
+                  <Link href={`/dashboard/blogs/edit-blogs/${blog.id}`} className="text-primary font-medium">
                     Edit Blog
                   </Link>
                 </Button>
