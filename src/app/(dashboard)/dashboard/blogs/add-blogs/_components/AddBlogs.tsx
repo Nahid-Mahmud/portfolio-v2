@@ -193,7 +193,7 @@ export default function AddBlogs({ categories }: { categories: { id: string; nam
                 <FormLabel>Category</FormLabel>
                 <FormControl>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select a category" />
                     </SelectTrigger>
                     <SelectContent>
