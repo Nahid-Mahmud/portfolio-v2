@@ -1,8 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Card, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { getAllBlogs } from "@/actions/blog.actions";
+import { BlogCard } from "@/app/(dashboard)/dashboard/blogs/all-blogs/_components/BlogCard";
 
 interface Blog {
   id: string;
@@ -26,31 +23,17 @@ export default async function AdminAllBlogs() {
           <p className="max-w-2xl mx-auto text-muted-foreground">Manage all your blog posts here.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((blog) => (
-            <Card key={blog.slug} className="z-10 flex flex-col h-full pt-0">
-              {blog.photo && (
-                <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
-                  <Image src={blog.photo} alt={blog.altText} fill className="object-cover" />
-                </div>
-              )}
-              <CardContent className="space-y-2 pt-4 flex-1">
-                <CardTitle>{blog.title}</CardTitle>
-                <CardDescription>{blog.description}</CardDescription>
-                <p className="text-sm text-muted-foreground">
-                  Created: {new Date(blog.createdAt).toLocaleDateString()}
-                </p>
-              </CardContent>
-              <CardFooter className="items-end flex w-full justify-end">
-                <Button variant={"outline"} asChild>
-                  <Link href={`/dashboard/blogs/edit-blogs/${blog.id}`} className="text-primary font-medium">
-                    Edit Blog
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+        {blogs.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogs.map((blog) => (
+              <BlogCard key={blog.slug} blog={blog} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-lg text-muted-foreground">No blogs available</p>
+          </div>
+        )}
       </div>
     </section>
   );
