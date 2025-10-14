@@ -127,10 +127,11 @@ export async function updateBlog(
     title: string;
     content: string;
     description: string;
-    photo?: File;
+    photo?: File | undefined;
     altText: string;
-    categoryId: string;
+    category: string;
     tags: string;
+    deletePhoto?: string | undefined;
   }
 ) {
   const cookieStore = await cookies();
@@ -148,8 +149,9 @@ export async function updateBlog(
       content: data.content,
       description: data.description,
       altText: data.altText,
-      categoryId: data.categoryId,
+      category: data.category,
       tags: data.tags.split(",").map((tag: string) => tag.trim()),
+      deletePhoto: data.deletePhoto,
     })
   );
   if (data.photo) {
@@ -157,7 +159,7 @@ export async function updateBlog(
   }
 
   const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/blogs/${id}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: headersOptions,
     body: formData,
   });
