@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const MDXEditor = dynamic(() => import("@/components/mdx-editor").then((mod) => ({ default: mod.MDXEditor })), {
   ssr: false,
@@ -47,6 +48,7 @@ export default function AddNewProject() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [isImageError, setIsImageError] = useState(false);
+  const router = useRouter();
 
   const form = useForm<ProjectFormData>({
     resolver: zodResolver(projectSchema),
@@ -79,6 +81,7 @@ export default function AddNewProject() {
         form.reset();
         setImageFile(null);
         setIsImageError(false);
+        router.push("/dashboard/project/all");
       } else {
         toast.error(result.error || "Error adding project");
         console.error("Error details:", result.details);

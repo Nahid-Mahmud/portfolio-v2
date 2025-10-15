@@ -29,6 +29,7 @@ interface ProjectCardProps {
 
 export function AdminProjectCard({ project, onDelete }: ProjectCardProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [showAllTech, setShowAllTech] = useState(false);
 
   const handleDeleteClick = () => {
     setIsDeleteModalOpen(true);
@@ -54,11 +55,21 @@ export function AdminProjectCard({ project, onDelete }: ProjectCardProps) {
             : project.shortDescription}
         </p>
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech, index) => (
+          {project.technologies.slice(0, showAllTech ? project.technologies.length : 5).map((tech, index) => (
             <span key={index} className="px-2 py-1 text-xs bg-secondary text-secondary-foreground rounded">
               {tech}
             </span>
           ))}
+          {project.technologies.length > 5 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowAllTech(!showAllTech)}
+              className="px-2 py-1 text-xs h-auto"
+            >
+              {showAllTech ? "Show less" : `+${project.technologies.length - 5} more`}
+            </Button>
+          )}
         </div>
         <div className="flex gap-2 flex-wrap">
           <Button variant="outline" asChild>
