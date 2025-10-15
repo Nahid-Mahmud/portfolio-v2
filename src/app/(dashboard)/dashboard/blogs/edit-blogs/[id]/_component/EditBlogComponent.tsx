@@ -1,6 +1,6 @@
 "use client";
 
-import { MDXEditor } from "@/components/mdx-editor";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,14 @@ import { z } from "zod";
 import { updateBlog } from "@/actions/blog.actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+
+// Dynamic import for MDXEditor to avoid hydration issues
+const MDXEditor = dynamic(() => import("@/components/mdx-editor").then((mod) => ({ default: mod.MDXEditor })), {
+  ssr: false,
+  loading: () => (
+    <div className="min-h-[400px] border rounded-md flex items-center justify-center">Loading editor...</div>
+  ),
+});
 
 const blogSchema = z.object({
   title: z.string().min(1, "Title is required"),

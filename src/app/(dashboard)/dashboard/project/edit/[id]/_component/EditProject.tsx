@@ -5,13 +5,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import dynamic from "next/dynamic";
-import { createProject } from "@/actions/project.actions";
+import { updateProject } from "@/actions/project.actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // Dynamic import for MDXEditor to avoid hydration issues
 const MDXEditor = dynamic(() => import("@/components/mdx-editor").then((mod) => ({ default: mod.MDXEditor })), {
@@ -36,49 +37,70 @@ const projectSchema = z.object({
 
 type ProjectFormData = z.infer<typeof projectSchema>;
 
-export default function AddNewProject() {
+interface ProjectType {
+  id: string;
+  title: string;
+  shortDescription: string;
+  projectDetails: string;
+  liveLink: string;
+  frontendLink: string;
+  backendLink?: string;
+  photo: string;
+  altText: string;
+  video?: string;
+  category: "FullStack" | "Frontend";
+  technologies: string[];
+}
+
+export default function EditProject({ project }: { project: ProjectType }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [isImageError, setIsImageError] = useState(false);
+  const router = useRouter();
 
   const form = useForm<ProjectFormData>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
-      title: "",
-      shortDescription: "",
-      projectDetails: "",
-      liveLink: "",
-      frontendLink: "",
-      backendLink: "",
-      altText: "",
-      video: "",
-      category: "FullStack",
-      technologies: [],
+      title: project.title || "",
+      shortDescription: project.shortDescription || "",
+      projectDetails: project.projectDetails || "",
+      liveLink: project.liveLink || "",
+      frontendLink: project.frontendLink || "",
+      backendLink: project.backendLink || "",
+      altText: project.altText || "",
+      video: project.video || "",
+      category: project.category || "FullStack",
+      technologies: project.technologies || [],
     },
   });
 
   const onSubmit = async (data: ProjectFormData) => {
-    if (!imageFile) return; // Safety check
-
     setIsSubmitting(true);
     try {
-      const result = await createProject({
-        ...data,
-        photo: imageFile,
+      const result = await updateProject(project.id, {
+        name: data.title,
+        description: data.shortDescription,
+        liveUrl: data.liveLink,
+        clientRepo: data.frontendLink,
+        serverRepo: data.backendLink,
+        photo: imageFile || undefined,
+        altText: data.altText,
+        category: data.category,
+        tags: data.technologies.join(", "),
+        explanationVideo: data.video,
+        projectData: data.projectDetails,
+        deletePhoto: imageFile ? project.photo : undefined,
       });
 
       if (result.success) {
-        toast.success("Project added successfully!");
-        form.reset();
-        setImageFile(null);
-        setIsImageError(false);
+        toast.success("Project updated successfully!");
+        router.push("/dashboard/project/all");
       } else {
-        toast.error(result.error || "Error adding project");
+        toast.error(result.error || "Error updating project");
         console.error("Error details:", result.details);
       }
     } catch (error) {
-      console.error("Error adding project:", error);
-      toast.error("Error adding project");
+      console.error("Error updating project:", error);
+      toast.error("Error updating project");
     } finally {
       setIsSubmitting(false);
     }
@@ -86,24 +108,10 @@ export default function AddNewProject() {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-6">Add New Project</h1>
+      <h1 className="text-3xl font-bold mb-6">Edit Project</h1>
 
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit((data) => {
-            // Check image but allow Zod validation to proceed
-            if (!imageFile) {
-              setIsImageError(true);
-              // Don't return, let Zod validation errors also show
-            }
-
-            // Only if we have an image, proceed with the rest of the submission
-            if (imageFile) {
-              onSubmit(data);
-            }
-          })}
-          className="space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 gap-6">
             <FormField
               control={form.control}
@@ -151,8 +159,14 @@ export default function AddNewProject() {
 
             <div className="space-y-2">
               <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                Image File
+                Image File (Optional - leave empty to keep current)
               </label>
+              {project.photo && !imageFile && (
+                <div className="mb-2">
+                  <p className="text-sm text-gray-600">Current Image:</p>
+                  <img src={project.photo} alt={project.altText} className="w-32 h-32 object-cover rounded" />
+                </div>
+              )}
               <Input
                 type="file"
                 accept="image/*"
@@ -167,12 +181,8 @@ export default function AddNewProject() {
                   }
 
                   setImageFile(file);
-                  if (file) {
-                    setIsImageError(false);
-                  }
                 }}
               />
-              {isImageError && <p className="text-sm text-destructive">Image file is required</p>}
             </div>
           </div>
 
@@ -305,10 +315,10 @@ export default function AddNewProject() {
             {isSubmitting ? (
               <>
                 <span className="animate-spin mr-2">⏳</span>
-                Adding Project...
+                Updating Project...
               </>
             ) : (
-              "Add Project"
+              "Update Project"
             )}
           </Button>
         </form>

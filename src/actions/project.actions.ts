@@ -188,7 +188,7 @@ export async function updateProject(
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };
   }
 
-  revalidatePath("/dashboard/projects/all-projects");
+  revalidatePath("/dashboard/project/all");
 
   return { success: true, data: responseData.data };
 }
