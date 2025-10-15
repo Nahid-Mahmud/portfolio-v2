@@ -14,7 +14,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-// Dynamic import for MDXEditor to avoid hydration issues
 const MDXEditor = dynamic(() => import("@/components/mdx-editor").then((mod) => ({ default: mod.MDXEditor })), {
   ssr: false,
   loading: () => (
@@ -23,16 +22,16 @@ const MDXEditor = dynamic(() => import("@/components/mdx-editor").then((mod) => 
 });
 
 const projectSchema = z.object({
-  title: z.string().min(1, "Title cannot be empty").max(500, "Title is too long"),
-  shortDescription: z.string().min(1, "Short description cannot be empty"),
-  projectDetails: z.string().min(1, "Project details cannot be empty"),
-  liveLink: z.string().url("Invalid live link URL"),
-  frontendLink: z.string().url("Invalid frontend link URL"),
+  title: z.string().min(1, "Title cannot be empty").max(500, "Title is too long").optional(),
+  shortDescription: z.string().min(1, "Short description cannot be empty").optional(),
+  projectDetails: z.string().min(1, "Project details cannot be empty").optional(),
+  liveLink: z.string().url("Invalid live link URL").optional(),
+  frontendLink: z.string().url("Invalid frontend link URL").optional(),
   backendLink: z.string().url("Invalid backend link URL").optional(),
-  altText: z.string().min(1, "Alt text is required"),
+  altText: z.string().min(1, "Alt text is required").optional(),
   video: z.string().url("Invalid video URL").optional(),
-  category: z.enum(["FullStack", "Frontend"]),
-  technologies: z.array(z.string()).min(1, "At least one technology is required"),
+  category: z.enum(["FullStack", "Frontend"]).optional(),
+  technologies: z.array(z.string()).min(1, "At least one technology is required").optional(),
 });
 
 type ProjectFormData = z.infer<typeof projectSchema>;
@@ -77,17 +76,18 @@ export default function EditProject({ project }: { project: ProjectType }) {
     setIsSubmitting(true);
     try {
       const result = await updateProject(project.id, {
-        name: data.title,
-        description: data.shortDescription,
-        liveUrl: data.liveLink,
-        clientRepo: data.frontendLink,
-        serverRepo: data.backendLink,
+        title: data.title,
+        shortDescription: data.shortDescription,
+        projectDetails: data.projectDetails,
+        liveLink: data.liveLink,
+        frontendLink: data.frontendLink,
+        backendLink: data.backendLink,
         photo: imageFile || undefined,
         altText: data.altText,
+        video: data.video,
         category: data.category,
-        tags: data.technologies.join(", "),
-        explanationVideo: data.video,
-        projectData: data.projectDetails,
+        technologies: data.technologies,
+        // if photo is a file then send deletePhoto as previously set image link getting from api
         deletePhoto: imageFile ? project.photo : undefined,
       });
 
@@ -179,7 +179,6 @@ export default function EditProject({ project }: { project: ProjectType }) {
                     setImageFile(null);
                     return;
                   }
-
                   setImageFile(file);
                 }}
               />
@@ -277,7 +276,7 @@ export default function EditProject({ project }: { project: ProjectType }) {
                 <FormControl>
                   <Input
                     placeholder="React, Next.js, TypeScript, Node.js"
-                    value={field.value.join(", ")}
+                    value={field.value?.join(", ") || ""}
                     onChange={(e) => {
                       const technologies = e.target.value
                         .split(",")

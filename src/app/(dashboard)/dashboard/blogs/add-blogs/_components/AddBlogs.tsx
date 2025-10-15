@@ -15,7 +15,6 @@ import { createBlog } from "@/actions/blog.actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-// Dynamic import for MDXEditor to avoid hydration issues
 const MDXEditor = dynamic(() => import("@/components/mdx-editor").then((mod) => ({ default: mod.MDXEditor })), {
   ssr: false,
   loading: () => (

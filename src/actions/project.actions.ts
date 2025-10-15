@@ -55,7 +55,7 @@ export async function createProject(data: {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };
   }
 
-  revalidatePath("/dashboard/projects/all-projects");
+  revalidatePath("/dashboard/project/all");
 
   return { success: true, data: responseData.data };
 }
@@ -124,7 +124,7 @@ export async function deleteProject(id: string) {
     return { success: false, error: `HTTP error! status: ${res.status}` };
   }
 
-  revalidatePath("/dashboard/projects/all-projects");
+  revalidatePath("/dashboard/project/all");
 
   return { success: true };
 }
@@ -133,20 +133,21 @@ export async function deleteProject(id: string) {
 export async function updateProject(
   id: string,
   data: {
-    name: string;
-    description: string;
-    liveUrl: string;
-    clientRepo?: string;
-    serverRepo?: string;
+    title?: string;
+    shortDescription?: string;
+    projectDetails?: string;
+    liveLink?: string;
+    frontendLink?: string;
+    backendLink?: string;
     photo?: File | undefined;
-    altText: string;
-    category: string;
-    tags: string;
-    explanationVideo?: string;
-    projectData?: string;
+    altText?: string;
+    video?: string;
+    category?: string;
+    technologies?: string[];
     deletePhoto?: string | undefined;
   }
 ) {
+  console.log(data);
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value || "";
   const headersOptions = {
@@ -158,16 +159,16 @@ export async function updateProject(
   formData.append(
     "data",
     JSON.stringify({
-      name: data.name,
-      description: data.description,
-      liveUrl: data.liveUrl,
-      clientRepo: data.clientRepo,
-      serverRepo: data.serverRepo,
+      title: data.title,
+      shortDescription: data.shortDescription,
+      projectDetails: data.projectDetails,
+      liveLink: data.liveLink,
+      frontendLink: data.frontendLink,
+      backendLink: data.backendLink,
       altText: data.altText,
       category: data.category,
-      tags: data.tags.split(",").map((tag: string) => tag.trim()),
-      explanationVideo: data.explanationVideo,
-      projectData: data.projectData,
+      technologies: data.technologies ? data.technologies.map((tag: string) => tag.trim()) : undefined,
+      video: data.video,
       deletePhoto: data.deletePhoto,
     })
   );
