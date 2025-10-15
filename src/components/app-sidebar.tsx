@@ -61,7 +61,7 @@ const data = {
           url: "/dashboard/project/add-new",
         },
         {
-          title: "All",
+          title: "All Projects",
           url: "/dashboard/project/all",
         },
       ],

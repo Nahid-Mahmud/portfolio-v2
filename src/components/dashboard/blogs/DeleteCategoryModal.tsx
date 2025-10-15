@@ -1,8 +1,8 @@
 "use client";
 
-import { Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from "@/components/Modal";
-import { Button } from "@/components/ui/button";
 import { deleteBlogCategory } from "@/actions/blog.category.actions";
+import { Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle } from "@/components/Modal";
+import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 type Category = {

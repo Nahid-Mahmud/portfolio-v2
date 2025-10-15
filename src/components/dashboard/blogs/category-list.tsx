@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Plus, Edit, Trash2 } from "lucide-react";
+import { Edit, Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
 import CreateCategoryModal from "./CreateCategoryModal";
-import EditCategoryModal from "./EditCategoryModal";
 import DeleteCategoryModal from "./DeleteCategoryModal";
-import { deleteBlogCategory } from "@/actions/blog.category.actions";
+import EditCategoryModal from "./EditCategoryModal";
 
 type Category = {
   id?: string;

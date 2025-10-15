@@ -5,58 +5,72 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { MDXEditor } from "@/components/mdx-editor";
+import { createProject } from "@/actions/project.actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { toast } from "sonner";
 
 const projectSchema = z.object({
-  id: z.string().min(1, "ID is required"),
-  name: z.string().min(1, "Name is required"),
-  description: z.string().min(1, "Description is required"),
-  liveUrl: z.string().url("Invalid live URL"),
-  clientRepo: z.string().optional(),
-  serverRepo: z.string().optional(),
-  tags: z.string().min(1, "Tags are required"),
-  category: z.string().min(1, "Category is required"),
-  imageUrl: z.string().url("Invalid image URL"),
-  explanationVideo: z.string().optional(),
-  projectData: z.string().optional(),
+  title: z.string().min(1, "Title cannot be empty").max(500, "Title is too long"),
+  shortDescription: z.string().min(1, "Short description cannot be empty"),
+  projectDetails: z.string().min(1, "Project details cannot be empty"),
+  liveLink: z.string().url("Invalid live link URL"),
+  frontendLink: z.string().url("Invalid frontend link URL"),
+  backendLink: z.string().url("Invalid backend link URL").optional(),
+  altText: z.string().min(1, "Alt text is required"),
+  video: z.string().url("Invalid video URL").optional(),
+  category: z.enum(["FullStack", "Frontend"]),
+  technologies: z.array(z.string()).min(1, "At least one technology is required"),
 });
 
 type ProjectFormData = z.infer<typeof projectSchema>;
 
 export default function AddNewProject() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [isImageError, setIsImageError] = useState(false);
 
   const form = useForm<ProjectFormData>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
-      id: "",
-      name: "",
-      description: "",
-      liveUrl: "",
-      clientRepo: "",
-      serverRepo: "",
-      tags: "",
-      category: "",
-      imageUrl: "",
-      explanationVideo: "",
-      projectData: "",
+      title: "",
+      shortDescription: "",
+      projectDetails: "",
+      liveLink: "",
+      frontendLink: "",
+      backendLink: "",
+      altText: "",
+      video: "",
+      category: "FullStack",
+      technologies: [],
     },
   });
 
   const onSubmit = async (data: ProjectFormData) => {
+    if (!imageFile) return; // Safety check
+
     setIsSubmitting(true);
     try {
-      // TODO: Submit to API
-      console.log("Project data:", data);
-      // For now, just log. In future, send to API to save project
-      alert("Project added successfully! (Check console for data)");
-      form.reset();
+      const result = await createProject({
+        ...data,
+        photo: imageFile,
+      });
+
+      if (result.success) {
+        toast.success("Project added successfully!");
+        form.reset();
+        setImageFile(null);
+        setIsImageError(false);
+      } else {
+        toast.error(result.error || "Error adding project");
+        console.error("Error details:", result.details);
+      }
     } catch (error) {
       console.error("Error adding project:", error);
-      alert("Error adding project");
+      toast.error("Error adding project");
     } finally {
       setIsSubmitting(false);
     }
@@ -67,28 +81,28 @@ export default function AddNewProject() {
       <h1 className="text-3xl font-bold mb-6">Add New Project</h1>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField
-              control={form.control}
-              name="id"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project ID</FormLabel>
-                  <FormControl>
-                    <Input placeholder="unique-project-id" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <form
+          onSubmit={form.handleSubmit((data) => {
+            // Check image but allow Zod validation to proceed
+            if (!imageFile) {
+              setIsImageError(true);
+              // Don't return, let Zod validation errors also show
+            }
 
+            // Only if we have an image, proceed with the rest of the submission
+            if (imageFile) {
+              onSubmit(data);
+            }
+          })}
+          className="space-y-6"
+        >
+          <div className="grid grid-cols-1 gap-6">
             <FormField
               control={form.control}
-              name="name"
+              name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Name</FormLabel>
+                  <FormLabel>Project Title</FormLabel>
                   <FormControl>
                     <Input placeholder="My Awesome Project" {...field} />
                   </FormControl>
@@ -100,10 +114,10 @@ export default function AddNewProject() {
 
           <FormField
             control={form.control}
-            name="description"
+            name="shortDescription"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Short Description</FormLabel>
                 <FormControl>
                   <Textarea placeholder="Brief description of the project" className="min-h-[80px]" {...field} />
                 </FormControl>
@@ -115,7 +129,7 @@ export default function AddNewProject() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
-              name="liveUrl"
+              name="liveLink"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Live URL</FormLabel>
@@ -127,30 +141,56 @@ export default function AddNewProject() {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="imageUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Image URL</FormLabel>
-                  <FormControl>
-                    <Input placeholder="https://example.com/image.png" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="space-y-2">
+              <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                Image File
+              </label>
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0] || null;
+                  // Check file size - 5MB max
+                  if (file && file.size > 5 * 1024 * 1024) {
+                    toast.error("File size exceeds 5MB limit");
+                    e.target.value = "";
+                    setImageFile(null);
+                    return;
+                  }
+
+                  setImageFile(file);
+                  if (file) {
+                    setIsImageError(false);
+                  }
+                }}
+              />
+              {isImageError && <p className="text-sm text-destructive">Image file is required</p>}
+            </div>
           </div>
+
+          <FormField
+            control={form.control}
+            name="altText"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Alt Text for Image (SEO)</FormLabel>
+                <FormControl>
+                  <Input placeholder="Describe the image for accessibility and SEO" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
-              name="clientRepo"
+              name="frontendLink"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Client Repository (optional)</FormLabel>
+                  <FormLabel>Frontend Repository</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://github.com/user/client-repo" {...field} />
+                    <Input placeholder="https://github.com/user/frontend-repo" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -159,12 +199,12 @@ export default function AddNewProject() {
 
             <FormField
               control={form.control}
-              name="serverRepo"
+              name="backendLink"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Server Repository (optional)</FormLabel>
+                  <FormLabel>Backend Repository (optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://github.com/user/server-repo" {...field} />
+                    <Input placeholder="https://github.com/user/backend-repo" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -179,9 +219,17 @@ export default function AddNewProject() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Category</FormLabel>
-                  <FormControl>
-                    <Input placeholder="fullstack, frontend, backend, etc." {...field} />
-                  </FormControl>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl className="w-full">
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="FullStack">FullStack</SelectItem>
+                      <SelectItem value="Frontend">Frontend</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -189,12 +237,12 @@ export default function AddNewProject() {
 
             <FormField
               control={form.control}
-              name="tags"
+              name="video"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tags (comma separated)</FormLabel>
+                  <FormLabel>Explanation Video URL (optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="React, Next.js, TypeScript" {...field} />
+                    <Input placeholder="https://youtube.com/watch?v=..." {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -204,12 +252,22 @@ export default function AddNewProject() {
 
           <FormField
             control={form.control}
-            name="explanationVideo"
+            name="technologies"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Explanation Video URL (optional)</FormLabel>
+                <FormLabel>Technologies (comma separated)</FormLabel>
                 <FormControl>
-                  <Input placeholder="https://youtube.com/watch?v=..." {...field} />
+                  <Input
+                    placeholder="React, Next.js, TypeScript, Node.js"
+                    value={field.value.join(", ")}
+                    onChange={(e) => {
+                      const technologies = e.target.value
+                        .split(",")
+                        .map((tech) => tech.trim())
+                        .filter((tech) => tech.length > 0);
+                      field.onChange(technologies);
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -218,7 +276,7 @@ export default function AddNewProject() {
 
           <FormField
             control={form.control}
-            name="projectData"
+            name="projectDetails"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Project Details (Markdown)</FormLabel>
@@ -236,7 +294,14 @@ export default function AddNewProject() {
           />
 
           <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
-            {isSubmitting ? "Adding Project..." : "Add Project"}
+            {isSubmitting ? (
+              <>
+                <span className="animate-spin mr-2">⏳</span>
+                Adding Project...
+              </>
+            ) : (
+              "Add Project"
+            )}
           </Button>
         </form>
       </Form>
