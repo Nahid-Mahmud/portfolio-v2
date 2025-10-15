@@ -22,7 +22,7 @@ import {
   listsPlugin,
   ListsToggle,
   markdownShortcutPlugin,
-  MDXEditor,
+  // MDXEditor,
   quotePlugin,
   Separator,
   tablePlugin,
@@ -33,13 +33,23 @@ import {
   type MDXEditorMethods,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
-import { Edit, Eye } from "lucide-react";
+import { Edit, Eye, FileText } from "lucide-react";
 import { forwardRef, useMemo, useState } from "react";
 // import { Card } from "./card";
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import { processMarkdown } from "@/utils/processMarkdown";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Card } from "./ui/card";
+import { Textarea } from "./ui/textarea";
+import MarkdownRenderer from "./MarkdownRenderer";
+
+import dynamic from "next/dynamic";
+const MDXEditor = dynamic(() => import("@mdxeditor/editor").then((mod) => ({ default: mod.MDXEditor })), {
+  ssr: false,
+  loading: () => (
+    <div className="min-h-[400px] border rounded-md flex items-center justify-center">Loading editor...</div>
+  ),
+});
 
 // Process markdown to HTML using remark
 
@@ -82,99 +92,68 @@ interface MDXEditorProps {
   className?: string;
   readOnly?: boolean;
   name?: string;
-  showPreview?: boolean;
+  renderMode?: "mdx" | "markdown"; // New prop to choose between MDX editor and simple markdown
 }
 
 const MDXEditorComponent = forwardRef<MDXEditorMethods, MDXEditorProps>(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ({ value, onChange, onBlur, placeholder, className, readOnly = false, name, showPreview = true }, ref) => {
-    const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
+  ({ value, onChange, onBlur, placeholder, className, readOnly = false, name, renderMode = "mdx" }, ref) => {
+    const [activeTab, setActiveTab] = useState<"edit" | "preview" | "markdown">("edit");
 
     const handleEditorChange = (newValue: string) => {
       onChange(newValue);
     };
 
-    if (!showPreview) {
+    // Simple markdown mode
+    if (renderMode === "markdown") {
       return (
-        <div className={cn("mdx-editor-wrapper", className)}>
-          <MDXEditor
-            ref={ref}
-            markdown={value}
-            onChange={handleEditorChange}
-            placeholder={placeholder}
-            readOnly={readOnly}
-            plugins={[
-              // Essential plugins
-              headingsPlugin(),
-              listsPlugin(),
-              quotePlugin(),
-              thematicBreakPlugin(),
-              markdownShortcutPlugin(),
-              linkPlugin(),
-              linkDialogPlugin(),
-              imagePlugin(),
-              tablePlugin(),
-              codeBlockPlugin({
-                defaultCodeBlockLanguage: "javascript",
-              }),
-              codeMirrorPlugin({
-                codeBlockLanguages: {
-                  javascript: "JavaScript",
-                  typescript: "TypeScript",
-                  python: "Python",
-                  java: "Java",
-                  css: "CSS",
-                  html: "HTML",
-                  json: "JSON",
-                  markdown: "Markdown",
-                },
-              }),
-              diffSourcePlugin({
-                viewMode: "rich-text",
-                diffMarkdown: "",
-              }),
-              frontmatterPlugin(),
-              directivesPlugin(),
-              // Toolbar plugin with all tools
-              toolbarPlugin({
-                toolbarContents: () => (
-                  <>
-                    <UndoRedo />
-                    <Separator />
-                    <BoldItalicUnderlineToggles />
-                    <CodeToggle />
-                    <Separator />
-                    <BlockTypeSelect />
-                    <Separator />
-                    <ListsToggle />
-                    <Separator />
-                    <CreateLink />
-                    <InsertImage />
-                    <Separator />
-                    <InsertTable />
-                    <InsertThematicBreak />
-                    <InsertCodeBlock />
-                  </>
-                ),
-              }),
-            ]}
-            contentEditableClassName={cn(
-              "min-h-[200px] max-h-[500px] overflow-y-auto",
-              "focus:outline-none p-3 border border-input rounded-md bg-background",
-              "prose prose-sm max-w-none dark:prose-invert"
-            )}
-          />
+        <div className={cn("markdown-editor-wrapper", className)}>
+          <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "edit" | "preview")}>
+            <TabsList className="grid w-full grid-cols-2 mb-2">
+              <TabsTrigger value="edit" className="flex items-center gap-2">
+                <Edit className="w-4 h-4" />
+                Edit
+              </TabsTrigger>
+              <TabsTrigger value="preview" className="flex items-center gap-2">
+                <Eye className="w-4 h-4" />
+                Preview
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="edit" className="mt-0">
+              <Textarea
+                value={value}
+                onChange={(e) => handleEditorChange(e.target.value)}
+                placeholder={placeholder}
+                readOnly={readOnly}
+                className={cn(
+                  "min-h-[200px] max-h-[500px] resize-none font-mono text-sm",
+                  "focus:outline-none p-3 border border-input rounded-md bg-background"
+                )}
+              />
+            </TabsContent>
+
+            <TabsContent value="preview" className="mt-0">
+              <Card className="min-h-[200px] max-h-[500px] overflow-y-auto p-4 border border-input bg-background">
+                <MarkdownRenderer markdown={value} placeholder={placeholder} />
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       );
     }
 
     return (
       <div className={cn("mdx-editor-wrapper", className)}>
-        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "edit" | "preview")}>
-          <TabsList className="grid w-full grid-cols-2 mb-2">
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "edit" | "preview" | "markdown")}>
+          <TabsList className="grid w-full grid-cols-3 mb-2">
             <TabsTrigger value="edit" className="flex items-center gap-2">
               <Edit className="w-4 h-4" />
               Edit
+            </TabsTrigger>
+            <TabsTrigger value="markdown" className="flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              Markdown
             </TabsTrigger>
             <TabsTrigger value="preview" className="flex items-center gap-2">
               <Eye className="w-4 h-4" />
@@ -251,6 +230,19 @@ const MDXEditorComponent = forwardRef<MDXEditorMethods, MDXEditorProps>(
                 "prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground",
                 "prose-code:text-foreground prose-pre:bg-muted prose-pre:text-foreground",
                 "prose-blockquote:text-foreground prose-li:text-foreground"
+              )}
+            />
+          </TabsContent>
+
+          <TabsContent value="markdown" className="mt-0">
+            <Textarea
+              value={value}
+              onChange={(e) => handleEditorChange(e.target.value)}
+              placeholder={placeholder}
+              readOnly={readOnly}
+              className={cn(
+                "min-h-[200px] max-h-[500px] resize-none font-mono text-sm",
+                "focus:outline-none p-3 border border-input rounded-md bg-background"
               )}
             />
           </TabsContent>

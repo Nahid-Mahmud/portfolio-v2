@@ -20,6 +20,14 @@ const MDXEditor = dynamic(() => import("@/components/mdx-editor").then((mod) => 
   ),
 });
 
+// Alternative: Import MarkdownInput if you want to use it instead
+// const MarkdownInput = dynamic(() => import("@/components/MarkdownInput"), {
+//   ssr: false,
+//   loading: () => (
+//     <div className="min-h-[400px] border rounded-md flex items-center justify-center">Loading editor...</div>
+//   ),
+// });
+
 const projectSchema = z.object({
   title: z.string().min(1, "Title cannot be empty").max(500, "Title is too long"),
   shortDescription: z.string().min(1, "Short description cannot be empty"),
