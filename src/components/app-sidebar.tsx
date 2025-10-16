@@ -146,7 +146,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 onClick={() => logoutUser(router)}
                 className="w-full text-left hover:bg-red-800 cursor-pointer hover:text-white"
               >
-                Account
+                Logout
               </Button>
             </SidebarMenuButton>
           </SidebarMenuItem>

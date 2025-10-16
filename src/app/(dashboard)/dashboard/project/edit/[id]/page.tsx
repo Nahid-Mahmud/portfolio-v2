@@ -1,7 +1,7 @@
 import { getProjectById } from "@/actions/project.actions";
 import EditProject from "./_component/EditProject";
 
-export default async function EditProjectPage({ params }: { params: { id: string } }) {
+export default async function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   const { data: project } = await getProjectById(id);
