@@ -58,7 +58,7 @@ export default function RootLayout({
       antialiased`}
       >
         {children}
-        <Toaster richColors={true} position="top-right" expand={true} />
+        <Toaster richColors={true} position="top-right" expand={true} closeButton />
       </body>
     </html>
   );

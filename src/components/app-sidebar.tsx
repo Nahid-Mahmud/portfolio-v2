@@ -134,14 +134,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
+          <SidebarMenuItem className="space-y-3">
+            <SidebarMenuButton asChild>
+              <Link href="/dashboard/profile" className="">
+                <Button className="w-full text-left cursor-pointer hover:text-white ">Profile</Button>
+              </Link>
+            </SidebarMenuButton>
             <SidebarMenuButton asChild>
               <Button
                 variant={"destructive"}
                 onClick={() => logoutUser(router)}
                 className="w-full text-left hover:bg-red-800 cursor-pointer hover:text-white"
               >
-                Logout
+                Account
               </Button>
             </SidebarMenuButton>
           </SidebarMenuItem>
