@@ -18,9 +18,9 @@ async function createBlogCategory(data: { name: string; description?: string }) 
   });
 
   const responseData = await res.json();
-  // console.log("Response:", responseData);
 
-  console.log(cookieStore.get("accessToken"));
+
+
 
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };

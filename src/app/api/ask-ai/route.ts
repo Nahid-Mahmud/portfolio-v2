@@ -38,17 +38,17 @@ export async function POST(req: NextRequest) {
       content: portfolioContext,
     });
 
-    console.log(`Sending conversation to OpenAI with ${messages.length} messages.`);
+
     const completion = await openai.chat.completions.create({
       model: "mistralai/devstral-small-2505:free",
       // model: "google/learnlm-1.5-pro-experimental:free",
       messages,
     });
-    // console.log(completion);
+
     
 
     const responseMessage = completion.choices[0]?.message?.content;
-    console.log(responseMessage);
+
     // return;
 
     if (!responseMessage) {

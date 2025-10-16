@@ -7,7 +7,6 @@ export const login = async (data: {
   email: string;
   password: string;
 }): Promise<{ success: boolean; error?: string; message?: string } | void> => {
-  console.log(data);
 
   try {
     const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/auth/login`, {
@@ -20,7 +19,7 @@ export const login = async (data: {
     });
 
     const responseData = await res.json();
-    // console.log(responseData);
+
 
     // Check if the response was successful
     if (!res.ok) {

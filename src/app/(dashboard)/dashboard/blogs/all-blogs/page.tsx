@@ -14,7 +14,7 @@ interface Blog {
 
 export default async function AdminAllBlogs() {
   const { data: blogs } = (await getAllBlogs()) as { data: Blog[] };
-  console.log(blogs);
+
   return (
     <section className="py-20">
       <div className="container px-4 mx-auto">

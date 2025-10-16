@@ -49,7 +49,7 @@ export async function createProject(data: {
   });
 
   const responseData = await res.json();
-  console.log("Response:", responseData);
+
 
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };
@@ -149,7 +149,7 @@ export async function updateProject(
     deletePhoto?: string | undefined;
   }
 ) {
-  console.log(data);
+
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value || "";
   const headersOptions = {
@@ -185,7 +185,7 @@ export async function updateProject(
   });
 
   const responseData = await res.json();
-  console.log("Response:", responseData);
+
 
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };

@@ -39,7 +39,6 @@ export async function createBlog(data: {
   });
 
   const responseData = await res.json();
-  console.log("Response:", responseData);
 
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };
@@ -167,7 +166,7 @@ export async function updateBlog(
   });
 
   const responseData = await res.json();
-  console.log("Response:", responseData);
+
 
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };

@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 
 export default async function Projects() {
   const { data: projects } = await getAllProjects();
-  // console.log(projects);
+
 
   return (
     <section id="projects" className="py-20 ">

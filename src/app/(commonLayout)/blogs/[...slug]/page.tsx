@@ -7,6 +7,8 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getBlogById } from "@/actions/blog.actions";
+// Force dynamic rendering for project pages
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;

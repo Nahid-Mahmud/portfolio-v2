@@ -8,6 +8,8 @@ import { notFound } from "next/navigation";
 import ReactPlayer from "react-player";
 import { getProjectById } from "@/actions/project.actions";
 
+// Force dynamic rendering for project pages
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{

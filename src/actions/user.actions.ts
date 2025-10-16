@@ -55,7 +55,7 @@ export const updateMyProfile = async (data: {
   });
 
   if (!res.ok) {
-    console.log(await res.json());
+
     return { success: false, error: `HTTP error! status: ${res.status}` };
   }
 
