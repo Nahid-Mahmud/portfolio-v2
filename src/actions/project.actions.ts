@@ -56,6 +56,7 @@ export async function createProject(data: {
   }
 
   revalidatePath("/dashboard/project/all");
+  revalidatePath("/projects");
 
   return { success: true, data: responseData.data };
 }
@@ -125,6 +126,7 @@ export async function deleteProject(id: string) {
   }
 
   revalidatePath("/dashboard/project/all");
+  revalidatePath("/projects");
 
   return { success: true };
 }
@@ -190,6 +192,7 @@ export async function updateProject(
   }
 
   revalidatePath("/dashboard/project/all");
+  revalidatePath("/projects");
 
   return { success: true, data: responseData.data };
 }

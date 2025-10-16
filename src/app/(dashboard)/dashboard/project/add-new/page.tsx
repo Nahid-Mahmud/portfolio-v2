@@ -35,9 +35,11 @@ const projectSchema = z.object({
   projectDetails: z.string().min(1, "Project details cannot be empty"),
   liveLink: z.string().url("Invalid live link URL"),
   frontendLink: z.string().url("Invalid frontend link URL"),
-  backendLink: z.string().url("Invalid backend link URL").optional(),
+  backendLink: z
+    .string()
+    .refine((val) => val === "" || z.string().url().safeParse(val).success, "Invalid backend link URL"),
   altText: z.string().min(1, "Alt text is required"),
-  video: z.string().url("Invalid video URL").optional(),
+  video: z.string().refine((val) => val === "" || z.string().url().safeParse(val).success, "Invalid video URL"),
   category: z.enum(["FullStack", "Frontend"]),
   technologies: z.array(z.string()).min(1, "At least one technology is required"),
 });

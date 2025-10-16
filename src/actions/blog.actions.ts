@@ -46,6 +46,7 @@ export async function createBlog(data: {
   }
 
   revalidatePath("/dashboard/blogs/all-blogs");
+  revalidatePath("/blogs");
 
   return { success: true, data: responseData.data };
 }
@@ -116,6 +117,7 @@ export async function deleteBlog(id: string) {
   }
 
   revalidatePath("/dashboard/blogs/all-blogs");
+  revalidatePath("/blogs");
 
   return { success: true };
 }
@@ -172,6 +174,7 @@ export async function updateBlog(
   }
 
   revalidatePath("/dashboard/blogs/all-blogs");
+  revalidatePath("/blogs");
 
   return { success: true, data: responseData.data };
 }
