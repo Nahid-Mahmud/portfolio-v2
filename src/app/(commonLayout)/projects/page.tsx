@@ -1,5 +1,21 @@
+import { getAllProjects } from "@/actions/project.actions";
 import ProjectCardsComponent from "@/components/ProjectCardsComponent";
 import { Metadata } from "next";
+
+type ServerProject = {
+  id: string;
+  title: string;
+  shortDescription: string;
+  liveLink: string;
+  frontendLink?: string;
+  backendLink?: string;
+  photo: string;
+  altText: string;
+  category: string;
+  technologies: string[];
+  createdAt: string;
+  updatedAt: string;
+};
 
 export const metadata: Metadata = {
   title: "Projects - Md. Nahid Mahmud",
@@ -31,7 +47,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Projects() {
+export default async function Projects() {
+  const { data: projects } = await getAllProjects();
+  // console.log(projects);
+
   return (
     <section id="projects" className="py-20 ">
       <div className="container px-4 mx-auto">
@@ -44,7 +63,7 @@ export default function Projects() {
           </p>
         </div>
 
-        <ProjectCardsComponent />
+        <ProjectCardsComponent projects={projects} />
       </div>
     </section>
   );

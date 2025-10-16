@@ -76,6 +76,8 @@ export default function AddNewProject() {
       const result = await createProject({
         ...data,
         photo: imageFile,
+        backendLink: data.backendLink || undefined,
+        video: data.video || undefined,
       });
 
       if (result.success) {

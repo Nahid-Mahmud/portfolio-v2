@@ -4,22 +4,36 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import { projectsData } from "@/app/(commonLayout)/_data/projects";
 
-function ProjectCardsComponent() {
+interface ServerProject {
+  id: string;
+  title: string;
+  shortDescription: string;
+  liveLink: string;
+  frontendLink?: string;
+  backendLink?: string;
+  photo: string;
+  altText: string;
+  category: string;
+  technologies: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+function ProjectCardsComponent({ projects }: { projects: ServerProject[] }) {
   // Get unique categories from projects
-  const categories = ["all", ...new Set(projectsData.map((project) => project.category))];
+  const categories = ["all", ...new Set(projects.map((project) => project.category))];
   const [activeCategory, setActiveCategory] = useState("all");
-  const [filteredProjects, setFilteredProjects] = useState(projectsData);
+  const [filteredProjects, setFilteredProjects] = useState(projects);
 
   // Filter projects when category changes
   useEffect(() => {
     if (activeCategory === "all") {
-      setFilteredProjects(projectsData);
+      setFilteredProjects(projects);
     } else {
-      setFilteredProjects(projectsData.filter((project) => project.category === activeCategory));
+      setFilteredProjects(projects.filter((project) => project.category === activeCategory));
     }
-  }, [activeCategory]);
+  }, [activeCategory, projects]);
 
   return (
     <div className="space-y-8">
