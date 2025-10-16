@@ -1,10 +1,21 @@
 import { Metadata } from "next";
-import { allBlogs } from "../_data/blogs";
 import Image from "next/image";
 import Link from "next/link";
 // Add import for Card components
 import { Card, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { getAllBlogs } from "@/actions/blog.actions";
+
+interface Blog {
+  id: string;
+  title: string;
+  description: string;
+  photo: string;
+  altText: string;
+  slug: string;
+  categoryId: string;
+  createdAt: string;
+}
 
 export const metadata: Metadata = {
   title: "Blogs - Md. Nahid Mahmud",
@@ -33,7 +44,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Blogs() {
+export default async function Blogs() {
+  const { data: blogs } = await getAllBlogs();
+  console.log(blogs);
   return (
     <section id="blogs" className="py-20">
       <div className="container px-4 mx-auto">
@@ -45,11 +58,11 @@ export default function Blogs() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allBlogs.map((blog) => (
+          {blogs?.map((blog: Blog) => (
             <Card key={blog.slug} className="z-10 flex flex-col h-full pt-0">
-              {blog.image && (
+              {blog.photo && (
                 <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
-                  <Image src={blog.image} alt={blog.title} fill className="object-cover" />
+                  <Image src={blog.photo} alt={blog.altText} fill className="object-cover" />
                 </div>
               )}
               <CardContent className="space-y-2 pt-4 flex-1">
@@ -58,7 +71,7 @@ export default function Blogs() {
               </CardContent>
               <CardFooter className="items-end flex w-full justify-end">
                 <Button variant={"outline"} asChild>
-                  <Link href={`/blogs/${blog.slug}`} className="text-primary font-medium">
+                  <Link href={`/blogs/${blog.description}/${blog.slug}`} className="text-primary font-medium">
                     Read Full Blog →
                   </Link>
                 </Button>

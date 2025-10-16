@@ -1,22 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { readMarkdownFile } from "@/utils/readMarkdownFile";
+import { processMarkdown } from "@/utils/processMarkdown";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactPlayer from "react-player";
-import { projectsData } from "../../_data/projects";
+import { getProjectById } from "@/actions/project.actions";
 
-// Force static rendering for all project pages
-export const dynamic = "force-static";
-
-// Pre-generate all project id routes at build time
-export async function generateStaticParams() {
-  return projectsData.map((p) => ({
-    id: encodeURIComponent(p.id),
-  }));
-}
 
 interface PageProps {
   params: Promise<{
@@ -28,14 +19,16 @@ interface PageProps {
 
 export default async function ProjectPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const projectId = decodeURIComponent(resolvedParams.id);
-  const project = projectsData.find((p) => p.id === projectId);
 
-  if (!project) {
+  const projectId = decodeURIComponent(resolvedParams.id);
+
+  const { data: projectFormServer } = await getProjectById(projectId);
+
+  if (!projectFormServer) {
     notFound();
   }
 
-  const projectDetailsHtml = await readMarkdownFile(project.projectData);
+  const projectDetailsHtml = await processMarkdown(projectFormServer.projectDetails);
 
   return (
     <div className="min-h-screen bg-background pt-20 ">
@@ -52,11 +45,11 @@ export default async function ProjectPage({ params }: PageProps) {
 
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Project Image */}
-          {!project?.explanationVideo && (
+          {!projectFormServer.video && (
             <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg bg-white">
               <Image
-                src={project.image}
-                alt={project.name}
+                src={projectFormServer.photo}
+                alt={projectFormServer.altText}
                 fill
                 className="object-cover bg-white aspect-square z-10"
                 priority
@@ -65,11 +58,11 @@ export default async function ProjectPage({ params }: PageProps) {
           )}
 
           {/* Explanation Video */}
-          {project.explanationVideo && (
+          {projectFormServer.video && (
             <div className="space-y-4">
               <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg bg-black">
                 <ReactPlayer
-                  src={project.explanationVideo}
+                  src={projectFormServer.video}
                   width="100%"
                   height="100%"
                   controls
@@ -89,8 +82,8 @@ export default async function ProjectPage({ params }: PageProps) {
 
           {/* Project Header */}
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold">{project.name}</h1>
-            <p className="text-muted-foreground text-lg leading-relaxed">{project.description}</p>
+            <h1 className="text-4xl font-bold">{projectFormServer.title}</h1>
+            <p className="text-muted-foreground text-lg leading-relaxed">{projectFormServer.shortDescription}</p>
           </div>
 
           {/* Project Details */}
@@ -98,14 +91,14 @@ export default async function ProjectPage({ params }: PageProps) {
             {/* Category */}
             <div className="space-y-2">
               <h3 className="text-xl font-semibold">Category</h3>
-              <p className="text-muted-foreground capitalize">{project.category}</p>
+              <p className="text-muted-foreground capitalize">{projectFormServer.category}</p>
             </div>
 
             {/* Technologies */}
             <div className="space-y-2">
               <h3 className="text-xl font-semibold">Technologies</h3>
               <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag: string) => (
+                {projectFormServer.technologies.map((tag: string) => (
                   <Badge key={tag} variant="secondary" className="font-normal">
                     {tag}
                   </Badge>
@@ -117,24 +110,24 @@ export default async function ProjectPage({ params }: PageProps) {
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 pt-8">
             <Button asChild size="lg">
-              <Link href={project.liveUrl} target="_blank" rel="noreferrer">
+              <Link href={projectFormServer.liveLink} target="_blank" rel="noreferrer">
                 <ExternalLink className="mr-2 h-4 w-4" />
                 Live Demo
               </Link>
             </Button>
 
-            {project.clientRepo && (
+            {projectFormServer.frontendLink && (
               <Button variant="outline" size="lg" asChild>
-                <Link href={project.clientRepo} target="_blank" rel="noreferrer">
+                <Link href={projectFormServer.frontendLink} target="_blank" rel="noreferrer">
                   <Github className="mr-2 h-4 w-4" />
                   Client Repository
                 </Link>
               </Button>
             )}
 
-            {project.serverRepo && (
+            {projectFormServer.backendLink && (
               <Button variant="outline" size="lg" asChild>
-                <Link href={project.serverRepo} target="_blank" rel="noreferrer">
+                <Link href={projectFormServer.backendLink} target="_blank" rel="noreferrer">
                   <Github className="mr-2 h-4 w-4" />
                   Server Repository
                 </Link>

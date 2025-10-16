@@ -13,18 +13,18 @@ export async function readMarkdownFile(projectData: string | undefined): Promise
   }
 
   try {
-    // Try to read from filesystem first
-    const filePath = path.join(process.cwd(), "src", "docs", projectData);
-    const markdownContent = fs.readFileSync(filePath, "utf-8");
-    return await processMarkdown(markdownContent);
-  } catch (error) {
-    console.error("Error reading markdown file:", error);
-    // Fallback: treat projectData as direct markdown content
-    try {
+    // Check if projectData is a filename (ends with .md) or content
+    if (projectData.endsWith(".md")) {
+      // Treat as filename
+      const filePath = path.join(process.cwd(), "src", "docs", projectData);
+      const markdownContent = fs.readFileSync(filePath, "utf-8");
+      return await processMarkdown(markdownContent);
+    } else {
+      // Treat as direct markdown content
       return await processMarkdown(projectData);
-    } catch (fallbackError) {
-      console.error("Error processing fallback markdown:", fallbackError);
-      return null;
     }
+  } catch (error) {
+    console.error("Error processing markdown:", error);
+    return null;
   }
 }

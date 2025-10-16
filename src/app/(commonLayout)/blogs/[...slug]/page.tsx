@@ -6,56 +6,28 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-
-export const dynamic = "force-static";
-
-export async function generateStaticParams() {
-  return await allBlogs.map((blog) => ({ slug: blog.slug }));
-}
-
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const blog = allBlogs.find((b) => b.slug === slug);
-  if (!blog) {
-    return { title: "Blog Not Found" };
-  }
-  const img = blog.image;
-  const imageUrl = typeof img === "string" ? img : img.src;
-  return {
-    title: `${blog.title} - Md. Nahid Mahmud`,
-    description: blog.description,
-    openGraph: {
-      title: `${blog.title} - Md. Nahid Mahmud`,
-      description: blog.description,
-      url: `https://nahid-mahmud.xyz/blogs/${blog.slug}`,
-      siteName: "Md. Nahid Mahmud",
-      images: [
-        {
-          url: imageUrl || "/open_Graph_photo.png",
-          width: 1200,
-          height: 630,
-          alt: blog.title,
-        },
-      ],
-      locale: "en_US",
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${blog.title} - Md. Nahid Mahmud`,
-      description: blog.description,
-      images: [imageUrl || "/open_Graph_photo.png"],
-    },
-  };
-}
+import { getBlogById } from "@/actions/blog.actions";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 export default async function BlogPage({ params }: PageProps) {
   const { slug } = await params;
-  const blog = allBlogs.find((b) => b.slug === slug);
+  const { data: blogData } = await getBlogById(slug[0]);
+  const blog = blogData
+    ? {
+        title: blogData.title,
+        image: blogData.photo,
+        publishDate: new Date(blogData.createdAt).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
+        fullBlog: blogData.content, // pass content directly
+        description: blogData.description,
+      }
+    : allBlogs.find((b) => b.slug === slug[1]);
   if (!blog) {
     notFound();
   }
