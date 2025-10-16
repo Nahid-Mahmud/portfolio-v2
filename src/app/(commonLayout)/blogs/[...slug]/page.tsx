@@ -1,12 +1,11 @@
-import { Metadata } from "next";
-import { allBlogs } from "../../_data/blogs";
-import { notFound } from "next/navigation";
-import { readMarkdownFile } from "@/utils/readMarkdownFile";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
 import { getBlogById } from "@/actions/blog.actions";
+import { Button } from "@/components/ui/button";
+import { readMarkdownFile } from "@/utils/readMarkdownFile";
+import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { allBlogs } from "../../_data/blogs";
 // Force dynamic rendering for project pages
 export const dynamic = "force-dynamic";
 

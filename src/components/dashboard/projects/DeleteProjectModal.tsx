@@ -59,8 +59,8 @@ export default function DeleteProjectModal({ isOpen, onClose, project, onDelete 
       </ModalHeader>
       <ModalBody>
         <p className="text-sm text-muted-foreground">
-          Are you sure you want to delete the project <strong>"{project?.title}"</strong>? This action cannot be undone
-          and will permanently remove all project data.
+          Are you sure you want to delete the project <strong>&ldquo;{project?.title}&rdquo;</strong>? This action
+          cannot be undone and will permanently remove all project data.
         </p>
       </ModalBody>
       <ModalFooter>

@@ -42,8 +42,8 @@ export default function DeleteCategoryModal({ isOpen, onClose, category }: Delet
       </ModalHeader>
       <ModalBody>
         <p className="text-sm text-muted-foreground">
-          Are you sure you want to delete the category <strong>"{category?.name}"</strong>? This action cannot be
-          undone.
+          Are you sure you want to delete the category <strong>&ldquo;{category?.name}&rdquo;</strong>? This action
+          cannot be undone.
         </p>
       </ModalBody>
       <ModalFooter>

@@ -84,6 +84,7 @@ export default function Profile({ profile }: ProfileProps) {
       }
     } catch (error) {
       toast.error("An error occurred while updating profile.");
+      console.log(error);
     } finally {
       setIsLoading(false);
     }

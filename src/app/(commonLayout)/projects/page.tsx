@@ -2,20 +2,20 @@ import { getAllProjects } from "@/actions/project.actions";
 import ProjectCardsComponent from "@/components/ProjectCardsComponent";
 import { Metadata } from "next";
 
-type ServerProject = {
-  id: string;
-  title: string;
-  shortDescription: string;
-  liveLink: string;
-  frontendLink?: string;
-  backendLink?: string;
-  photo: string;
-  altText: string;
-  category: string;
-  technologies: string[];
-  createdAt: string;
-  updatedAt: string;
-};
+// type ServerProject = {
+//   id: string;
+//   title: string;
+//   shortDescription: string;
+//   liveLink: string;
+//   frontendLink?: string;
+//   backendLink?: string;
+//   photo: string;
+//   altText: string;
+//   category: string;
+//   technologies: string[];
+//   createdAt: string;
+//   updatedAt: string;
+// };
 
 export const metadata: Metadata = {
   title: "Projects - Md. Nahid Mahmud",
@@ -49,7 +49,6 @@ export const metadata: Metadata = {
 
 export default async function Projects() {
   const { data: projects } = await getAllProjects();
-
 
   return (
     <section id="projects" className="py-20 ">

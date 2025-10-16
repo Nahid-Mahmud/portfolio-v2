@@ -37,7 +37,16 @@ export default function EditBlogComponent({
   blog,
   categories,
 }: {
-  blog: any;
+  blog: {
+    id: string;
+    title: string;
+    description: string;
+    altText: string;
+    photo?: string;
+    tags: string[];
+    content: string;
+    categoryId: string;
+  };
   categories: { id: string; name: string }[];
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);

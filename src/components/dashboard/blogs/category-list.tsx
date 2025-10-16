@@ -51,7 +51,9 @@ export default function CategoryList({ categories = [] }: CategoryListProps) {
       </div>
 
       {list.length === 0 ? (
-        <div className="text-center text-muted-foreground">No categories yet. Click "Add Category" to create one.</div>
+        <div className="text-center text-muted-foreground">
+          No categories yet. Click &ldquo;Add Category&rdquo; to create one.
+        </div>
       ) : (
         <div className="space-y-3">
           {list.map((cat) => (

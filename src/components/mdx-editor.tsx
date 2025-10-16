@@ -14,7 +14,6 @@ import {
   frontmatterPlugin,
   headingsPlugin,
   imagePlugin,
-  InsertImage,
   InsertTable,
   InsertThematicBreak,
   linkDialogPlugin,
@@ -163,12 +162,6 @@ const MDXEditorComponent = forwardRef<MDXEditorMethods, MDXEditorProps>(
       }
     }, [value, useFallback]);
 
-    // Handle MDX parsing errors
-    const handleMdxError = (error: string) => {
-      setMdxError(error);
-      setUseFallback(true);
-    };
-
     // Reset fallback when switching tabs
     useEffect(() => {
       if (activeTab !== "edit") {
@@ -258,7 +251,7 @@ const MDXEditorComponent = forwardRef<MDXEditorMethods, MDXEditorProps>(
                     </div>
                   )}
                   <p className="text-xs text-muted-foreground mt-2">
-                    You can continue editing here, or switch to the "Markdown" tab for raw markdown editing.
+                    You can continue editing here, or switch to the &ldquo;Markdown&rdquo; tab for raw markdown editing.
                   </p>
                   <button
                     onClick={() => {

@@ -1,13 +1,12 @@
 "use client";
 
+import { deleteBlog } from "@/actions/blog.actions";
+import { Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle } from "@/components/Modal";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Card, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from "@/components/Modal";
-import { deleteBlog } from "@/actions/blog.actions";
 import { toast } from "sonner";
 
 interface Blog {
@@ -28,7 +27,6 @@ interface BlogCardProps {
 export function BlogCard({ blog }: BlogCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const router = useRouter();
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -84,7 +82,7 @@ export function BlogCard({ blog }: BlogCardProps) {
           <ModalTitle>Confirm Deletion</ModalTitle>
         </ModalHeader>
         <ModalBody>
-          <p>Are you sure you want to delete the blog "{blog.title}"? This action cannot be undone.</p>
+          <p>Are you sure you want to delete the blog &ldquo;{blog.title}&rdquo;? This action cannot be undone.</p>
         </ModalBody>
         <ModalFooter>
           <Button variant="outline" onClick={() => setIsModalOpen(false)}>
