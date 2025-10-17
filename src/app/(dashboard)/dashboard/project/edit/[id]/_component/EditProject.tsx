@@ -27,7 +27,7 @@ const projectSchema = z.object({
   projectDetails: z.string().min(1, "Project details cannot be empty").optional(),
   liveLink: z.string().url("Invalid live link URL").optional(),
   frontendLink: z.string().url("Invalid frontend link URL").optional(),
-  backendLink: z.string().url("Invalid backend link URL").optional(),
+  backendLink: z.union([z.literal(""), z.string().url("Invalid backend link URL")]),
   altText: z.string().min(1, "Alt text is required").optional(),
   video: z.string().url("Invalid video URL").optional(),
   category: z.enum(["FullStack", "Frontend"]).optional(),
