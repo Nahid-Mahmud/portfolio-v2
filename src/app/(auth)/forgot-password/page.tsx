@@ -8,6 +8,8 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { forgetPassword } from "@/actions/auth.actions";
+import { toast } from "sonner";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -18,6 +20,8 @@ type ForgotPasswordForm = z.infer<typeof forgotPasswordSchema>;
 export default function ForgotPasswordPage() {
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
 
   const form = useForm<ForgotPasswordForm>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -42,9 +46,25 @@ export default function ForgotPasswordPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = (data: ForgotPasswordForm) => {
-    // TODO: trigger forgot-password API
-    console.log("Request password reset for:", data);
+  const handleSubmit = async (data: ForgotPasswordForm) => {
+    setIsLoading(true);
+    setMessage(null);
+    form.clearErrors();
+
+    try {
+      const result = await forgetPassword(data);
+      if (result?.success) {
+        // setMessage(result.message || "Password reset email sent successfully.");
+        toast.success("Password reset email sent successfully.");
+        form.reset();
+      } else {
+        form.setError("email", { message: result?.error || "An error occurred." });
+      }
+    } catch {
+      form.setError("email", { message: "Network error. Please try again." });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -101,13 +121,29 @@ export default function ForgotPasswordPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center justify-center space-x-2 group"
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center justify-center space-x-2 group disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Send className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                <span>Send Reset Link</span>
+                {isLoading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                    <span>Send Reset Link</span>
+                  </>
+                )}
               </Button>
             </form>
           </Form>
+
+          {message && (
+            <div className="mt-6 p-4 bg-green-500/20 border border-green-500/30 rounded-2xl">
+              <p className="text-green-300 text-center font-medium">{message}</p>
+            </div>
+          )}
 
           <div className="text-center mt-8">
             <p className="text-blue-200">

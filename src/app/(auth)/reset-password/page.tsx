@@ -1,20 +1,23 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Eye, EyeOff, Lock, ShieldCheck } from "lucide-react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { resetPassword } from "@/actions/auth.actions";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff, Lock, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import * as z from "zod";
 
 const resetPasswordSchema = z
   .object({
-    password: z.string().min(6, "Password must be at least 6 characters"),
+    newPassword: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string().min(6, "Password must be at least 6 characters"),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
@@ -26,11 +29,16 @@ export default function ResetPasswordPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  // console.log(searchParams.get("token"));
+  const token = searchParams.get("token") || "";
 
   const form = useForm<ResetPasswordForm>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
-      password: "",
+      newPassword: "",
       confirmPassword: "",
     },
   });
@@ -51,9 +59,34 @@ export default function ResetPasswordPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = (data: ResetPasswordForm) => {
-    // TODO: trigger reset-password API with token
-    console.log("Reset password:", data);
+  const handleSubmit = async (data: ResetPasswordForm) => {
+    if (!token) {
+      form.setError("newPassword", { message: "Invalid reset token." });
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage(null);
+    form.clearErrors();
+
+    try {
+      const result = await resetPassword({ newPassword: data.newPassword, token });
+      if (result?.success) {
+        // setMessage(result.message || "Password has been reset successfully.");
+        toast.success("Password has been reset successfully.");
+        form.reset();
+        // Optionally redirect to login after a delay
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      } else {
+        form.setError("newPassword", { message: result?.error || "An error occurred." });
+      }
+    } catch {
+      form.setError("newPassword", { message: "Network error. Please try again." });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -87,7 +120,7 @@ export default function ResetPasswordPage() {
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
-                name="password"
+                name="newPassword"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
@@ -155,12 +188,26 @@ export default function ResetPasswordPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
-                Save New Password
+                {isLoading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    Saving...
+                  </>
+                ) : (
+                  "Save New Password"
+                )}
               </Button>
             </form>
           </Form>
+
+          {message && (
+            <div className="mt-6 p-4 bg-green-500/20 border border-green-500/30 rounded-2xl">
+              <p className="text-green-300 text-center font-medium">{message}</p>
+            </div>
+          )}
 
           <div className="text-center mt-8 space-y-2">
             <Link

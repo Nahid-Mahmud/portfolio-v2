@@ -7,7 +7,6 @@ export const login = async (data: {
   email: string;
   password: string;
 }): Promise<{ success: boolean; error?: string; message?: string } | void> => {
-
   try {
     const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: "POST",
@@ -19,7 +18,6 @@ export const login = async (data: {
     });
 
     const responseData = await res.json();
-
 
     // Check if the response was successful
     if (!res.ok) {
@@ -51,6 +49,75 @@ export const login = async (data: {
     }
 
     console.error("Login error:", error);
+    return {
+      success: false,
+      error: "Network error. Please check your connection and try again.",
+    };
+  }
+};
+
+export const forgetPassword = async (data: {
+  email: string;
+}): Promise<{ success: boolean; error?: string; message?: string } | void> => {
+  try {
+    const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/auth/forget-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const responseData = await res.json();
+
+    if (!res.ok) {
+      return {
+        success: false,
+        error: responseData.message || `HTTP error! status: ${res.status}`,
+      };
+    }
+
+    return {
+      success: true,
+      message: responseData.message || "Password reset email sent successfully.",
+    };
+  } catch (error) {
+    console.error("Forgot Password error:", error);
+    return {
+      success: false,
+      error: "Network error. Please check your connection and try again.",
+    };
+  }
+};
+
+export const resetPassword = async (data: {
+  newPassword: string;
+  token: string;
+}): Promise<{ success: boolean; error?: string; message?: string } | void> => {
+  try {
+    const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/auth/reset-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const responseData = await res.json();
+
+    if (!res.ok) {
+      return {
+        success: false,
+        error: responseData.message || `HTTP error! status: ${res.status}`,
+      };
+    }
+
+    return {
+      success: true,
+      message: responseData.message || "Password has been reset successfully.",
+    };
+  } catch (error) {
+    console.error("Reset Password error:", error);
     return {
       success: false,
       error: "Network error. Please check your connection and try again.",
