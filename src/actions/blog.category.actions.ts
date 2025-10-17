@@ -19,9 +19,6 @@ async function createBlogCategory(data: { name: string; description?: string }) 
 
   const responseData = await res.json();
 
-
-
-
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };
   }
@@ -83,6 +80,7 @@ async function deleteBlogCategory(id: string) {
 async function getAllBlogCategories() {
   const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/blog-categories`, {
     method: "GET",
+    cache: "no-store",
   });
 
   if (!res.ok) {

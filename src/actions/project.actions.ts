@@ -50,7 +50,6 @@ export async function createProject(data: {
 
   const responseData = await res.json();
 
-
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };
   }
@@ -73,7 +72,7 @@ export async function getAllProjects() {
   const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/projects`, {
     method: "GET",
     headers: headersOptions,
-    cache: "no-store", // Disable caching to always fetch fresh data
+    next: { revalidate: 10 },
   });
 
   if (!res.ok) {
@@ -149,7 +148,6 @@ export async function updateProject(
     deletePhoto?: string | undefined;
   }
 ) {
-
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("accessToken")?.value || "";
   const headersOptions = {
@@ -185,7 +183,6 @@ export async function updateProject(
   });
 
   const responseData = await res.json();
-
 
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };

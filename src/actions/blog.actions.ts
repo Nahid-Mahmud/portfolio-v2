@@ -62,8 +62,7 @@ export async function getAllBlogs() {
   const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/blogs`, {
     method: "GET",
     headers: headersOptions,
-    // next: { revalidate: 10 }, // ISR: Revalidate every 10 seconds
-    cache: "no-store", // Disable caching to always fetch fresh data
+    next: { revalidate: 10 }, // ISR: Revalidate every 10 seconds
   });
 
   if (!res.ok) {
@@ -86,7 +85,7 @@ export async function getBlogById(id: string) {
   const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/blogs/${id}`, {
     method: "GET",
     headers: headersOptions,
-    next: { revalidate: 10 }, // ISR: Revalidate every 10 seconds
+    next: { revalidate: 10 },
   });
 
   if (!res.ok) {
@@ -166,7 +165,6 @@ export async function updateBlog(
   });
 
   const responseData = await res.json();
-
 
   if (!res.ok) {
     return { success: false, error: `HTTP error! status: ${res.status}`, details: responseData };
