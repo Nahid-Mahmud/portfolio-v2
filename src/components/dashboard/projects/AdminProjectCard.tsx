@@ -73,7 +73,7 @@ export function AdminProjectCard({ project, onDelete }: ProjectCardProps) {
         </div>
         <div className="flex gap-2 flex-wrap">
           <Button variant="outline" asChild>
-            <Link href={`/dashboard/project/${project.id}`}>View</Link>
+            <Link href={`/projects/${project.id}`}>View</Link>
           </Button>
           <Button variant="outline" asChild>
             <Link href={`/dashboard/project/edit/${project.id}`}>Edit</Link>
