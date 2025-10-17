@@ -41,7 +41,7 @@ export const updateMyProfile = async (data: {
     "data",
     JSON.stringify({
       bio: data.bio,
-      deletePhoto: data.deletePhoto,
+      deletePhoto: data.photo instanceof File ? data.deletePhoto : undefined,
     })
   );
 

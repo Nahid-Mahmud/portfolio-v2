@@ -71,11 +71,18 @@ export default function Profile({ profile }: ProfileProps) {
   const onSubmit = async (data: ProfileFormData) => {
     setIsLoading(true);
     try {
-      const result = await updateMyProfile({
+      const updateData: {
+        bio?: string;
+        photo?: File | undefined;
+        deletePhoto?: string | undefined;
+      } = {
         bio: data.bio,
         photo: selectedFile || undefined,
-        deletePhoto: selectedFile && profile?.photo ? profile.photo : undefined,
-      });
+      };
+      if (selectedFile && profile?.photo) {
+        updateData.deletePhoto = profile.photo;
+      }
+      const result = await updateMyProfile(updateData);
       if (result.success) {
         toast.success("Profile updated — Your changes have been saved successfully.");
         setIsEditing(false);
