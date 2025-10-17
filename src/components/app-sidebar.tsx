@@ -48,10 +48,10 @@ const data = {
         },
       ],
     },
-    {
-      title: "Photo Gallery",
-      url: "/dashboard/photo-gallery",
-    },
+    // {
+    //   title: "Photo Gallery",
+    //   url: "/dashboard/photo-gallery",
+    // },
     {
       title: "Project",
       url: "#",
