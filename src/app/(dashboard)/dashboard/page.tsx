@@ -1,8 +1,16 @@
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, FolderOpen, Tag } from "lucide-react";
+import envVariables from "@/config/env";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const statsRes = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/stats`, {
+    next: { revalidate: 30 },
+  });
+
+  const payload = await statsRes.json();
+  const { blogs = 0, blogCategories = 0, projects = 0 } = payload?.data ?? {};
+
   return (
     <div className="space-y-6">
       <div>
@@ -23,6 +31,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
+              <p className="text-2xl font-semibold">{blogs}</p>
               <Link href="/dashboard/blogs/add-blogs" className="block text-sm text-blue-600 hover:underline">
                 Add New Blog
               </Link>
@@ -42,9 +51,12 @@ export default function DashboardPage() {
             <CardDescription>Organize your blogs with categories</CardDescription>
           </CardHeader>
           <CardContent>
-            <Link href="/dashboard/blogs/blog-category" className="text-sm text-blue-600 hover:underline">
-              Manage Categories
-            </Link>
+            <div className="space-y-2">
+              <p className="text-2xl font-semibold">{blogCategories}</p>
+              <Link href="/dashboard/blogs/blog-category" className="text-sm text-blue-600 hover:underline">
+                Manage Categories
+              </Link>
+            </div>
           </CardContent>
         </Card>
 
@@ -58,6 +70,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
+              <p className="text-2xl font-semibold">{projects}</p>
               <Link href="/dashboard/project/add-new" className="block text-sm text-blue-600 hover:underline">
                 Add New Project
               </Link>
