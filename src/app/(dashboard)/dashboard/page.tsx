@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, FolderOpen, Tag } from "lucide-react";
 import envVariables from "@/config/env";
+import FirstTimeModal from "@/components/FirstTimeModal";
 
 export default async function DashboardPage() {
   const statsRes = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/stats`, {
@@ -13,6 +14,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
+      <FirstTimeModal />
       <div>
         <h1 className="text-3xl font-bold">Dashboard</h1>
         <p className="text-muted-foreground">
