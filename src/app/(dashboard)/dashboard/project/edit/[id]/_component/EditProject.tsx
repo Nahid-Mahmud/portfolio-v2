@@ -81,7 +81,7 @@ export default function EditProject({ project }: { project: ProjectType }) {
         projectDetails: data.projectDetails,
         liveLink: data.liveLink,
         frontendLink: data.frontendLink,
-        backendLink: data.backendLink,
+        backendLink: data.backendLink || undefined,
         photo: imageFile || undefined,
         altText: data.altText,
         video: data.video,
