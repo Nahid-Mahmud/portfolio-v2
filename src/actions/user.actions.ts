@@ -1,5 +1,6 @@
 "use server";
 import envVariables from "@/config/env";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export const getMyProfile = async () => {
@@ -55,10 +56,12 @@ export const updateMyProfile = async (data: {
   });
 
   if (!res.ok) {
-
     return { success: false, error: `HTTP error! status: ${res.status}` };
   }
 
+  // console.log(await res.json());
+
   const responseData = await res.json();
+  revalidatePath("/dashboard/profile");
   return { success: true, data: responseData.data };
 };

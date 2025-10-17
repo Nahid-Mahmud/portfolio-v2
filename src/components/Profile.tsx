@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+const { updateMyProfile } = await import("@/actions/user.actions");
 
 const profileSchema = z.object({
   bio: z.string().max(500, "Bio must be at most 500 characters").optional(),
@@ -70,11 +71,10 @@ export default function Profile({ profile }: ProfileProps) {
   const onSubmit = async (data: ProfileFormData) => {
     setIsLoading(true);
     try {
-      const { updateMyProfile } = await import("@/actions/user.actions");
       const result = await updateMyProfile({
         bio: data.bio,
         photo: selectedFile || undefined,
-        deletePhoto: selectedFile instanceof File && profile?.photo ? profile.photo : undefined,
+        deletePhoto: selectedFile && profile?.photo ? profile.photo : undefined,
       });
       if (result.success) {
         toast.success("Profile updated — Your changes have been saved successfully.");
