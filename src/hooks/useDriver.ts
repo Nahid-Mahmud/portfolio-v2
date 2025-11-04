@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { driverInstance } from "../utils/driverInstance";
 
 interface DriverStep {
@@ -17,7 +17,21 @@ interface HighlightOptions {
   };
 }
 
+// Dynamically load Driver.js CSS only when needed
+const loadDriverCSS = () => {
+  if (typeof document !== "undefined" && !document.querySelector('link[href*="driver.css"]')) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/node_modules/driver.js/dist/driver.css";
+    document.head.appendChild(link);
+  }
+};
+
 export const useDriver = () => {
+  useEffect(() => {
+    loadDriverCSS();
+  }, []);
+
   const startTour = useCallback((steps: DriverStep[]) => {
     // Check if a tour is already active
     if (driverInstance.isActive()) {

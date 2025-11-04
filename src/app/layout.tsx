@@ -6,11 +6,15 @@ import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const titillium = Titillium_Web({
@@ -34,6 +38,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+        {/* DNS prefetch for external resources */}
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+        {/* Preload critical CSS */}
+        <link rel="preload" href="/globals.css" as="style" />
+
         <Script
           defer={true}
           strategy="lazyOnload"

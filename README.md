@@ -35,7 +35,7 @@ This portfolio is built with modern web technologies:
 - **AI Integration**: OpenAI via OpenRouter
 - **Image Processing**: Sharp
 - **Styling**: Tailwind CSS, PostCSS, CSS-in-JS
-- **Tools**: ESLint, TypeScript, Next Themes, Sonner (toasts), Driver.js (tours)
+- **Tools**: ESLint, TypeScript, Next Themes, Sonner (toasts)
 - **Deployment**: VPS Hosting, CI/CD with GitHub Actions
 
 ## 📂 Project Structure
