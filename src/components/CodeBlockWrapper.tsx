@@ -15,6 +15,7 @@ export default function CodeBlockWrapper({ children }: CodeBlockWrapperProps) {
     // Find all code blocks
     const codeBlocks = contentRef.current.querySelectorAll("pre");
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     codeBlocks.forEach((pre, index) => {
       // Skip if already processed
       if (pre.querySelector(".copy-button-container")) return;
