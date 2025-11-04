@@ -1,11 +1,20 @@
 import { Metadata } from "next";
-import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import profileImage from "@/assets/profile.png";
-import TextAnimate from "@/components/TextAnimate";
-import ResumeButtonModal from "@/components/ResumeButtonModal";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
+
+// Dynamic imports for components (only load when needed)
+const SimpleTextAnimate = dynamic(() => import("@/components/SimpleTextAnimate"), {
+  loading: () => <Skeleton className="h-8 w-48" />,
+});
+
+const ResumeButtonModal = dynamic(() => import("@/components/ResumeButtonModal"), {
+  loading: () => <Skeleton className="h-12 w-32 rounded-md" />,
+});
 
 // Define metadata for the Home page
 export const metadata: Metadata = {
@@ -76,7 +85,7 @@ export default function Home() {
         <h1 className="text-4xl md:text-6xl lg:text-7xl  font-bold text-slate-900 dark:text-white">Md. Nahid Mahmud</h1>
         <div className="">
           <div className="text-2xl font-medium text-emerald-600 dark:text-emerald-400">
-            <TextAnimate />
+            <SimpleTextAnimate />
           </div>
         </div>
 
