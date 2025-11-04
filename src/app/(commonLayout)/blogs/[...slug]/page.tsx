@@ -1,5 +1,6 @@
 import { getBlogById } from "@/actions/blog.actions";
 import { Button } from "@/components/ui/button";
+import CodeBlockWrapper from "@/components/CodeBlockWrapper";
 import envVariables from "@/config/env";
 import { readMarkdownFile } from "@/utils/readMarkdownFile";
 import { calculateReadingTime, formatReadingTime } from "@/utils/readingTime";
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahidmahmud.dev";
+  const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz";
   const blogUrl = `${baseUrl}/blogs/${blog.slug || slug[0]}`;
   const imageUrl = blog.image?.startsWith("http") ? blog.image : `${baseUrl}${blog.image}`;
 
@@ -249,7 +250,9 @@ export default async function BlogPage({ params }: PageProps) {
             {/* Article Content */}
             {contentHtml && (
               <article className="prose prose-sm md:prose-lg max-w-none dark:prose-invert text-wrap break-words">
-                <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+                <CodeBlockWrapper>
+                  <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+                </CodeBlockWrapper>
               </article>
             )}
 
