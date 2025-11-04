@@ -1,6 +1,6 @@
 import Background from "@/components/Background";
 import FloatingChat from "@/components/FloatingChat";
-import MouseFollower from "@/components/MouseFollower";
+// import MouseFollower from "@/components/MouseFollower";
 import Navbar from "@/components/NavBar";
 import { ThemeProvider } from "@/components/theme-providers";
 import { Toaster } from "sonner";
@@ -14,7 +14,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
           {children}
           <Toaster position="top-right" />
           <Background />
-          <MouseFollower />
+          {/* <MouseFollower /> */}
         </div>
         <FloatingChat />
       </ThemeProvider>
