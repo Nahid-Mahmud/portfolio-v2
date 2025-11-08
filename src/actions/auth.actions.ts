@@ -48,7 +48,7 @@ export const login = async (data: {
       throw error;
     }
 
-    console.error("Login error:", error);
+    // console.error("Login error:", error);
     return {
       success: false,
       error: "Network error. Please check your connection and try again.",
@@ -82,7 +82,7 @@ export const forgetPassword = async (data: {
       message: responseData.message || "Password reset email sent successfully.",
     };
   } catch (error) {
-    console.error("Forgot Password error:", error);
+    // console.error("Forgot Password error:", error);
     return {
       success: false,
       error: "Network error. Please check your connection and try again.",
@@ -117,7 +117,7 @@ export const resetPassword = async (data: {
       message: responseData.message || "Password has been reset successfully.",
     };
   } catch (error) {
-    console.error("Reset Password error:", error);
+    // console.error("Reset Password error:", error);
     return {
       success: false,
       error: "Network error. Please check your connection and try again.",

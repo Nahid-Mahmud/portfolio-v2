@@ -88,11 +88,11 @@ export default function EditBlogComponent({
         router.push("/dashboard/blogs/all-blogs"); // Redirect to the blogs list
       } else {
         toast.error(`Failed to update blog: ${result.error || "Unknown error"}`);
-        console.error("Blog update error:", result);
+        // console.error("Blog update error:", result);
       }
     } catch (error) {
       toast.error("An error occurred while updating the blog");
-      console.error("Blog update error:", error);
+      // console.error("Blog update error:", error);
     } finally {
       setIsSubmitting(false);
     }

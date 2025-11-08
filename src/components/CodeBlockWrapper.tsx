@@ -68,7 +68,7 @@ export default function CodeBlockWrapper({ children }: CodeBlockWrapperProps) {
             `;
           }, 2000);
         } catch (err) {
-          console.error("Failed to copy:", err);
+          // console.error("Failed to copy:", err);
         }
       });
 

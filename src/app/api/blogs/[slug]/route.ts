@@ -27,7 +27,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       tags: "", // Not available
     });
   } catch (error) {
-    console.error("Error fetching blog:", error);
+    // console.error("Error fetching blog:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

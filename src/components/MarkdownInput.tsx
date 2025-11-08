@@ -31,9 +31,9 @@ const MarkdownInput = ({
     try {
       await navigator.clipboard.writeText(markdown);
       // You might want to add a toast notification here
-      console.log("Markdown copied to clipboard");
+      // console.log("Markdown copied to clipboard");
     } catch (err) {
-      console.error("Failed to copy markdown:", err);
+      // console.error("Failed to copy markdown:", err);
     }
   };
 

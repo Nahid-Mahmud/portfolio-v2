@@ -39,7 +39,7 @@ export default function PhotoGalleryClient({ initialPhotos }: PhotoGalleryClient
       const data = await response.json();
       setPhotos(data);
     } catch (error) {
-      console.error("Failed to fetch photos:", error);
+      // console.error("Failed to fetch photos:", error);
     }
   };
 
@@ -58,7 +58,7 @@ export default function PhotoGalleryClient({ initialPhotos }: PhotoGalleryClient
         toast.error("Failed to add photo");
       }
     } catch (error) {
-      console.error("Failed to add photo:", error);
+      // console.error("Failed to add photo:", error);
       toast.error("Failed to add photo");
     } finally {
       setLoading(false);
@@ -91,7 +91,7 @@ export default function PhotoGalleryClient({ initialPhotos }: PhotoGalleryClient
         toast.error("Failed to update alt text");
       }
     } catch (error) {
-      console.error("Failed to update alt text:", error);
+      // console.error("Failed to update alt text:", error);
       toast.error("Failed to update alt text");
     } finally {
       setLoading(false);

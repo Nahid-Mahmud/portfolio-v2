@@ -35,7 +35,7 @@ export default function CategoryList({ categories = [] }: CategoryListProps) {
     setIsDeleteModalOpen(true);
   };
 
-  console.log(categories);
+  // console.log(categories);
 
   // Defensive: ensure we have an array to map over.
   const list: Category[] = Array.isArray(categories) ? categories : [];

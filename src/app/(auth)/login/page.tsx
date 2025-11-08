@@ -104,7 +104,7 @@ export default function LoginPage() {
         return;
       }
 
-      console.error("Login error:", error);
+      // console.error("Login error:", error);
       setErrorMessage("An unexpected error occurred. Please try again.");
       setCharacterAnimation("wave");
       toast.error("An unexpected error occurred. Please try again.");

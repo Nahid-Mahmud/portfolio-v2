@@ -31,7 +31,7 @@ const MarkdownRenderer = ({ markdown, className, placeholder }: MarkdownRenderer
         setIsProcessing(false);
       })
       .catch((err: unknown) => {
-        console.error("Error processing markdown:", err);
+        // console.error("Error processing markdown:", err);
         setError("Failed to process markdown");
         setProcessedHtml(markdown); // Fallback to original markdown
         setIsProcessing(false);

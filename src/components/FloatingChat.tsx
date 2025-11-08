@@ -119,7 +119,7 @@ export default function FloatingChat() {
       setHistory((prevHistory) => [...prevHistory, modelResponse]);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      console.error("Error fetching from API route:", err);
+      // console.error("Error fetching from API route:", err);
       setError(err.message || "An unexpected error occurred.");
     } finally {
       setIsLoading(false);

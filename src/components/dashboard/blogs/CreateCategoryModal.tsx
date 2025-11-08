@@ -38,7 +38,7 @@ export default function CreateCategoryModal({ isOpen, onClose }: CreateCategoryM
       onClose();
     } catch (error) {
       toast.error("Failed to create category");
-      console.error(error);
+      // console.error(error);
     }
   };
 

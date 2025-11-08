@@ -46,7 +46,7 @@ export default function DeleteProjectModal({ isOpen, onClose, project, onDelete 
       }
     } catch (error) {
       toast.error("An error occurred while deleting the project");
-      console.error("Delete error:", error);
+      // console.error("Delete error:", error);
     } finally {
       setIsDeleting(false);
     }

@@ -88,10 +88,10 @@ export default function AddNewProject() {
         router.push("/dashboard/project/all");
       } else {
         toast.error(result.error || "Error adding project");
-        console.error("Error details:", result.details);
+        // console.error("Error details:", result.details);
       }
     } catch (error) {
-      console.error("Error adding project:", error);
+      // console.error("Error adding project:", error);
       toast.error("Error adding project");
     } finally {
       setIsSubmitting(false);

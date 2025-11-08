@@ -74,11 +74,11 @@ export default function AddBlogs({ categories }: { categories: { id: string; nam
         router.push("/dashboard/blogs/all-blogs"); // Redirect to the blogs list
       } else {
         toast.error(`Failed to create blog: ${result.error || "Unknown error"}`);
-        console.error("Blog creation error:", result);
+        // console.error("Blog creation error:", result);
       }
     } catch (error) {
       toast.error("An error occurred while creating the blog");
-      console.error("Blog creation error:", error);
+      // console.error("Blog creation error:", error);
     } finally {
       setIsSubmitting(false);
     }

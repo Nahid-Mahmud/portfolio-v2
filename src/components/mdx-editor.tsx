@@ -70,7 +70,7 @@ class MDXEditorErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundary
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("MDXEditor Error Boundary caught an error:", error, errorInfo);
+    // console.error("MDXEditor Error Boundary caught an error:", error, errorInfo);
     if (this.props.onError) {
       this.props.onError();
     }
@@ -152,7 +152,7 @@ const MDXEditorComponent = forwardRef<MDXEditorMethods, MDXEditorProps>(
 
         return value;
       } catch (error) {
-        console.error("Error processing markdown:", error);
+        // console.error("Error processing markdown:", error);
         // Use setTimeout to avoid setting state during render
         setTimeout(() => {
           setUseFallback(true);

@@ -58,7 +58,7 @@ export default function EditCategoryModal({ isOpen, onClose, category }: EditCat
       onClose();
     } catch (error) {
       toast.error("Failed to update category");
-      console.error(error);
+      // console.error(error);
     }
   };
 

@@ -96,10 +96,10 @@ export default function EditProject({ project }: { project: ProjectType }) {
         router.push("/dashboard/project/all");
       } else {
         toast.error(result.error || "Error updating project");
-        console.error("Error details:", result.details);
+        // console.error("Error details:", result.details);
       }
     } catch (error) {
-      console.error("Error updating project:", error);
+      // console.error("Error updating project:", error);
       toast.error("Error updating project");
     } finally {
       setIsSubmitting(false);

@@ -14,7 +14,7 @@ const openai = new OpenAI({
 
 export async function POST(req: NextRequest) {
   if (!process.env.OPENROUTER_API_KEY) {
-    console.error("Error: OPENROUTER_API_KEY environment variable is not set.");
+    // console.error("Error: OPENROUTER_API_KEY environment variable is not set.");
     return NextResponse.json({ error: "API key not configured." }, { status: 500 });
   }
 
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     // return;
 
     if (!responseMessage) {
-      console.error("No response message received from OpenAI.");
+      // console.error("No response message received from OpenAI.");
       return NextResponse.json({ error: "Failed to parse response from AI." }, { status: 500 });
     }
 
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ answer: responseMessage });
   } catch (error: any) {
-    console.error("Error in /api/ask-gemini:", error);
+    // console.error("Error in /api/ask-gemini:", error);
     if (error instanceof SyntaxError) {
       return NextResponse.json({ error: "Invalid request format." }, { status: 400 });
     }

@@ -36,7 +36,7 @@ export function BlogCard({ blog }: BlogCardProps) {
         toast.success("Blog deleted successfully!");
       }
     } catch (error) {
-      console.error("Error deleting blog:", error);
+      // console.error("Error deleting blog:", error);
     } finally {
       setIsDeleting(false);
       setIsModalOpen(false);

@@ -31,7 +31,7 @@ export default function DeleteCategoryModal({ isOpen, onClose, category }: Delet
       }
     } catch (error) {
       toast.error("Failed to delete category");
-      console.error(error);
+      // console.error(error);
     }
   };
 

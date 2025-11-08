@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       dynamicBlogs = responseData.data || [];
     }
   } catch (error) {
-    console.error("Error fetching blogs for sitemap:", error);
+    // console.error("Error fetching blogs for sitemap:", error);
   }
 
   // Static pages
