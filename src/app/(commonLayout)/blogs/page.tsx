@@ -67,7 +67,12 @@ export default async function Blogs() {
               )}
               <CardContent className="space-y-2 pt-4 flex-1">
                 <CardTitle>{blog.title}</CardTitle>
-                <CardDescription>{blog.description}</CardDescription>
+                <CardDescription>
+                  {
+                    // show 190 characters of the description
+                    blog.description.length > 190 ? blog.description.slice(0, 190) + "..." : blog.description
+                  }
+                </CardDescription>
               </CardContent>
               <CardFooter className="items-end flex w-full justify-end">
                 <Button variant={"outline"} asChild>
