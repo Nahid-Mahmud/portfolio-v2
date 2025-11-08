@@ -71,10 +71,7 @@ export default async function Blogs() {
               </CardContent>
               <CardFooter className="items-end flex w-full justify-end">
                 <Button variant={"outline"} asChild>
-                  <Link
-                    href={`/blogs/${blog.id}/${blog.description}/${blog.slug}`}
-                    className="text-primary font-medium"
-                  >
+                  <Link href={`/blogs/${blog.id}/${blog.slug}`} className="text-primary font-medium">
                     Read Full Blog →
                   </Link>
                 </Button>

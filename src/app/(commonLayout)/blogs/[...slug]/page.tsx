@@ -241,7 +241,8 @@ export default async function BlogPage({ params }: PageProps) {
                   alt={blog.title}
                   fill
                   className="object-cover"
-                  placeholder="blur"
+                  // placeholder="blur"
+                  // blurDataURL=""
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                 />
