@@ -56,6 +56,7 @@ export default function EditCategoryModal({ isOpen, onClose, category }: EditCat
         toast.error("Failed to update category");
       }
       onClose();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Failed to update category");
       // console.error(error);

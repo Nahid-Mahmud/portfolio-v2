@@ -30,6 +30,7 @@ const MarkdownRenderer = ({ markdown, className, placeholder }: MarkdownRenderer
         setProcessedHtml(html);
         setIsProcessing(false);
       })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .catch((err: unknown) => {
         // console.error("Error processing markdown:", err);
         setError("Failed to process markdown");

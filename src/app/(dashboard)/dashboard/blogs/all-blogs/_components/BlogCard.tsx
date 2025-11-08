@@ -35,6 +35,7 @@ export function BlogCard({ blog }: BlogCardProps) {
       if (result.success) {
         toast.success("Blog deleted successfully!");
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       // console.error("Error deleting blog:", error);
     } finally {

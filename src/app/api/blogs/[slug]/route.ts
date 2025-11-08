@@ -26,6 +26,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       altText: "", // Not available
       tags: "", // Not available
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     // console.error("Error fetching blog:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

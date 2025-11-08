@@ -76,6 +76,7 @@ export default function AddBlogs({ categories }: { categories: { id: string; nam
         toast.error(`Failed to create blog: ${result.error || "Unknown error"}`);
         // console.error("Blog creation error:", result);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("An error occurred while creating the blog");
       // console.error("Blog creation error:", error);

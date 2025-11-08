@@ -38,6 +38,7 @@ export default function PhotoGalleryClient({ initialPhotos }: PhotoGalleryClient
       const response = await fetch("/api/photos");
       const data = await response.json();
       setPhotos(data);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       // console.error("Failed to fetch photos:", error);
     }
@@ -57,6 +58,7 @@ export default function PhotoGalleryClient({ initialPhotos }: PhotoGalleryClient
       } else {
         toast.error("Failed to add photo");
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       // console.error("Failed to add photo:", error);
       toast.error("Failed to add photo");
@@ -90,6 +92,7 @@ export default function PhotoGalleryClient({ initialPhotos }: PhotoGalleryClient
       } else {
         toast.error("Failed to update alt text");
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       // console.error("Failed to update alt text:", error);
       toast.error("Failed to update alt text");

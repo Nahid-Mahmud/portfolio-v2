@@ -44,6 +44,7 @@ export default function DeleteProjectModal({ isOpen, onClose, project, onDelete 
       } else {
         toast.error(result.error || "Failed to delete project");
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("An error occurred while deleting the project");
       // console.error("Delete error:", error);

@@ -32,6 +32,7 @@ const MarkdownInput = ({
       await navigator.clipboard.writeText(markdown);
       // You might want to add a toast notification here
       // console.log("Markdown copied to clipboard");
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       // console.error("Failed to copy markdown:", err);
     }

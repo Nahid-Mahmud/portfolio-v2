@@ -32,6 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const responseData = await res.json();
       dynamicBlogs = responseData.data || [];
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     // console.error("Error fetching blogs for sitemap:", error);
   }

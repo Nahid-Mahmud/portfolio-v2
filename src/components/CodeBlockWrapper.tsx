@@ -67,6 +67,7 @@ export default function CodeBlockWrapper({ children }: CodeBlockWrapperProps) {
               <span>Copy</span>
             `;
           }, 2000);
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
           // console.error("Failed to copy:", err);
         }

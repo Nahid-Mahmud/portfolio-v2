@@ -68,7 +68,7 @@ class MDXEditorErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundary
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
   }
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // console.error("MDXEditor Error Boundary caught an error:", error, errorInfo);
     if (this.props.onError) {
@@ -151,6 +151,7 @@ const MDXEditorComponent = forwardRef<MDXEditorMethods, MDXEditorProps>(
         }
 
         return value;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         // console.error("Error processing markdown:", error);
         // Use setTimeout to avoid setting state during render

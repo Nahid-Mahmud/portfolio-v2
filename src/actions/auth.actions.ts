@@ -81,6 +81,7 @@ export const forgetPassword = async (data: {
       success: true,
       message: responseData.message || "Password reset email sent successfully.",
     };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     // console.error("Forgot Password error:", error);
     return {
@@ -116,6 +117,7 @@ export const resetPassword = async (data: {
       success: true,
       message: responseData.message || "Password has been reset successfully.",
     };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     // console.error("Reset Password error:", error);
     return {

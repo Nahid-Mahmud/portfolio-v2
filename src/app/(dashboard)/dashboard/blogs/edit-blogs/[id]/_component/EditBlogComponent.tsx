@@ -90,6 +90,7 @@ export default function EditBlogComponent({
         toast.error(`Failed to update blog: ${result.error || "Unknown error"}`);
         // console.error("Blog update error:", result);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("An error occurred while updating the blog");
       // console.error("Blog update error:", error);

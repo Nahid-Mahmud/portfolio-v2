@@ -36,6 +36,7 @@ export default function CreateCategoryModal({ isOpen, onClose }: CreateCategoryM
         form.reset();
       }
       onClose();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Failed to create category");
       // console.error(error);

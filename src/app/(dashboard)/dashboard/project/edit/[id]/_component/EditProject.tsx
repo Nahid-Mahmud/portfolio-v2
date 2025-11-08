@@ -98,6 +98,7 @@ export default function EditProject({ project }: { project: ProjectType }) {
         toast.error(result.error || "Error updating project");
         // console.error("Error details:", result.details);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       // console.error("Error updating project:", error);
       toast.error("Error updating project");
