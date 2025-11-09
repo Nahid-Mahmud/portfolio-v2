@@ -85,7 +85,7 @@ export async function getBlogById(id: string) {
   const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/blogs/${id}`, {
     method: "GET",
     headers: headersOptions,
-    next: { revalidate: 30 },
+    next: { revalidate: 300 },
   });
 
   if (!res.ok) {

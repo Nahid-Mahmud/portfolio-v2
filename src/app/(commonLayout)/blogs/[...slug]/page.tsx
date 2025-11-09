@@ -12,6 +12,8 @@ import { notFound } from "next/navigation";
 import { allBlogs } from "../../_data/blogs";
 // Force dynamic rendering for project pages
 // export const dynamic = "force-dynamic";
+// export const dynamic = "force-static";
+
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
