@@ -14,7 +14,6 @@ import { allBlogs } from "../../_data/blogs";
 // export const dynamic = "force-dynamic";
 // export const dynamic = "force-static";
 
-
 interface PageProps {
   params: Promise<{ slug: string[] }>;
 }
@@ -26,6 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const blog = blogData
     ? {
+        id: slug[0],
         title: blogData.title,
         image: blogData.photo,
         publishDate: new Date(blogData.createdAt).toLocaleDateString("en-US", {
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         }),
         fullBlog: blogData.content,
         description: blogData.description,
-        slug: slug[0],
+        slug: slug[1],
       }
     : allBlogs.find((b) => b.slug === slug[1]);
 
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz";
-  const blogUrl = `${baseUrl}/blogs/${blog.slug || slug[0]}`;
+  const blogUrl = `${baseUrl}/blogs/${slug[0]}/${blog.slug}`;
   const imageUrl = blog.image?.startsWith("http") ? blog.image : `${baseUrl}${blog.image}`;
 
   return {
@@ -131,9 +131,9 @@ export default async function BlogPage({ params }: PageProps) {
   }
 
   const contentHtml = await readMarkdownFile(blog.fullBlog);
-  const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahidmahmud.dev";
-  const blogUrl = `${baseUrl}/blogs/${blog.slug || slug[0]}`;
-  const imageUrl = blog.image?.startsWith("http") ? blog.image : `${baseUrl}${blog.image}`;
+  const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz";
+  const blogUrl = `${baseUrl}/blogs/${slug[0]}/${blog.slug}`;
+  const imageUrl = blog.image;
 
   // Calculate reading time
   const readingTime = contentHtml ? calculateReadingTime(contentHtml) : 1;
