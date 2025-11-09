@@ -1,12 +1,12 @@
 import Background from "@/components/Background";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 // import MouseFollower from "@/components/MouseFollower";
 import Navbar from "@/components/NavBar";
 import { ThemeProvider } from "@/components/theme-providers";
 import { Toaster } from "sonner";
 
 // Load FloatingChat only when needed
-const FloatingChat = dynamic(() => import("@/components/FloatingChat"));
+// const FloatingChat = dynamic(() => import("@/components/FloatingChat"));
 
 export default function CommonLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,7 +19,7 @@ export default function CommonLayout({ children }: { children: React.ReactNode }
           <Background />
           {/* <MouseFollower /> */}
         </div>
-        <FloatingChat />
+        {/* <FloatingChat /> */}
       </ThemeProvider>
     </div>
   );
