@@ -46,9 +46,6 @@ export default function RootLayout({
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-        {/* Preload critical CSS */}
-        <link rel="preload" href="/globals.css" as="style" />
-
         <Script
           defer={true}
           strategy="lazyOnload"

@@ -165,3 +165,51 @@ body {
     clip-path: inset(0 0 0 100%);
   }
 }
+
+/* Code block styles for expand/collapse functionality */
+.code-block-wrapper {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.code-block-wrapper pre {
+  margin: 0 !important;
+  border-radius: 0.5rem;
+}
+
+/* Ensure the fade overlay works correctly */
+.code-block-wrapper .fade-overlay {
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Prose code block styling improvements */
+.prose pre {
+  position: relative;
+  background-color: #1a1a1a !important;
+  border: 1px solid #333333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.prose code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Dark mode adjustments */
+.dark .prose pre {
+  background-color: #1a1a1a !important;
+  border-color: #333333;
+}
+
+/* Button hover effects */
+.copy-button-container button:hover,
+.code-block-wrapper button:hover {
+  background-color: hsl(var(--secondary)) !important;
+  color: hsl(var(--secondary-foreground)) !important;
+}
