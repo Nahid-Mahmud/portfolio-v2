@@ -63,6 +63,8 @@ export default function RootLayout({
             
             `}
         </Script>
+
+        <meta name="google-site-verification" content="Ac19Ya94bx98Rd5se0ptA2SREx6tyyc7u_0Zwrncun4" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${titillium.variable}
