@@ -2,8 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Professional Experience - Md. Nahid Mahmud",
-  description:
-    "Explore my professional journey as a Full Stack Developer, showcasing my skills, achievements, and technologies used.",
+  description: "My professional journey...",
   openGraph: {
     title: "Professional Experience - Md. Nahid Mahmud",
     description:
@@ -29,203 +28,109 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ExperiencePage() {
-  const technologies = [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Express.js",
-    "MongoDB",
-    "Git",
-    "GitHub",
-    "Postman",
-    "VPS Hosting",
-    "CI/CD",
-    "API Integration",
-    "Prisma",
-  ];
+const experiences = [
+  {
+    company: "ExecuteML",
+    position: "Full-Stack Developer",
+    period: "Sep 2025 - Jan 2026",
+    duration: "4 mos",
+    current: true,
+    responsibilities: [
+      "Contribute to the development of scalable, AI-integrated web applications.",
+      "Collaborate with data science teams to integrate AI-driven features.",
+      "Implement clean, reusable code following best practices.",
+    ],
+    technologies: ["Next.js", "TypeScript", "Prisma", "Mongoose", "MongoDB","PostgreSQL"],
+  },
+  {
+    company: "SM Technology",
+    position: "Full Stack Developer",
+    period: "Aug 2024 - Apr 2025",
+    duration: "8 mos",
+    current: false,
+    responsibilities: [
+      "Led a frontend team of 12 developers, overseeing task distribution.",
+      "Built responsive interfaces using React and Next.js.",
+      "Configured VPS and maintained CI/CD pipelines.",
+    ],
+    technologies: ["React", "Next.js", "Prisma", "Node.js", "Express", "VPS", "Prisma", "MongoDB", "PostgreSQL"],
+  },
+];
 
+export default function ExperiencePage() {
   return (
-    <div className="min-h-screen  py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl mb-2">
-            Professional Experience
-          </h1>
-          <p className="text-slate-600 max-w-2xl mx-auto dark:text-white">
-            A detailed overview of my professional journey and expertise
+    <div className="min-h-screen bg-white dark:bg-slate-950 py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        {/* Page Header */}
+        <div className="mb-16">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">Experience</h1>
+          <p className="text-lg text-slate-600 dark:text-slate-400">
+            A timeline of my professional career and technical milestones.
           </p>
         </div>
-        
 
-        <div className="overflow-hidden border-none rounded-lg shadow-lg ">
-          {/* Card Header */}
-          <div
-            className="bg-gradient-to-r relative z-10 from-slate-800 to-slate-900 text-white p-6
-          dark:bg-gradient-to-r dark:from-slate-800 dark:to-slate-900 
-          "
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold">SM Technology</h2>
-                <p className="text-slate-300 mt-1">Full Stack Developer</p>
-              </div>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-500 text-white">
-                2024-2025
-              </span>
-            </div>
-          </div>
+        {/* Timeline Container */}
+        <div className="relative border-l-2 border-slate-200 dark:border-slate-800 ml-3 md:ml-4 space-y-16">
+          {experiences.map((exp, index) => (
+            <div key={index} className="relative pl-8 md:pl-12 group">
+              {/* Timeline Dot (Pulse effect for current job) */}
+              <div
+                className={`absolute -left-2.25 top-1.5 h-4 w-4 rounded-full border-4 border-white dark:border-slate-950 
+                ${exp.current ? "bg-emerald-500 ring-4 ring-emerald-500/20" : "bg-slate-300 dark:bg-slate-700"}`}
+              ></div>
 
-          {/* Card Content */}
-          <div className="p-0 relative bg-white z-10">
-            <div className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex items-start space-x-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-slate-700 mt-0.5"
-                  >
-                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
-                    <line x1="16" x2="16" y1="2" y2="6"></line>
-                    <line x1="8" x2="8" y1="2" y2="6"></line>
-                    <line x1="3" x2="21" y1="10" y2="10"></line>
-                  </svg>
-                  <div>
-                    <h3 className="font-medium text-slate-900">Duration</h3>
-                    <p className="text-slate-600">August, 2024 - April, 2025 (8 month)</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-slate-700 mt-0.5"
-                  >
-                    <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                  </svg>
-                  <div>
-                    <h3 className="font-medium text-slate-900">Position</h3>
-                    <p className="text-slate-600">Full Stack Developer</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Separator */}
-              <div className="h-px bg-slate-200 w-full my-4"></div>
-
-              <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-slate-700 mt-1"
-                  >
-                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" x2="8" y1="13" y2="13"></line>
-                    <line x1="16" x2="8" y1="17" y2="17"></line>
-                    <line x1="10" x2="8" y1="9" y2="9"></line>
-                  </svg>
-                  <div>
-                    <h3 className="font-medium text-slate-900">Responsibilities & Achievements</h3>
-                    <ul className="mt-2 space-y-3 text-slate-600">
-                      <li className="flex items-start">
-                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600 mt-2 mr-2 flex-shrink-0"></span>
-                        <span>
-                          Worked as a Full Stack Developer with a strong focus on frontend development, primarily using
-                          HTML, CSS, JavaScript, TypeScript, React, and Next.js to build responsive and user-friendly
-                          interfaces.
-                        </span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600 mt-2 mr-2 flex-shrink-0"></span>
-                        <span>
-                          Led a frontend team of 12 developers, overseeing task distribution, project planning, and code
-                          quality to ensure smooth delivery of features and UI components.
-                        </span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600 mt-2 mr-2 flex-shrink-0"></span>
-                        <span>
-                          Joined a capsule team to provide cross-functional support, helping other teams achieve their
-                          technical goals effectively.
-                        </span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-slate-600 mt-2 mr-2 flex-shrink-0"></span>
-                        <span>
-                          I provided technical assistance in configuring the VPS and assisted in deploying and
-                          maintaining web applications on the VPS, ensuring reliable and secure hosting.
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Separator */}
-              <div className="h-px bg-slate-200 w-full my-4"></div>
-
-              <div className="flex items-start space-x-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-slate-700 mt-0.5"
-                >
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
+              {/* Header: Role & Company */}
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
                 <div>
-                  <h3 className="font-medium text-slate-900">Technologies Used</h3>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {technologies.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-slate-100 text-slate-800 border border-slate-200"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                    {exp.position}
+                  </h3>
+                  <div className="text-lg font-medium text-slate-700 dark:text-slate-300">{exp.company}</div>
+                </div>
+
+                {/* Date Badge */}
+                <div className="mt-2 sm:mt-0 flex flex-col items-start sm:items-end">
+                  <span className="text-sm font-semibold text-slate-900 dark:text-white whitespace-nowrap">
+                    {exp.period}
+                  </span>
+                  <span className="text-xs text-slate-500 dark:text-slate-500 font-mono">{exp.duration}</span>
                 </div>
               </div>
+
+              {/* Responsibilities */}
+              <div className="mb-6">
+                <ul className="space-y-2">
+                  {exp.responsibilities.map((resp, idx) => (
+                    <li key={idx} className="flex items-start text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <span className="mr-3 mt-2 h-1.5 w-1.5 min-w-1.5 rounded-full bg-slate-300 dark:bg-slate-600" />
+                      <span>{resp}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Tech Stack */}
+              <div className="flex flex-wrap gap-2">
+                {exp.technologies.map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium 
+                    bg-slate-100 text-slate-700 
+                    dark:bg-slate-800/50 dark:text-slate-400 
+                    border border-slate-200 dark:border-slate-800"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+
+        {/* Optional: "End of list" indicator to show the timeline is complete */}
+        <div className="relative ml-3 md:ml-4 pt-8">
+          <div className="absolute -left-1.25 top-8 h-2.5 w-2.5 rounded-full bg-slate-200 dark:bg-slate-800"></div>
+          <p className="pl-8 md:pl-12 text-sm text-slate-400 italic">Professional journey began in 2024</p>
         </div>
       </div>
     </div>
