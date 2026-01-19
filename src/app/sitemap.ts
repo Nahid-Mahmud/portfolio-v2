@@ -3,7 +3,7 @@ import envVariables from "@/config/env";
 import { MetadataRoute } from "next";
 
 interface ApiBlog {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   photo: string;
@@ -79,7 +79,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic blog routes from API
   const dynamicBlogRoutes: MetadataRoute.Sitemap = dynamicBlogs.map((blog) => ({
-    url: `${baseUrl}/blogs/${blog._id}`,
+    url: `${baseUrl}/blogs/${blog.id}/${blog.slug}`,
     lastModified: new Date(blog.updatedAt || blog.createdAt),
     changeFrequency: "weekly" as const,
     priority: 0.8,

@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import envVariables from "@/config/env";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahidmahmud.dev";
+  const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz";
 
   return {
     rules: {

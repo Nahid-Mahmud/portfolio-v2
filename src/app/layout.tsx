@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Titillium_Web } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "sonner";
+import envVariables from "@/config/env";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,6 +26,7 @@ const titillium = Titillium_Web({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz"),
   title: "Md. Nahid Mahmud",
   description:
     "I build exceptional digital experiences with modern technologies, focusing on clean code and user-centered design.",
