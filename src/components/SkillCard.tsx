@@ -40,19 +40,19 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill, index, isVisible }) => {
             className={`p-3 rounded-lg bg-primary/10 transition-all duration-300 
             ${isHovered ? "scale-110 bg-primary/20" : ""}`}
           >
-            <IconComponent className="w-6 h-6 text-primary" />
+            <IconComponent className="w-6 h-6 text-emerald-600" />
           </div>
           <ProgressRing progress={skill.proficiency} isVisible={isVisible} />
         </div>
 
-        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-emerald-600 transition-colors duration-300">
           {skill.name}
         </h3>
 
         <p className="text-sm text-muted-foreground leading-relaxed mb-3">{skill.description}</p>
 
         <div className="flex items-center justify-between">
-          <span className="inline-block px-2 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full">
+          <span className="inline-block px-2 py-1 text-xs font-medium dark:text-emerald-500 bg-primary/10 rounded-full">
             {skill.category}
           </span>
         </div>

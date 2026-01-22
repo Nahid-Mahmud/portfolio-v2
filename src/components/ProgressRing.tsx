@@ -36,7 +36,7 @@ const ProgressRing: React.FC<ProgressRingProps> = ({ progress, size = 60, stroke
           fill="transparent"
           strokeDasharray={strokeDasharray}
           strokeDashoffset={isVisible ? strokeDashoffset : circumference}
-          className="text-primary transition-all duration-1000 ease-out"
+          className="text-emerald-500 transition-all duration-1000 ease-out"
           strokeLinecap="round"
         />
       </svg>
