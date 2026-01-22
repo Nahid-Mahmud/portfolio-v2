@@ -38,7 +38,7 @@ function ProjectCardsComponent({ projects }: { projects: ServerProject[] }) {
   return (
     <div className="space-y-8">
       <Tabs defaultValue="all" onValueChange={setActiveCategory} className="w-full ">
-        <TabsList className="w-full z-10 max-w-md mx-auto grid grid-cols-3 mb-8 dark:bg-[#0A2540]">
+        <TabsList className="w-full z-10 max-w-md mx-auto grid grid-cols-3 mb-8 dark:bg-[#0f172b]">
           {categories.map((category) => (
             <TabsTrigger key={category} value={category} className="capitalize">
               {category}
