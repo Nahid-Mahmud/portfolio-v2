@@ -39,11 +39,12 @@ export default function Navbar() {
   };
 
   const navLinks: { href: string; label: string }[] = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/experience", label: "Experience" },
-    { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
+    { href: "/#home", label: "Home" },
+    { href: "/#about", label: "About" },
+    { href: "/#experience", label: "Experience" },
+    { href: "/#skills", label: "Skills" },
+    { href: "/#projects", label: "Projects" },
+    { href: "/#contact", label: "Contact" },
     {
       href: "/blogs",
       label: "Blogs",
