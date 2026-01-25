@@ -1,6 +1,4 @@
 import AboutMeSection from "@/components/AboutMeSection";
-import SkillsSection from "@/components/SkillsSection";
-import SoftSkills from "@/components/Softskill";
 
 export default function AboutSection() {
   return (
