@@ -47,15 +47,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz";
-  const blogUrl = `${baseUrl}/blogs/${slug[0]}/${blog.slug}`;
-  const imageUrl = blog.image?.startsWith("http") ? blog.image : `${baseUrl}${blog.image}`;
+  const blogUrl = `${baseUrl}/blogs/${slug[0]}/${blog.slug || slug[1]}`;
+
+  // Enhanced image URL handling
+  const imageUrl = blog.image
+    ? blog.image.startsWith("http")
+      ? blog.image
+      : `${baseUrl}${blog.image}`
+    : `${baseUrl}/og-default-blog.png`; // Fallback image
+
+  // Generate dynamic tags
+  const dynamicTags =
+    blogData?.tags && Array.isArray(blogData.tags) ? blogData.tags : ["web development", "programming", "technology"];
+
+  // Format dates consistently
+  const publishedDate = blogData?.createdAt
+    ? new Date(blogData.createdAt).toISOString()
+    : new Date(blog.publishDate).toISOString();
+
+  const modifiedDate = blogData?.updatedAt ? new Date(blogData.updatedAt).toISOString() : publishedDate;
 
   return {
-    title: blog.title,
+    title: `${blog.title} | Md. Nahid Mahmud - Blog`,
     description: blog.description,
+    keywords: dynamicTags.join(", "),
     authors: [{ name: "Md. Nahid Mahmud", url: baseUrl }],
     creator: "Md. Nahid Mahmud",
-    publisher: "Md. Nahid Mahmud",
+    publisher: "Md. Nahid Mahmud - Portfolio",
     formatDetection: {
       email: false,
       address: false,
@@ -76,32 +94,69 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           width: 1200,
           height: 630,
           alt: blog.title,
+          type: "image/jpeg",
+        },
+        // Add additional image sizes for different platforms
+        {
+          url: imageUrl,
+          width: 800,
+          height: 600,
+          alt: blog.title,
+          type: "image/jpeg",
         },
       ],
       locale: "en_US",
       type: "article",
-      publishedTime: blogData?.createdAt || blog.publishDate,
+      publishedTime: publishedDate,
+      modifiedTime: modifiedDate,
       authors: ["Md. Nahid Mahmud"],
       section: "Technology",
-      tags: blogData?.tags || ["web development", "programming", "technology"],
+      tags: dynamicTags,
+      // Additional OpenGraph article properties
+      ...(blogData && {
+        article: {
+          publishedTime: publishedDate,
+          modifiedTime: modifiedDate,
+          authors: ["Md. Nahid Mahmud"],
+          section: "Technology",
+          tags: dynamicTags,
+        },
+      }),
     },
     twitter: {
       card: "summary_large_image",
       title: blog.title,
       description: blog.description,
       creator: "@nahidmahmuddev",
-      images: [imageUrl],
+      site: "@nahidmahmuddev",
+      images: [
+        {
+          url: imageUrl,
+          alt: blog.title,
+        },
+      ],
     },
+    // Enhanced robots configuration
     robots: {
       index: true,
       follow: true,
+      nocache: false,
       googleBot: {
         index: true,
         follow: true,
+        noimageindex: false,
         "max-video-preview": -1,
         "max-image-preview": "large",
         "max-snippet": -1,
       },
+    },
+    // Additional meta tags for better SEO
+    other: {
+      "article:author": "Md. Nahid Mahmud",
+      "article:published_time": publishedDate,
+      "article:modified_time": modifiedDate,
+      "article:section": "Technology",
+      "article:tag": dynamicTags.join(", "),
     },
     verification: {
       google: "your-google-verification-code", // Replace with your actual verification code
@@ -133,26 +188,49 @@ export default async function BlogPage({ params }: PageProps) {
   const contentHtml = await readMarkdownFile(blog.fullBlog);
   const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz";
   const blogUrl = `${baseUrl}/blogs/${slug[0]}/${blog.slug}`;
-  const imageUrl = blog.image;
+
+  // Enhanced image URL handling (consistent with metadata)
+  const imageUrl = blog.image
+    ? blog.image.startsWith("http")
+      ? blog.image
+      : `${baseUrl}${blog.image}`
+    : `${baseUrl}/og-default-blog.png`;
 
   // Calculate reading time
   const readingTime = contentHtml ? calculateReadingTime(contentHtml) : 1;
 
-  // Structured data for SEO
+  // Dynamic tags handling (consistent with metadata)
+  const dynamicTags =
+    blogData?.tags && Array.isArray(blogData.tags) ? blogData.tags : ["web development", "programming", "technology"];
+
+  // Format dates consistently
+  const publishedDate = blogData?.createdAt
+    ? new Date(blogData.createdAt).toISOString()
+    : new Date(blog.publishDate).toISOString();
+
+  const modifiedDate = blogData?.updatedAt ? new Date(blogData.updatedAt).toISOString() : publishedDate;
+
+  // Enhanced structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: blog.title,
     description: blog.description,
-    image: imageUrl,
+    image: {
+      "@type": "ImageObject",
+      url: imageUrl,
+      width: 1200,
+      height: 630,
+    },
     url: blogUrl,
-    datePublished: blogData?.createdAt || blog.publishDate,
-    dateModified: blogData?.createdAt || blog.publishDate,
+    datePublished: publishedDate,
+    dateModified: modifiedDate,
     author: {
       "@type": "Person",
       name: "Md. Nahid Mahmud",
       url: baseUrl,
       jobTitle: "Fullstack Developer",
+      image: `${baseUrl}/profile-image.jpg`,
       sameAs: [
         "https://www.linkedin.com/in/md-nahid-mahmud/",
         "https://github.com/Nahid-Mahmud",
@@ -163,17 +241,44 @@ export default async function BlogPage({ params }: PageProps) {
       "@type": "Person",
       name: "Md. Nahid Mahmud",
       url: baseUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/logo.png`,
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": blogUrl,
     },
-    keywords:
-      blogData?.tags && Array.isArray(blogData.tags)
-        ? blogData.tags.join(", ")
-        : "web development, programming, technology",
+    keywords: dynamicTags.join(", "),
     articleSection: "Technology",
     inLanguage: "en-US",
+    wordCount: contentHtml ? contentHtml.replace(/<[^>]*>/g, "").split(/\s+/).length : 0,
+    timeRequired: `PT${readingTime}M`,
+    // Add breadcrumb structured data
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: baseUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blogs",
+          item: `${baseUrl}/blogs`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: blog.title,
+          item: blogUrl,
+        },
+      ],
+    },
   };
 
   return (
@@ -253,7 +358,7 @@ export default async function BlogPage({ params }: PageProps) {
 
             {/* Article Content */}
             {contentHtml && (
-              <article className="prose prose-sm md:prose-lg max-w-none dark:prose-invert text-wrap break-words">
+              <article className="prose prose-sm md:prose-lg max-w-none dark:prose-invert text-wrap wrap-break-word">
                 <CodeBlockWrapper>
                   <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
                 </CodeBlockWrapper>
