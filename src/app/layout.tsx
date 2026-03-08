@@ -32,6 +32,15 @@ export const metadata: Metadata = {
     "I build exceptional digital experiences with modern technologies, focusing on clean code and user-centered design.",
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Md. Nahid Mahmud",
+  url: "https://nahid-mahmud.xyz",
+  description:
+    "I build exceptional digital experiences with modern technologies, focusing on clean code and user-centered design.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,6 +56,8 @@ export default function RootLayout({
 
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         <Script
           defer={true}
