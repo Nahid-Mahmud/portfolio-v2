@@ -1,6 +1,8 @@
 import { getAllProjects } from "@/actions/project.actions";
 import { ProjectsClient } from "./ProjectsClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminAllProjects() {
   const { data: projects } = await getAllProjects();
 

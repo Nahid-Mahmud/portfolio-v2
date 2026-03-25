@@ -1,9 +1,10 @@
 "use client";
 
-import { deleteBlog } from "@/actions/blog.actions";
+import { deleteBlog, togglePublishBlog } from "@/actions/blog.actions";
 import { Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle } from "@/components/Modal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,6 +18,7 @@ interface Blog {
   altText: string;
   slug: string;
   categoryId: string;
+  isPublished: boolean;
   createdAt: string;
 }
 
@@ -27,6 +29,7 @@ interface BlogCardProps {
 export function BlogCard({ blog }: BlogCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isToggling, setIsToggling] = useState(false);
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -35,12 +38,29 @@ export function BlogCard({ blog }: BlogCardProps) {
       if (result.success) {
         toast.success("Blog deleted successfully!");
       }
+      // eslint rule to disable unused variable error for result
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       // console.error("Error deleting blog:", error);
     } finally {
       setIsDeleting(false);
       setIsModalOpen(false);
+    }
+  };
+
+  const handleTogglePublish = async () => {
+    setIsToggling(true);
+    try {
+      const result = await togglePublishBlog(blog.id, !blog.isPublished);
+      if (result.success) {
+        toast.success(blog.isPublished ? "Blog unpublished successfully!" : "Blog published successfully!");
+      }
+      // eslint rule to disable unused variable error for result
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      // console.error("Error toggling publish:", error);
+    } finally {
+      setIsToggling(false);
     }
   };
 
@@ -53,11 +73,28 @@ export function BlogCard({ blog }: BlogCardProps) {
           </div>
         )}
         <CardContent className="space-y-2 pt-4 flex-1">
-          <CardTitle>{blog.title}</CardTitle>
-          <CardDescription>{blog.description}</CardDescription>
+          <div className="flex items-center justify-between">
+            <CardTitle className="line-clamp-2">{blog.title}</CardTitle>
+            <Badge variant={blog.isPublished ? "default" : "secondary"}>
+              {blog.isPublished ? "Published" : "Draft"}
+            </Badge>
+          </div>
+          <CardDescription className="line-clamp-2">{blog.description}</CardDescription>
           <p className="text-sm text-muted-foreground">Created: {new Date(blog.createdAt).toLocaleDateString()}</p>
         </CardContent>
-        <CardFooter className="items-end flex w-full justify-end gap-2.5">
+        <CardFooter className="items-end flex w-full justify-end gap-2.5 flex-wrap">
+          <Button variant={"outline"} asChild>
+            <Link href={`/dashboard/blogs/preview/${blog.id}`} target="_blank">
+              Preview
+            </Link>
+          </Button>
+          <Button
+            variant={blog.isPublished ? "secondary" : "default"}
+            onClick={handleTogglePublish}
+            disabled={isToggling}
+          >
+            {isToggling ? "..." : blog.isPublished ? "Unpublish" : "Publish"}
+          </Button>
           <Button variant={"outline"} asChild>
             <Link href={`/dashboard/blogs/edit-blogs/${blog.id}`} className="text-primary font-medium">
               Edit Blog

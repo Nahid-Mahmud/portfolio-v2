@@ -1,5 +1,7 @@
 import { getAllBlogs } from "@/actions/blog.actions";
-import { BlogCard } from "@/app/(dashboard)/dashboard/blogs/all-blogs/_components/BlogCard";
+import { BlogTabs } from "@/app/(dashboard)/dashboard/blogs/all-blogs/_components/BlogTabs";
+
+export const dynamic = "force-dynamic";
 
 interface Blog {
   id: string;
@@ -9,6 +11,7 @@ interface Blog {
   altText: string;
   slug: string;
   categoryId: string;
+  isPublished: boolean;
   createdAt: string;
 }
 
@@ -23,17 +26,7 @@ export default async function AdminAllBlogs() {
           <p className="max-w-2xl mx-auto text-muted-foreground">Manage all your blog posts here.</p>
         </div>
 
-        {blogs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog) => (
-              <BlogCard key={blog.slug} blog={blog} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-lg text-muted-foreground">No blogs available</p>
-          </div>
-        )}
+        <BlogTabs blogs={blogs} />
       </div>
     </section>
   );

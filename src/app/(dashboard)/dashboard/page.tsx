@@ -4,6 +4,8 @@ import { BookOpen, FolderOpen, Tag } from "lucide-react";
 import envVariables from "@/config/env";
 import FirstTimeModal from "@/components/FirstTimeModal";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage() {
   const statsRes = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/stats`, {
     next: { revalidate: 30 },

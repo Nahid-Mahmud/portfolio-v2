@@ -4,7 +4,7 @@ import Link from "next/link";
 // Add import for Card components
 import { Card, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getAllBlogs } from "@/actions/blog.actions";
+import { getPublishedBlogs } from "@/actions/blog.actions";
 
 interface Blog {
   id: string;
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Blogs() {
-  const { data: blogs } = await getAllBlogs();
+  const { data: blogs } = await getPublishedBlogs();
 
   return (
     <section id="blogs" className="py-20">
