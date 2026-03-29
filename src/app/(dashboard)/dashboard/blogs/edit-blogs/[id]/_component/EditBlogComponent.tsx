@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -18,7 +19,18 @@ import { toast } from "sonner";
 const MDXEditor = dynamic(() => import("@/components/mdx-editor").then((mod) => ({ default: mod.MDXEditor })), {
   ssr: false,
   loading: () => (
-    <div className="min-h-[400px] border rounded-md flex items-center justify-center">Loading editor...</div>
+    <div className="min-h-96 border rounded-md p-4 space-y-3">
+      <div className="flex gap-2">
+        <Skeleton className="h-8 w-20" />
+        <Skeleton className="h-8 w-16" />
+        <Skeleton className="h-8 w-24" />
+      </div>
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-3/4" />
+      </div>
+    </div>
   ),
 });
 
@@ -128,7 +140,7 @@ export default function EditBlogComponent({
                 <FormControl>
                   <Textarea
                     placeholder="Brief description of the blog for SEO and previews"
-                    className="min-h-[80px]"
+                    className="min-h-20"
                     {...field}
                   />
                 </FormControl>
