@@ -15,7 +15,7 @@ interface ApiBlog {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahidmahmud.dev";
+  const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz";
 
   // Get dynamic blogs from API (public endpoint, no cookies needed for sitemap)
   let dynamicBlogs: ApiBlog[] = [];
