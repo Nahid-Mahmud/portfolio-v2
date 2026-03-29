@@ -17,24 +17,27 @@ interface ApiBlog {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = envVariables.NEXT_PUBLIC_BASE_URL || "https://nahid-mahmud.xyz";
 
-  // Get dynamic blogs from API (public endpoint, no cookies needed for sitemap)
   let dynamicBlogs: ApiBlog[] = [];
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     const res = await fetch(`${envVariables.NEXT_PUBLIC_API_URL}/blogs`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      next: { revalidate: 3600 }, // Revalidate every hour for sitemap
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (res.ok) {
       const responseData = await res.json();
       dynamicBlogs = responseData.data || [];
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
-    // console.error("Error fetching blogs for sitemap:", error);
+  } catch {
+    // Silently fail - static routes will still be returned
   }
 
   // Static pages
